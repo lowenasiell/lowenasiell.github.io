@@ -3,304 +3,1060 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lowe Nasiell — Growth Marketing Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Lowe Nasiell — Growth Marketer</title>
+
 <style>
-:root {
-  --paper: #E4E7EC;
-  --ink: #14181F;
-  --ink-soft: #545C6B;
-  --indigo: #2A2FE0;
-  --lime: #9FD8FF;
-  --line: #B9C2D0;
-  --card: #EFF1F5;
+*{margin:0;padding:0;box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#f7f8fa;
+color:#071a38;
+overflow-x:hidden;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+a{text-decoration:none;color:inherit}
 
-body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.5;
-}
-
-.display {
-  font-family: 'Fraunces', serif;
-  font-weight: 500;
-}
-
-mark {
-  background: var(--lime);
-  color: var(--ink);
-  padding: 0 0.15em;
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:25px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+mix-blend-mode:multiply;
 }
 
-a { color: var(--indigo); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-.wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 32px;
+.logo{
+font-weight:800;
+font-size:20px;
+letter-spacing:-1px;
 }
 
-/* NAV */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 28px 32px;
-  border-bottom: 1px solid var(--line);
-}
-nav .brand {
-  font-family: 'Fraunces', serif;
-  font-size: 1.1rem;
-}
-nav ul {
-  display: flex;
-  gap: 28px;
-  list-style: none;
-  font-size: 0.95rem;
+.nav-links{
+display:flex;
+gap:30px;
+font-size:14px;
+font-weight:600;
 }
 
-/* HERO */
-.hero {
-  padding: 90px 0 70px;
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 40px;
-  align-items: end;
-  border-bottom: 1px solid var(--line);
-  opacity: 0;
-  transform: translateY(14px);
-  animation: rise 0.7s ease forwards;
-}
-@keyframes rise {
-  to { opacity: 1; transform: translateY(0); }
-}
-.hero h1 {
-  font-size: clamp(2.6rem, 6vw, 4.6rem);
-  line-height: 1.02;
-  letter-spacing: -0.01em;
-}
-.hero .role {
-  font-size: 1.05rem;
-  color: var(--ink-soft);
-  max-width: 34ch;
-  margin-top: 18px;
+.nav-links a{
+position:relative;
 }
 
-/* SKILLS STRIP */
-.skills {
-  padding: 22px 0;
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 26px;
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-}
-.skills span::before { content: "— "; color: var(--line); }
-
-/* ABOUT */
-.about {
-  padding: 60px 0;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 40px;
-  border-bottom: 1px solid var(--line);
-}
-.about h2 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.3rem;
-}
-.about p {
-  max-width: 60ch;
-  font-size: 1.05rem;
-  color: var(--ink-soft);
+.nav-links a:after{
+content:"";
+position:absolute;
+left:0;
+bottom:-6px;
+width:0;
+height:2px;
+background:#075cff;
+transition:.3s;
 }
 
-/* PROJECTS */
-.projects { padding: 60px 0; }
-.projects h2 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.3rem;
-  margin-bottom: 30px;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-.card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  transition: border-color 0.2s ease;
-}
-.card:hover { border-color: var(--ink); }
-.card.featured {
-  grid-column: span 2;
-  background: var(--ink);
-  color: var(--paper);
-}
-.card.featured .tag { color: var(--lime); }
-.card.featured .card-desc { color: #C7C8CC; }
-.card .tag {
-  font-size: 0.8rem;
-  color: var(--indigo);
-}
-.card h3 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.3rem;
-  font-weight: 500;
-}
-.card .card-desc {
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-  flex-grow: 1;
-}
-.card .card-link { font-size: 0.9rem; }
+.nav-links a:hover:after{width:100%}
 
-/* CONTACT */
-.contact {
-  padding: 80px 0 60px;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 40px;
-}
-.contact h2 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.3rem;
-}
-.contact .big-link {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  display: inline-block;
-  margin-bottom: 18px;
-}
-.contact .handles {
-  display: flex;
-  gap: 22px;
-  font-size: 0.95rem;
-  margin-top: 6px;
+.hero{
+min-height:100vh;
+padding:160px 5% 80px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+position:relative;
 }
 
-footer {
-  padding: 24px 32px;
-  border-top: 1px solid var(--line);
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-  text-align: center;
+.small-label{
+font-size:13px;
+font-weight:700;
+letter-spacing:2px;
+text-transform:uppercase;
+margin-bottom:25px;
+color:#075cff;
 }
 
-@media (max-width: 760px) {
-  nav ul { display: none; }
-  .hero { grid-template-columns: 1fr; }
-  .about, .contact { grid-template-columns: 1fr; }
-  .grid { grid-template-columns: 1fr; }
-  .card.featured { grid-column: span 1; }
+.hero h1{
+font-size:clamp(70px,12vw,180px);
+line-height:.82;
+letter-spacing:-8px;
+max-width:1200px;
+font-weight:800;
+}
+
+.hero h1 span{
+color:#075cff;
+}
+
+.hero-bottom{
+margin-top:70px;
+display:flex;
+justify-content:space-between;
+align-items:end;
+gap:40px;
+}
+
+.hero-description{
+max-width:450px;
+font-size:19px;
+line-height:1.5;
+}
+
+.button{
+display:inline-flex;
+align-items:center;
+gap:25px;
+padding:17px 23px;
+border:1px solid #071a38;
+font-size:13px;
+font-weight:700;
+text-transform:uppercase;
+transition:.35s;
+}
+
+.button span{
+transition:.35s;
+}
+
+.button:hover{
+background:#075cff;
+color:white;
+border-color:#075cff;
+transform:translateY(-4px);
+}
+
+.button:hover span{
+transform:translateX(8px);
+}
+
+.marquee{
+overflow:hidden;
+border-top:1px solid #ccd2dc;
+border-bottom:1px solid #ccd2dc;
+padding:20px 0;
+white-space:nowrap;
+}
+
+.marquee-inner{
+display:inline-block;
+animation:marquee 20s linear infinite;
+font-size:20px;
+font-weight:700;
+}
+
+.marquee span{
+margin:0 35px;
+color:#075cff;
+}
+
+@keyframes marquee{
+from{transform:translateX(0)}
+to{transform:translateX(-50%)}
+}
+
+.intro{
+padding:150px 5%;
+display:grid;
+grid-template-columns:1fr 2fr;
+gap:70px;
+}
+
+.intro h2{
+font-size:16px;
+text-transform:uppercase;
+letter-spacing:2px;
+}
+
+.intro-text{
+font-size:clamp(38px,5vw,75px);
+line-height:1;
+letter-spacing:-3px;
+}
+
+.intro-text span{color:#075cff}
+
+.section{
+padding:100px 5%;
+}
+
+.section-header{
+display:flex;
+justify-content:space-between;
+align-items:end;
+margin-bottom:60px;
+}
+
+.section-title{
+font-size:clamp(50px,8vw,110px);
+letter-spacing:-5px;
+line-height:.85;
+}
+
+.projects{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:25px;
+}
+
+.project{
+position:relative;
+height:550px;
+overflow:hidden;
+background:#dce4f1;
+}
+
+.project-image{
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#cdd9ea,#7594c7);
+transition:.7s;
+}
+
+.project:nth-child(2) .project-image{
+background:linear-gradient(135deg,#071a38,#075cff);
+}
+
+.project:hover .project-image{
+transform:scale(1.06);
+}
+
+.project-info{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+padding:35px;
+background:linear-gradient(transparent,rgba(0,0,0,.75));
+color:white;
+}
+
+.project-info h3{
+font-size:38px;
+letter-spacing:-2px;
+margin-bottom:8px;
+}
+
+.project-info p{
+font-size:13px;
+text-transform:uppercase;
+letter-spacing:1px;
+}
+
+.project-arrow{
+position:absolute;
+top:25px;
+right:25px;
+width:55px;
+height:55px;
+border-radius:50%;
+background:white;
+color:#071a38;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+transition:.35s;
+}
+
+.project:hover .project-arrow{
+background:#075cff;
+color:white;
+transform:rotate(45deg);
+}
+
+.capabilities{
+border-top:1px solid #ccd2dc;
+}
+
+.capability{
+display:grid;
+grid-template-columns:100px 1fr auto;
+align-items:center;
+padding:30px 0;
+border-bottom:1px solid #ccd2dc;
+transition:.3s;
+}
+
+.capability:hover{
+padding-left:15px;
+color:#075cff;
+}
+
+.capability-number{
+font-size:14px;
+font-weight:700;
+}
+
+.capability h3{
+font-size:clamp(35px,5vw,70px);
+letter-spacing:-3px;
+}
+
+.capability-arrow{
+font-size:30px;
+}
+
+.cta{
+padding:180px 5%;
+background:#071a38;
+color:white;
+}
+
+.cta h2{
+font-size:clamp(60px,11vw,150px);
+line-height:.8;
+letter-spacing:-8px;
+margin-bottom:70px;
+}
+
+.cta h2 span{color:#4f88ff}
+
+footer{
+padding:30px 5%;
+display:flex;
+justify-content:space-between;
+font-size:13px;
+background:#071a38;
+color:white;
+border-top:1px solid #31415b;
+}
+
+@media(max-width:800px){
+
+nav{padding:20px}
+
+.nav-links{
+gap:14px;
+font-size:11px;
+}
+
+.hero{padding:140px 6% 70px}
+
+.hero h1{
+letter-spacing:-4px;
+}
+
+.hero-bottom{
+flex-direction:column;
+align-items:start;
+}
+
+.intro{
+grid-template-columns:1fr;
+padding:100px 6%;
+}
+
+.projects{
+grid-template-columns:1fr;
+}
+
+.project{height:450px}
+
+.section{padding:80px 6%}
+
+.capability{
+grid-template-columns:45px 1fr auto;
+}
+
+.capability h3{
+font-size:34px;
+}
+
+.cta{padding:120px 6%}
+
+.cta h2{
+letter-spacing:-4px;
+}
+
+footer{
+flex-direction:column;
+gap:15px;
+}
 }
 </style>
 </head>
+
 <body>
 
 <nav>
-  <div class="brand">Ditt Namn</div>
-  <ul>
-    <li><a href="#projects">Projekt</a></li>
-    <li><a href="#about">Om mig</a></li>
-    <li><a href="#contact">Kontakt</a></li>
-  </ul>
+<a href="index.html" class="logo">LN.</a>
+
+<div class="nav-links">
+<a href="work.html">WORK</a>
+<a href="about.html">ABOUT</a>
+<a href="skills.html">SKILLS</a>
+<a href="contact.html">CONTACT</a>
+</div>
 </nav>
 
-<div class="wrap">
+<section class="hero">
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1 class="display">Ditt Namn<br>bygger tillväxt<br>genom idéer.</h1>
-    <p class="role">Growth Marketing-student på Berghs School of Communication. Det här är samlingen av projekt jag gör under utbildningen — <mark>uppdateras löpande</mark>.</p>
-  </section>
+<div class="small-label">Growth Marketer · Stockholm</div>
 
-  <!-- SKILLS -->
-  <div class="skills">
-    <span>Content Strategy</span>
-    <span>Paid Social</span>
-    <span>SEO</span>
-    <span>Data & Analys</span>
-    <span>Copywriting</span>
-    <span>Pitching</span>
-  </div>
+<h1>
+LOWE<br>
+NASIELL<span>.</span>
+</h1>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <h2>Om mig</h2>
-    <p>Skriv två-tre meningar om vem du är, vad du brinner för inom marknadsföring, och vart du är på väg. Undvik generiska fraser — skriv som du faktiskt pratar.</p>
-  </section>
+<div class="hero-bottom">
 
-  <!-- PROJECTS -->
-  <section class="projects" id="projects">
-    <h2>Projekt</h2>
-    <div class="grid">
+<p class="hero-description">
+I use data, strategy and creativity to build growth.
+Currently studying Growth Marketing at Berghs School of Communication.
+</p>
 
-      <!-- FEATURED PROJECT: kopiera denna block-typ för ditt starkaste projekt -->
-      <div class="card featured">
-        <span class="tag">Kampanj · CAB</span>
-        <h3 class="display">Namn på projektet</h3>
-        <p class="card-desc">Kort beskrivning: vilket problem löste ni, vilken strategi använde ni, och vad blev resultatet? 2–3 meningar räcker.</p>
-        <a class="card-link" href="#">Se projektet →</a>
-      </div>
-
-      <!-- Vanligt projekt: kopiera detta block för fler projekt -->
-      <div class="card">
-        <span class="tag">Pitch</span>
-        <h3 class="display">Namn på projektet</h3>
-        <p class="card-desc">Kort beskrivning av uppgiften och din roll.</p>
-        <a class="card-link" href="#">Se projektet →</a>
-      </div>
-
-      <div class="card">
-        <span class="tag">Content</span>
-        <h3 class="display">Namn på projektet</h3>
-        <p class="card-desc">Kort beskrivning av uppgiften och din roll.</p>
-        <a class="card-link" href="#">Se projektet →</a>
-      </div>
-
-      <!-- Lägg till fler <div class="card">...</div> här efter varje ny skoluppgift -->
-
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <h2>Kontakt</h2>
-    <div>
-      <a class="display big-link" href="mailto:din@mail.se">din@mail.se</a>
-      <div class="handles">
-        <a href="#">LinkedIn</a>
-        <a href="#">Instagram</a>
-      </div>
-    </div>
-  </section>
+<a href="work.html" class="button">
+View my work <span>→</span>
+</a>
 
 </div>
 
-<footer>© 2026 Ditt Namn — byggd med enkel HTML/CSS, hostad på GitHub Pages</footer>
+</section>
 
-<script>
-document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
-  });
-});
-</script>
+<div class="marquee">
+<div class="marquee-inner">
+GROWTH MARKETING <span>×</span>
+DIGITAL STRATEGY <span>×</span>
+ANALYTICS <span>×</span>
+CONTENT <span>×</span>
+GROWTH MARKETING <span>×</span>
+DIGITAL STRATEGY <span>×</span>
+</div>
+</div>
+
+<section class="intro">
+
+<h2>What I do</h2>
+
+<p class="intro-text">
+I work where <span>data</span>, strategy and creativity meet — turning insights into ideas and ideas into <span>growth.</span>
+</p>
+
+</section>
+
+<section class="section">
+
+<div class="section-header">
+<h2 class="section-title">Selected<br>work.</h2>
+<a href="work.html" class="button">All projects <span>→</span></a>
+</div>
+
+<div class="projects">
+
+<a href="kungliga-operan.html" class="project">
+
+<div class="project-image"></div>
+
+<div class="project-arrow">↗</div>
+
+<div class="project-info">
+<h3>Kungliga Operan</h3>
+<p>Reality Show · Berghs Project</p>
+</div>
+
+</a>
+
+<div class="project">
+
+<div class="project-image"></div>
+
+<div class="project-arrow">↗</div>
+
+<div class="project-info">
+<h3>More coming soon</h3>
+<p>Growth Marketing · Strategy</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section capabilities">
+
+<div class="section-header">
+<h2 class="section-title">Capabilities.</h2>
+</div>
+
+<div class="capability">
+<div class="capability-number">01</div>
+<h3>Growth Marketing</h3>
+<div class="capability-arrow">↗</div>
+</div>
+
+<div class="capability">
+<div class="capability-number">02</div>
+<h3>Digital Strategy</h3>
+<div class="capability-arrow">↗</div>
+</div>
+
+<div class="capability">
+<div class="capability-number">03</div>
+<h3>Analytics</h3>
+<div class="capability-arrow">↗</div>
+</div>
+
+<div class="capability">
+<div class="capability-number">04</div>
+<h3>Content Marketing</h3>
+<div class="capability-arrow">↗</div>
+</div>
+
+</section>
+
+<section class="cta">
+
+<div class="small-label">Let's work together</div>
+
+<h2>
+LET'S CREATE<br>
+SOME <span>GROWTH.</span>
+</h2>
+
+<a href="contact.html" class="button" style="border-color:white;color:white;">
+Get in touch <span>→</span>
+</a>
+
+</section>
+
+<footer>
+<span>© 2026 Lowe Nasiell</span>
+<span>Stockholm, Sweden</span>
+</footer>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Lowe Nasiell</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;background:#f7f8fa;color:#071a38}
+a{text-decoration:none;color:inherit}
+
+nav{
+position:fixed;top:0;left:0;width:100%;
+padding:25px 5%;display:flex;
+justify-content:space-between;z-index:10;
+background:rgba(247,248,250,.85);
+backdrop-filter:blur(10px);
+}
+
+.logo{font-weight:800;font-size:20px}
+.nav-links{display:flex;gap:30px;font-size:13px;font-weight:700}
+.nav-links a:hover{color:#075cff}
+
+.hero{
+padding:180px 5% 100px;
+}
+
+.label{
+font-size:13px;
+font-weight:700;
+color:#075cff;
+letter-spacing:2px;
+text-transform:uppercase;
+margin-bottom:25px;
+}
+
+h1{
+font-size:clamp(80px,14vw,190px);
+line-height:.8;
+letter-spacing:-9px;
+}
+
+.intro{
+padding:0 5% 100px;
+max-width:900px;
+font-size:30px;
+line-height:1.2;
+}
+
+.projects{
+padding:0 5% 150px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+}
+
+.card{
+height:650px;
+position:relative;
+overflow:hidden;
+background:#d9e1ef;
+}
+
+.visual{
+width:100%;
+height:100%;
+transition:.7s;
+background:linear-gradient(135deg,#d7e0ed,#718fc0);
+}
+
+.card:nth-child(2) .visual{
+background:linear-gradient(135deg,#071a38,#075cff);
+}
+
+.card:hover .visual{transform:scale(1.07)}
+
+.card-content{
+position:absolute;
+bottom:0;
+left:0;
+padding:35px;
+width:100%;
+color:white;
+background:linear-gradient(transparent,rgba(0,0,0,.8));
+}
+
+.card-content h2{
+font-size:45px;
+letter-spacing:-2px;
+margin-bottom:10px;
+}
+
+.card-content p{
+font-size:12px;
+text-transform:uppercase;
+letter-spacing:1px;
+}
+
+.arrow{
+position:absolute;
+right:25px;
+top:25px;
+width:55px;height:55px;
+background:white;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+transition:.35s;
+}
+
+.card:hover .arrow{
+background:#075cff;
+color:white;
+transform:rotate(45deg);
+}
+
+footer{
+padding:30px 5%;
+background:#071a38;
+color:white;
+display:flex;
+justify-content:space-between;
+font-size:13px;
+}
+
+@media(max-width:800px){
+.nav-links{gap:12px;font-size:10px}
+.hero{padding:140px 6% 80px}
+h1{letter-spacing:-5px}
+.intro{padding:0 6% 80px;font-size:25px}
+.projects{grid-template-columns:1fr;padding:0 6% 100px}
+.card{height:500px}
+footer{padding:25px 6%}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html" class="logo">LN.</a>
+<div class="nav-links">
+<a href="work.html">WORK</a>
+<a href="about.html">ABOUT</a>
+<a href="skills.html">SKILLS</a>
+<a href="contact.html">CONTACT</a>
+</div>
+</nav>
+
+<section class="hero">
+<div class="label">Selected work</div>
+<h1>MY<br>WORK<span style="color:#075cff">.</span></h1>
+</section>
+
+<section class="intro">
+I create work where strategy, creativity and data come together. Here are selected projects from my journey as a Growth Marketing student at Berghs.
+</section>
+
+<section class="projects">
+
+<a href="kungliga-operan.html" class="card">
+<div class="visual"></div>
+<div class="arrow">↗</div>
+<div class="card-content">
+<h2>Kungliga Operan</h2>
+<p>Reality Show · Berghs</p>
+</div>
+</a>
+
+<div class="card">
+<div class="visual"></div>
+<div class="arrow">↗</div>
+<div class="card-content">
+<h2>Coming soon</h2>
+<p>Growth Marketing</p>
+</div>
+</div>
+
+</section>
+
+<footer>
+<span>© 2026 Lowe Nasiell</span>
+<span>Stockholm, Sweden</span>
+</footer>
+
+</body>
+</html></div>
+
+<div class="step">
+<div>03</div>
+<h3>Strategy</h3>
+</div>
+
+<div class="step">
+<div>04</div>
+<h3>Execution</h3>
+</div>
+
+</section>
+
+<footer>
+<span>© 2026 Lowe Nasiell</span>
+<a href="work.html">← Back to work</a>
+</footer>
+
+</body>
+</html><html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Lowe Nasiell</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;background:#f7f8fa;color:#071a38}
+a{text-decoration:none;color:inherit}
+
+nav{
+position:fixed;top:0;left:0;width:100%;
+padding:25px 5%;display:flex;
+justify-content:space-between;z-index:10;
+background:rgba(247,248,250,.85);
+backdrop-filter:blur(10px);
+}
+
+.logo{font-weight:800;font-size:20px}
+.nav-links{display:flex;gap:30px;font-size:13px;font-weight:700}
+.nav-links a:hover{color:#075cff}
+
+.hero{
+padding:180px 5% 100px;
+}
+
+.label{
+font-size:13px;
+font-weight:700;
+color:#075cff;
+letter-spacing:2px;
+margin-bottom:25px;
+}
+
+h1{
+font-size:clamp(75px,13vw,180px);
+line-height:.8;
+letter-spacing:-8px;
+}
+
+.about{
+padding:50px 5% 150px;
+display:grid;
+grid-template-columns:1fr 2fr;
+gap:80px;
+}
+
+.about h2{
+font-size:14px;
+text-transform:uppercase;
+letter-spacing:2px;
+}
+
+.about-text{
+font-size:clamp(35px,5vw,70px);
+line-height:1;
+letter-spacing:-3px;
+}
+
+.about-text span{color:#075cff}
+
+.details{
+background:#071a38;
+color:white;
+padding:120px 5%;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:80px;
+}
+
+.details h2{
+font-size:clamp(50px,7vw,100px);
+line-height:.85;
+letter-spacing:-5px;
+}
+
+.details p{
+font-size:20px;
+line-height:1.5;
+max-width:500px;
+}
+
+footer{
+padding:30px 5%;
+background:#071a38;
+color:white;
+border-top:1px solid #35445c;
+display:flex;
+justify-content:space-between;
+font-size:13px;
+}
+
+@media(max-width:800px){
+
+.nav-links{gap:12px;font-size:10px}
+
+.hero{padding:140px 6% 80px}
+h1{letter-spacing:-5px}
+
+.about{
+grid-template-columns:1fr;
+padding:30px 6% 100px;
+}
+
+.details{
+grid-template-columns:1fr;
+padding:90px 6%;
+}
+
+footer{padding:25px 6%}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html" class="logo">LN.</a>
+
+<div class="nav-links">
+<a href="work.html">WORK</a>
+<a href="about.html">ABOUT</a>
+<a href="skills.html">SKILLS</a>
+<a href="contact.html">CONTACT</a>
+</div>
+</nav>
+
+<section class="hero">
+<div class="label">About me</div>
+<h1>ABOUT<br>LOWE<span style="color:#075cff">.</span></h1>
+</section>
+
+<section class="about">
+
+<h2>Who I am</h2>
+
+<div class="about-text">
+I'm Lowe Nasiell, a <span>Growth Marketer</span> based in Stockholm, currently studying Growth Marketing at Berghs School of Communication.
+<br><br>
+I enjoy combining data, strategy and creativity to find opportunities for growth.
+</div>
+
+</section>
+
+<section class="details">
+
+<h2>
+DATA.<br>
+STRATEGY.<br>
+CREATIVITY.
+</h2>
+
+<p>
+My approach to marketing starts with understanding the problem. I like finding patterns in data, turning insights into strategy and creating ideas that people actually want to engage with.
+<br><br>
+I'm particularly interested in Growth Marketing, Digital Strategy, Analytics and Content Marketing.
+</p>
+
+</section>
+
+<footer>
+<span>© 2026 Lowe Nasiell</span>
+<span>Stockholm, Sweden</span>
+</footer>
+
+</body>
+</html><div class="tool">Google Analytics</div>
+<div class="tool">Google Tag Manager</div>
+<div class="tool">Google Ads</div>
+<div class="tool">SEO</div>
+<div class="tool">Content Strategy</div>
+<div class="tool">CRO</div>
+<div class="tool">AI</div>
+<div class="tool">Data Analysis</div>
+
+</div>
+
+</section>
+
+<footer>
+<span>© 2026 Lowe Nasiell</span>
+<span>Stockholm, Sweden</span>
+</footer>
+
+</body>
+</html>left:0;
+width:100%;
+padding:25px 5%;
+display:flex;
+justify-content:space-between;
+z-index:10;
+}
+
+.logo{font-weight:800;font-size:20px}
+
+.nav-links{
+display:flex;
+gap:30px;
+font-size:13px;
+font-weight:700;
+}
+
+.nav-links a:hover{color:#4f88ff}
+
+main{
+min-height:100vh;
+padding:180px 5% 100px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.label{
+font-size:13px;
+font-weight:700;
+color:#4f88ff;
+letter-spacing:2px;
+margin-bottom:30px;
+}
+
+h1{
+font-size:clamp(70px,13vw,180px);
+line-height:.8;
+letter-spacing:-8px;
+margin-bottom:80px;
+}
+
+h1 span{color:#4f88ff}
+
+.contact-links{
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.contact-button{
+padding:18px 25px;
+border:1px solid #53647d;
+font-size:14px;
+font-weight:700;
+transition:.35s;
+}
+
+.contact-button:hover{
+background:#075cff;
+border-color:#075cff;
+transform:translateY(-5px);
+}
+
+footer{
+padding:30px 5%;
+border-top:1px solid #35445c;
+display:flex;
+justify-content:space-between;
+font-size:13px;
+}
+
+@media(max-width:800px){
+
+.nav-links{gap:12px;font-size:10px}
+
+main{padding:140px 6% 80px}
+
+h1{letter-spacing:-5px}
+
+footer{
+padding:25px 6%;
+}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<a href="index.html" class="logo">LN.</a>
+
+<div class="nav-links">
+<a href="work.html">WORK</a>
+<a href="about.html">ABOUT</a>
+<a href="skills.html">SKILLS</a>
+<a href="contact.html">CONTACT</a>
+</div>
+
+</nav>
+
+<main>
+
+<div class="label">Get in touch</div>
+
+<h1>
+LET'S<br>
+TALK<span>.</span>
+</h1>
+
+<div class="contact-links">
+
+<a class="contact-button" href="mailto:lowe.nasiell@student.berghs.se">
+Email ↗
+</a>
+
+<a class="contact-button" href="https://www.linkedin.com/in/lowe-nasiell-b75997377/" target="_blank">
+LinkedIn ↗
+</a>
+
+<a class="contact-button" href="#">
+GitHub ↗
+</a>
+
+</div>
+
+</main>
+
+<footer>
+<span>© 2026 Lowe Nasiell</span>
+<span>Stockholm, Sweden</span>
+</footer>
+
 </body>
 </html>
-<h1 class="text text--title1 text--light hero__title">My Growth Marketing Portfolio</h1>
