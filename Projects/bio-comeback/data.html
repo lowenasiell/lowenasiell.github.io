@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data — Biobesöken i Sverige, 2016–2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12141a;
+    --panel: #1b1e27;
+    --text: #f3efe6;
+    --muted: #9a9dae;
+    --gold: #e3b23c;
+    --red: #c4483a;
+    --border: rgba(243, 239, 230, 0.12);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; }
+  body { display: flex; justify-content: center; padding: 48px 24px 80px; }
+  .wrap { width: 100%; max-width: 860px; }
+
+  h1, h2 { font-family: 'Fraunces', serif; font-weight: 700; line-height: 1.12; margin: 0; }
+  p { line-height: 1.65; color: var(--muted); max-width: 66ch; }
+  a { color: var(--gold); }
+
+  .back { display: inline-block; font-size: 13px; text-decoration: none; margin-bottom: 22px; }
+  .back:hover { text-decoration: underline; }
+
+  header { padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+  header h1 { font-size: clamp(28px, 4vw, 38px); }
+  header p { margin-top: 14px; font-size: 15.5px; }
+
+  .meta-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 28px; border-radius: 8px; overflow: hidden; }
+  .meta-item { background: var(--panel); padding: 14px 16px; }
+  .meta-item .label { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
+  .meta-item .value { font-size: 14px; }
+
+  section { margin-top: 44px; }
+  section h2 { font-size: 21px; margin-bottom: 6px; }
+  section .sub { font-size: 13.5px; color: var(--muted); margin-bottom: 18px; }
+
+  .table-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 620px; }
+  th, td { text-align: left; padding: 11px 15px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { font-weight: 600; color: var(--muted); font-size: 11.5px; letter-spacing: 0.03em; }
+  td { color: var(--text); }
+  td.num { font-variant-numeric: tabular-nums; }
+  td.src { color: var(--muted); font-size: 12.5px; }
+  tr:last-child td { border-bottom: none; }
+  tr.pending td { color: var(--muted); font-style: italic; }
+  .tag { font-size: 11px; padding: 2px 7px; border-radius: 4px; font-style: normal; }
+  .tag.pandemi { background: rgba(196,72,58,0.18); color: #e08578; }
+  .tag.berak { background: rgba(227,178,60,0.16); color: var(--gold); }
+
+  .note { margin-top: 16px; background: rgba(227,178,60,0.1); border: 1px solid rgba(227,178,60,0.3); border-radius: 8px; padding: 14px 16px; font-size: 13px; }
+  .note strong { color: var(--gold); }
+
+  ol.sources { margin: 0; padding-left: 20px; color: var(--muted); font-size: 13.5px; line-height: 1.9; }
+  ol.sources strong { color: var(--text); }
+
+  .download { margin-top: 20px; font-size: 13.5px; color: var(--muted); }
+
+  @media (max-width: 640px) { .meta-strip { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Tillbaka till hela caset</a>
+
+  <header>
+    <h1>Data: biobesöken i Sverige, 2016–2026</h1>
+    <p>
+      Fullständigt underlag för caset — varje siffra med sin källa,
+      sina förbehåll och sin metod. Allt i presentationen, grafiken och
+      pressmeddelandet bygger på den här tabellen.
+    </p>
+    <div class="meta-strip">
+      <div class="meta-item"><div class="label">Tidsperiod</div><div class="value">2016–2026</div></div>
+      <div class="meta-item"><div class="label">Enhet</div><div class="value">Antal biobesök (styck)</div></div>
+      <div class="meta-item"><div class="label">Geografi</div><div class="value">Sverige</div></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Biobesök per år</h2>
+    <p class="sub">Totalt antal biobesök under helåret — inte biljettintäkter eller antal biografer.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>År</th><th>Biobesök</th><th>Miljoner</th><th>Källa</th><th>Kommentar</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2016</td><td class="num">17 800 000</td><td class="num">17,8</td><td class="src">Sveriges Biografägareförbund</td><td class="src">Preliminär siffra, s.k. "kanonår"</td></tr>
+          <tr><td>2017</td><td class="num">≈16 800 000 <span class="tag berak">beräknad</span></td><td class="num">≈16,8</td><td class="src">Beräknad utifrån Biografägareförbundet/SVT</td><td class="src">2018 hade 400 000 färre besök än 2017 — ej primärkälla</td></tr>
+          <tr><td>2018</td><td class="num">16 363 368</td><td class="num">16,4</td><td class="src">Filminstitutet / Biografägareförbund</td><td class="src">—</td></tr>
+          <tr><td>2019</td><td class="num">15 899 247</td><td class="num">15,9</td><td class="src">Sveriges Biografägareförbund, Helåret 2019</td><td class="src">Sista normalåret före pandemin</td></tr>
+          <tr><td>2020</td><td class="num">5 666 632 <span class="tag pandemi">pandemi</span></td><td class="num">5,7</td><td class="src">Sveriges Biografägareförbund</td><td class="src">Restriktioner</td></tr>
+          <tr><td>2021</td><td class="num">6 027 312 <span class="tag pandemi">pandemi</span></td><td class="num">6,0</td><td class="src">Sveriges Biografägareförbund</td><td class="src">Restriktioner</td></tr>
+          <tr><td>2022</td><td class="num">≈10 400 000</td><td class="num">10,4</td><td class="src">Filminstitutet (avrundad)</td><td class="src">Återhämtning påbörjas</td></tr>
+          <tr><td>2023</td><td class="num">11 200 000</td><td class="num">11,2</td><td class="src">Filminstitutet / Kulturanalys</td><td class="src">—</td></tr>
+          <tr><td>2024</td><td class="num">10 600 000</td><td class="num">10,6</td><td class="src">Filminstitutet / Biografägareförbund</td><td class="src">Kulturanalys anger 10,3 miljoner (annan metod)</td></tr>
+          <tr><td>2025</td><td class="num">9 700 000</td><td class="num">9,7</td><td class="src">Filminstitutet, Filmåret i siffror 2025</td><td class="src">Nytt bottenrekord för ett normalår</td></tr>
+          <tr class="pending"><td>2026</td><td class="num">ej klar</td><td class="num">—</td><td class="src">Pågående år, endast delårsdata</td><td class="src">Sommaren 2026: +40% mot sommaren 2025. Helårssiffra tidigast jan 2027.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <strong>Så här ska siffrorna läsas:</strong> 2017 är beräknad, inte
+      hämtad ur en primärkälla. För 2024 skiljer sig källorna åt — här
+      används Filminstitutets 10,6 miljoner för att vara konsekvent med
+      samma källas siffra för 2025. 2026 saknar helårssiffra och visas
+      därför separat i grafiken, med streckad linje.
+    </div>
+  </section>
+
+  <section>
+    <h2>Nyckeltal härledda ur tabellen</h2>
+    <p class="sub">Uträkningarna bakom siffrorna som används i pressmeddelandet.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Nyckeltal</th><th>Värde</th><th>Uträkning</th></tr></thead>
+        <tbody>
+          <tr><td>Nedgång 2016 → 2025</td><td class="num">−46%</td><td class="src">(9,7 − 17,8) / 17,8</td></tr>
+          <tr><td>Fall under pandemin (2019 → 2020)</td><td class="num">−64%</td><td class="src">(5,67 − 15,90) / 15,90</td></tr>
+          <tr><td>Nedgång efter återhämtningstoppen (2023 → 2025)</td><td class="num">−13%</td><td class="src">(9,7 − 11,2) / 11,2</td></tr>
+          <tr><td>Sommaren 2026 mot sommaren 2025</td><td class="num">+40%</td><td class="src">Direkt branschuppgift, ej beräknad här</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Källor</h2>
+    <ol class="sources">
+      <li><strong>Sveriges Biografägareförbund</strong> — pressmeddelanden för helåren 2016–2021, inklusive exakta siffror för 2018–2021</li>
+      <li><strong>Svenska Filminstitutet</strong>, "Filmåret i siffror" — årliga rapporter 2016–2025</li>
+      <li><strong>Myndigheten för kulturanalys</strong>, "Film på bio" — kompletterande siffror för 2023 och 2024</li>
+      <li><strong>Branschuppgift om sommaren 2026</strong> (Hänt.se) — grunden för +40%-siffran</li>
+    </ol>
+    <p class="download">
+      Samma data finns även som kalkylark, förberett för Google Sheets och Looker Studio.
+    </p>
+  </section>
+
+</div>
+</body>
+</html>

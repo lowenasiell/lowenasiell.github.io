@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pressmeddelande — Biobesöken i Sverige vänder</title>
+<style>
+  :root { --bg: #12141a; --muted: #6b6455; --border: #ddd6c4; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); font-family: Arial, sans-serif; }
+  body { display: flex; justify-content: center; padding: 48px 20px; }
+  .wrap { width: 100%; max-width: 720px; }
+
+  .back { display: inline-block; color: #e3b23c; font-size: 13px; text-decoration: none; margin-bottom: 20px; }
+  .back:hover { text-decoration: underline; }
+
+  .press-doc { background: #f7f3ea; color: #1f1c14; border-radius: 10px; padding: 40px 44px; font-family: Georgia, serif; }
+  .press-doc .kicker { color: #8a6a1f; font-family: Arial, sans-serif; font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; margin: 0 0 10px; }
+  .press-doc h1 { font-family: Georgia, serif; font-size: 28px; color: #1f1c14; margin: 0 0 6px; line-height: 1.2; }
+  .press-doc .meta { font-size: 12.5px; color: var(--muted); margin-bottom: 22px; font-family: Arial, sans-serif; }
+  .press-doc p { color: #2d2a22; font-size: 15.5px; line-height: 1.75; margin: 0 0 16px; }
+  .press-doc .quote { border-left: 3px solid #8a6a1f; padding-left: 18px; font-style: italic; margin: 22px 0; }
+  .press-doc table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 13px; margin: 20px 0; }
+  .press-doc th, .press-doc td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  .press-doc th { color: var(--muted); font-weight: 700; }
+  .press-doc .contact { font-family: Arial, sans-serif; font-size: 13px; color: var(--muted); margin-top: 26px; border-top: 1px solid var(--border); padding-top: 16px; }
+  .press-doc .about { font-family: Arial, sans-serif; font-size: 12.5px; color: var(--muted); margin-top: 14px; line-height: 1.7; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .back { display: none; }
+    .press-doc { border-radius: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Tillbaka till hela caset</a>
+  <div class="press-doc">
+    <p class="kicker">PRESSMEDDELANDE</p>
+    <h1>Efter fem års nedgång — nu tyder ny data på att svenska biobesöken vänder</h1>
+    <p class="meta">Stockholm, september 2026</p>
+
+    <p>
+      Biobesöken i Sverige har minskat med 46 procent sedan 2016, från 17,8
+      miljoner besök till ett nytt bottenrekord på 9,7 miljoner besök 2025.
+      Men efter fem raka år av nedgång visar färska sommarsiffror för 2026
+      en ökning på över 40 procent jämfört med samma period föregående år
+      — vilket väcker frågan om trenden äntligen är på väg att vända.
+    </p>
+
+    <p>
+      Nedgången har pågått långt efter att pandemins restriktioner togs
+      bort. Besöken återhämtade sig till 10–11 miljoner 2022–2023, men föll
+      sedan igen två år i rad, ner till fjolårets bottenrekord. Det tyder på
+      en mer bestående förändring i hur svenskar konsumerar film — driven
+      av streamingtjänster och förändrade vanor — snarare än ett
+      pandemi-efterskalv.
+    </p>
+
+    <p>
+      Sommarens siffror bryter dock mönstret tydligt. Om trenden håller i
+      sig återstår att se, men det är första gången på fem år som
+      utvecklingen pekar uppåt i stället för nedåt.
+    </p>
+
+    <div class="quote">
+      "Att se en vändning just efter fem raka år av nedgång är ovanligt.
+      Om trenden håller i sig kan det handla om ett riktigt trendbrott,
+      inte bara ett starkt filmår." — [Namn, titel]
+    </div>
+
+    <table>
+      <tr><th>År</th><th>Biobesök</th><th>Källa</th></tr>
+      <tr><td>2016</td><td>17,8 miljoner</td><td>Sveriges Biografägareförbund</td></tr>
+      <tr><td>2025</td><td>9,7 miljoner</td><td>Svenska Filminstitutet</td></tr>
+      <tr><td>Sommaren 2026</td><td>+40% mot sommaren 2025</td><td>Branschuppgift, sommaren 2026</td></tr>
+    </table>
+
+    <div class="contact">
+      <strong>Kontakt:</strong> [Namn] · [mejl] · [telefon]<br>
+      Fullständig data, grafik i högupplöst format och ytterligare
+      källhänvisningar tillhandahålls på begäran.
+    </div>
+    <div class="about">
+      Fullständigt källunderlag: Sveriges Biografägareförbund,
+      Svenska Filminstitutet ("Filmåret i siffror"), Myndigheten för
+      kulturanalys ("Film på bio").
+    </div>
+  </div>
+</div>
+</body>
+</html>
