@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bio-comeback — PR-case: biobesöken i Sverige</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12141a;
+    --panel: #1b1e27;
+    --panel-2: #21242f;
+    --text: #f3efe6;
+    --muted: #9a9dae;
+    --gold: #e3b23c;
+    --red: #c4483a;
+    --border: rgba(243, 239, 230, 0.12);
+    --grid: rgba(243, 239, 230, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; }
+  body { display: flex; justify-content: center; }
+  main { width: 100%; max-width: 920px; padding: 0 24px 100px; }
+
+  h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 700; line-height: 1.1; margin: 0; }
+  p { line-height: 1.6; color: var(--muted); max-width: 66ch; }
+  a { color: var(--gold); }
+  strong { color: var(--text); font-weight: 700; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(18,20,26,0.92); backdrop-filter: blur(6px);
+    display: flex; gap: 18px; flex-wrap: wrap;
+    padding: 14px 0; margin-bottom: 8px; border-bottom: 1px solid var(--border);
+    font-size: 12.5px;
+  }
+  nav a { color: var(--muted); text-decoration: none; }
+  nav a:hover { color: var(--gold); }
+
+  .hero { padding: 56px 0 40px; border-bottom: 1px solid var(--border); }
+  .eyebrow { display: inline-block; font-size: 12.5px; color: var(--gold); font-weight: 700; letter-spacing: 0.04em; margin-bottom: 14px; }
+  .hero h1 { font-size: clamp(30px, 4.6vw, 46px); max-width: 16ch; }
+  .hero p.lede { margin-top: 16px; font-size: 16.5px; max-width: 58ch; }
+
+  section { margin-top: 60px; scroll-margin-top: 70px; }
+  section .kicker { font-size: 12.5px; color: var(--gold); font-weight: 700; letter-spacing: 0.03em; margin-bottom: 6px; }
+  section h2 { font-size: 26px; }
+  section .sub { font-size: 14px; color: var(--muted); margin-top: 8px; margin-bottom: 24px; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px 22px; }
+
+  /* Argument cards */
+  .arg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .arg-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+  .arg-card .n { font-family: 'Fraunces', serif; font-size: 26px; color: var(--gold); }
+  .arg-card h3 { font-size: 15px; margin: 8px 0 6px; }
+  .arg-card p { font-size: 13px; margin: 0; }
+
+  /* Chart */
+  .chart-panel svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .grid-line { stroke: var(--grid); stroke-width: 1; }
+  .axis-label { fill: var(--muted); font-size: 12px; }
+  .val-label { fill: var(--text); font-size: 12px; font-weight: 600; text-anchor: middle; }
+  .draw-line { stroke-dasharray: 2000; stroke-dashoffset: 2000; transition: stroke-dashoffset 1.8s cubic-bezier(.3,.7,.2,1); }
+  .in-view .draw-line { stroke-dashoffset: 0; }
+  .pt { opacity: 0; transform: scale(0.3); transform-box: fill-box; transform-origin: center; transition: opacity 0.4s ease, transform 0.4s ease; }
+  .in-view .pt { opacity: 1; transform: scale(1); }
+  .legend { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12.5px; color: var(--muted); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+
+  /* LinkedIn mockup */
+  .li-card { background: #ffffff; color: #1a1a1a; border-radius: 10px; max-width: 420px; margin: 0 auto; overflow: hidden; font-family: Arial, sans-serif; }
+  .li-head { display: flex; gap: 10px; padding: 14px 16px 0; }
+  .li-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--gold); color: #12141a; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; flex-shrink: 0; }
+  .li-name { font-weight: 700; font-size: 14px; margin: 0; }
+  .li-headline { font-size: 12px; color: #5b5b5b; margin: 2px 0 0; }
+  .li-time { font-size: 11.5px; color: #7a7a7a; margin: 2px 0 0; }
+  .li-body { padding: 10px 16px; font-size: 13.5px; line-height: 1.5; }
+  .li-img { margin: 0 16px 12px; border-radius: 6px; overflow: hidden; border: 1px solid #eaeaea; }
+  .li-img svg { width: 100%; display: block; background: #12141a; }
+  .li-bar { display: flex; border-top: 1px solid #eaeaea; padding: 4px 8px; }
+  .li-bar div { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 4px; color: #5b5b5b; font-size: 12.5px; font-weight: 600; }
+  .li-icon { width: 17px; height: 17px; }
+  .li-caption { max-width: 420px; margin: 18px auto 0; font-size: 13px; color: var(--muted); }
+
+  /* Instagram phone */
+  .phone-wrap { display: flex; justify-content: center; }
+  .phone { width: 300px; background: #000; border-radius: 32px; padding: 10px; }
+  .phone-screen { background: #fff; border-radius: 24px; overflow: hidden; color: #1a1a1a; font-family: Arial, sans-serif; }
+  .ig-head { display: flex; align-items: center; gap: 8px; padding: 10px 12px; }
+  .ig-avatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--red)); }
+  .ig-user { font-size: 12.5px; font-weight: 700; }
+  .ig-slide-area { position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; }
+  .ig-slide {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; text-align: center; padding: 24px;
+    opacity: 0; transition: opacity 0.5s ease;
+  }
+  .ig-slide.active { opacity: 1; }
+  .ig-dots { display: flex; justify-content: center; gap: 6px; padding: 8px 0; }
+  .ig-dot { width: 6px; height: 6px; border-radius: 50%; background: #d0d0d0; transition: background 0.3s; cursor: pointer; }
+  .ig-dot.active { background: #3897f0; }
+  .ig-actions { display: flex; gap: 14px; padding: 8px 12px 4px; }
+  .ig-caption { font-size: 12px; padding: 0 12px 14px; line-height: 1.5; }
+  .ig-caption b { font-weight: 700; }
+
+  /* Press release */
+  .press-doc { background: #f7f3ea; color: #1f1c14; border-radius: 10px; padding: 34px 36px; font-family: Georgia, serif; }
+  .press-doc .kicker { color: #8a6a1f; }
+  .press-doc h3 { font-family: Georgia, serif; font-size: 22px; color: #1f1c14; margin: 0 0 4px; }
+  .press-doc .meta { font-size: 12.5px; color: #6b6455; margin-bottom: 18px; font-family: Arial, sans-serif; }
+  .press-doc p { color: #2d2a22; font-size: 14.5px; line-height: 1.7; max-width: none; }
+  .press-doc .quote { border-left: 3px solid #8a6a1f; padding-left: 16px; font-style: italic; margin: 18px 0; }
+  .press-doc table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 12.5px; margin: 16px 0; }
+  .press-doc th, .press-doc td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #ddd6c4; }
+  .press-doc .contact { font-family: Arial, sans-serif; font-size: 12.5px; color: #6b6455; margin-top: 20px; border-top: 1px solid #ddd6c4; padding-top: 14px; }
+
+  /* Summary structure */
+  .summary-list { display: flex; flex-direction: column; gap: 12px; }
+  .summary-item { display: flex; gap: 14px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .summary-item .num { font-family: 'Fraunces', serif; color: var(--gold); font-size: 20px; width: 26px; flex-shrink: 0; }
+  .summary-item h3 { font-size: 14.5px; margin: 0 0 3px; }
+  .summary-item p { font-size: 13px; margin: 0; }
+
+  .letter {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px 10px 10px 4px;
+    padding: 32px 34px;
+  }
+  .letter p { color: var(--text); font-size: 15.5px; max-width: 62ch; }
+  .letter p + p { margin-top: 14px; }
+  .letter .sign { margin-top: 24px; font-family: 'Fraunces', serif; font-size: 18px; color: var(--gold); }
+  .letter .sign span { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  .sources-list { margin: 0; padding-left: 20px; color: var(--muted); font-size: 13.5px; line-height: 1.9; }
+  .sources-list li strong { color: var(--text); }
+
+  @media (max-width: 640px) {
+    .arg-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <nav>
+    <a href="../../index.html" style="color:#e3b23c;">← Portfolio</a>
+    <a href="#varfor">Nyhetsvärdet</a>
+    <a href="#diagram">Diagrammet</a>
+    <a href="#linkedin">LinkedIn</a>
+    <a href="#instagram">Instagram</a>
+    <a href="#press">Pressmeddelande</a>
+    <a href="#struktur">Struktur</a>
+    <a href="#kallor">Källor</a>
+    <a href="#till-dig">Till journalisten</a>
+  </nav>
+
+  <div class="hero">
+    <span class="eyebrow">PR-case · biobesöken i sverige</span>
+    <h1>Efter fem års nedgång — nu vänder det</h1>
+    <p class="lede">
+      Ett komplett innehållspaket byggt kring en enda vinkel: biobesöken
+      i Sverige har fallit 46% sedan 2016, men sommaren 2026 visar de
+      första tecknen på en vändning. Allt nedan är byggt för att få en
+      journalist att vilja skriva om det.
+    </p>
+  </div>
+
+  <section id="varfor" class="reveal">
+    <div class="kicker">Viktig information om caset</div>
+    <h2>Varför det här är en nyhet</h2>
+    <p class="sub">Fem nyhetsvärderingskriterier, tillämpade på samma budskap.</p>
+    <div class="arg-grid">
+      <div class="arg-card"><div class="n">01</div><h3>Aktualitet</h3><p>Sommarens +40% är obekräftad i medierna — en nyhet ingen annan skrivit om än.</p></div>
+      <div class="arg-card"><div class="n">02</div><h3>Väsentlighet</h3><p>Säger något större om hur en hel generation konsumerar kultur efter pandemin.</p></div>
+      <div class="arg-card"><div class="n">03</div><h3>Sensation</h3><p>Fem år av nedgång, sedan en oväntad vändning — en kurva med en knorr.</p></div>
+      <div class="arg-card"><div class="n">04</div><h3>Identifikation</h3><p>Det här är inte B2B-statistik som bara branschfolk bryr sig om. Alla läsare har någon gång gått på bio, eller har en åsikt om varför de slutat. Det gör story:n lika lätt att relatera till för en kulturjournalist som för deras läsare.</p></div>
+      <div class="arg-card"><div class="n">05</div><h3>Enkelhet</h3><p>Siffror, källor, grafik och citat är redan klara. Noll extra jobb för journalisten.</p></div>
+    </div>
+  </section>
+
+  <section id="diagram" class="reveal">
+    <div class="kicker">Datan</div>
+    <h2>Biobesöken i Sverige, 2016–2026</h2>
+    <p class="sub">Antal biobesök per år, i miljoner. Röda punkter är pandemiåren.</p>
+    <div class="panel chart-panel">
+      <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
+        <line class="grid-line" x1="60" y1="340" x2="780" y2="340"/>
+        <text class="axis-label" x="46" y="344" text-anchor="end">0</text>
+        <line class="grid-line" x1="60" y1="260" x2="780" y2="260"/>
+        <text class="axis-label" x="46" y="264" text-anchor="end">5M</text>
+        <line class="grid-line" x1="60" y1="180" x2="780" y2="180"/>
+        <text class="axis-label" x="46" y="184" text-anchor="end">10M</text>
+        <line class="grid-line" x1="60" y1="100" x2="780" y2="100"/>
+        <text class="axis-label" x="46" y="104" text-anchor="end">15M</text>
+        <line class="grid-line" x1="60" y1="20" x2="780" y2="20"/>
+        <text class="axis-label" x="46" y="24" text-anchor="end">20M</text>
+
+        <path class="draw-line" fill="none" stroke="#e3b23c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+          d="M 60,55.2 L 132,71.2 L 204,78.2 L 276,85.6 L 348,249.3 L 420,243.6 L 492,173.6 L 564,160.8 L 636,170.4 L 708,184.8"/>
+        <path class="draw-line" fill="none" stroke="#9a9dae" stroke-width="1.5" stroke-dasharray="2000" d="M 708,184.8 L 760,145"/>
+
+        <circle class="pt" cx="60" cy="55.2" r="5" fill="#e3b23c" stroke="#1b1e27" stroke-width="2"/>
+        <text class="val-label" x="60" y="40">17,8M</text>
+        <circle class="pt" cx="132" cy="71.2" r="5" fill="#e3b23c" stroke="#1b1e27" stroke-width="2"/>
+        <circle class="pt" cx="204" cy="78.2" r="5" fill="#e3b23c" stroke="#1b1e27" stroke-width="2"/>
+        <circle class="pt" cx="276" cy="85.6" r="5" fill="#e3b23c" stroke="#1b1e27" stroke-width="2"/>
+        <circle class="pt" cx="348" cy="249.3" r="5" fill="#c4483a" stroke="#1b1e27" stroke-width="2"/>
+        <text class="val-label" x="348" y="234">5,7M</text>
+        <circle class="pt" cx="420" cy="243.6" r="5" fill="#c4483a" stroke="#1b1e27" stroke-width="2"/>
+        <circle class="pt" cx="492" cy="173.6" r="5" fill="#e3b23c" stroke="#1b1e27" stroke-width="2"/>
+        <circle class="pt" cx="564" cy="160.8" r="5" fill="#e3b23c" stroke="#1b1e27" stroke-width="2"/>
+        <circle class="pt" cx="636" cy="170.4" r="5" fill="#e3b23c" stroke="#1b1e27" stroke-width="2"/>
+        <circle class="pt" cx="708" cy="184.8" r="5" fill="#e3b23c" stroke="#1b1e27" stroke-width="2"/>
+        <text class="val-label" x="708" y="200">9,7M</text>
+        <circle class="pt" cx="760" cy="145" r="6" fill="none" stroke="#9a9dae" stroke-width="2"/>
+
+        <text class="axis-label" x="60" y="366" text-anchor="middle">2016</text>
+        <text class="axis-label" x="348" y="366" text-anchor="middle">2020</text>
+        <text class="axis-label" x="636" y="366" text-anchor="middle">2024</text>
+        <text class="axis-label" x="760" y="366" text-anchor="middle">2026*</text>
+      </svg>
+      <div class="legend">
+        <span><span class="dot" style="background:#e3b23c"></span>Normalår</span>
+        <span><span class="dot" style="background:#c4483a"></span>Pandemiår</span>
+        <span><span class="dot" style="background:#9a9dae"></span>2026: sommaren +40% mot 2025, helårssiffra saknas</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="linkedin" class="reveal">
+    <div class="kicker">Kanal 1</div>
+    <h2>LinkedIn — den seriösa avsändaren</h2>
+    <p class="sub">Syfte: bygga trovärdighet innan journalisten kontaktas.</p>
+    <div class="li-card">
+      <div class="li-head">
+        <div class="li-avatar">LN</div>
+        <div>
+          <p class="li-name">Lowe Nasiell</p>
+          <p class="li-headline">Growth Marketing-student @ Berghs School of Communication</p>
+          <p class="li-time">2 tim · 🌐</p>
+        </div>
+      </div>
+      <div class="li-body">
+        Efter fem års nedgång vänder det äntligen för svenska biografer.<br><br>
+        Vi har grävt i statistiken för biobesök i Sverige, 2016–2026:<br><br>
+        → 2016: 17,8 miljoner besök<br>
+        → 2025: 9,7 miljoner besök — nytt bottenrekord<br>
+        → Sommaren 2026: +40% jämfört med samma period 2025<br><br>
+        Vad tror ni ligger bakom vändningen?
+      </div>
+      <div class="li-img">
+        <svg viewBox="0 0 400 200">
+          <path fill="none" stroke="#e3b23c" stroke-width="3" d="M 40,150 L 180,110 L 280,90 L 360,30"/>
+          <circle cx="40" cy="150" r="4" fill="#9a9dae"/>
+          <circle cx="360" cy="30" r="4" fill="#e3b23c"/>
+          <text x="40" y="170" fill="#9a9dae" font-size="11" font-family="Arial">2016</text>
+          <text x="330" y="170" fill="#9a9dae" font-size="11" font-family="Arial">2025</text>
+        </svg>
+      </div>
+      <div class="li-bar">
+        <div>👍 Gilla</div>
+        <div>💬 Kommentera</div>
+        <div>↻ Dela om</div>
+        <div>➤ Skicka</div>
+      </div>
+    </div>
+    <p class="li-caption">Fullständig avsändarprofil, professionell ton och en egen graf — signalerar att det här är en seriös aktör värd att svara på, inte en anonym tipsare.</p>
+  </section>
+
+  <section id="instagram" class="reveal">
+    <div class="kicker">Kanal 2</div>
+    <h2>Instagram-karusell — nå människor i flödet</h2>
+    <p class="sub">Fyra slides, byggda för att swipas igenom. Klicka punkterna för att bläddra.</p>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ig-head">
+            <div class="ig-avatar"></div>
+            <span class="ig-user">aftonbladet</span>
+          </div>
+          <div class="ig-slide-area" id="ig-area">
+            <div class="ig-slide active" style="background:#6b1e2a;" data-i="0">
+              <p style="font-family:Georgia,serif; font-weight:700; font-size:22px; color:#f7ecd9; margin:0;">Hur längesen är det du gick på bio?</p>
+            </div>
+            <div class="ig-slide" style="background:#3a2a12;" data-i="1">
+              <p style="font-family:Arial; font-size:14px; color:#e0b9a8; margin:0 0 6px;">2016 → 2025</p>
+              <p style="font-family:Georgia,serif; font-weight:700; font-size:30px; color:#f7ecd9; margin:0;">17,8M → 9,7M</p>
+            </div>
+            <div class="ig-slide" style="background:#e8a83c;" data-i="2">
+              <p style="font-family:Georgia,serif; font-weight:700; font-size:56px; color:#3a2308; margin:0;">+40%</p>
+              <p style="font-family:Arial; font-size:13px; color:#5c3d12; margin:6px 0 0;">fler biobesök i sommar</p>
+            </div>
+            <div class="ig-slide" style="background:#12141a;" data-i="3">
+              <p style="font-family:Georgia,serif; font-weight:700; font-size:20px; color:#f3efe6; margin:0 0 8px;">Dela dina bio-minnen</p>
+              <p style="font-family:Arial; font-size:13px; color:#9a9dae; margin:0;">i kommentarerna 👇</p>
+            </div>
+          </div>
+          <div class="ig-dots" id="ig-dots"></div>
+          <div class="ig-actions">
+            <span>♡</span><span>💬</span><span>➤</span>
+          </div>
+          <div class="ig-caption"><b>aftonbladet</b> Plot twist: biograferna är tillbaka 🎬 Efter fem år av nedgång ökade biobesöken med 40% i sommar...</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="press" class="reveal">
+    <div class="kicker">Kanal 3</div>
+    <h2>Pressmeddelandet</h2>
+    <p class="sub">Det journalisten kan klippa direkt ur, om de vill.</p>
+    <div class="press-doc">
+      <p class="kicker" style="margin-bottom:6px;">PRESSMEDDELANDE</p>
+      <h3>Efter fem års nedgång — nu tyder ny data på att svenska biobesöken vänder</h3>
+      <p class="meta">Stockholm, september 2026</p>
+      <p>
+        Biobesöken i Sverige har minskat med 46 procent sedan 2016, från 17,8
+        miljoner besök till ett nytt bottenrekord på 9,7 miljoner besök 2025.
+        Men efter fem raka år av nedgång visar färska sommarsiffror för 2026
+        en ökning på över 40 procent jämfört med samma period föregående år
+        — vilket väcker frågan om trenden äntligen är på väg att vända.
+      </p>
+      <p>
+        Nedgången har pågått långt efter att pandemins restriktioner togs
+        bort. Besöken återhämtade sig till 10–11 miljoner 2022–2023, men föll
+        sedan igen två år i rad, ner till fjolårets bottenrekord. Det tyder på
+        en mer bestående förändring i hur svenskar konsumerar film — driven
+        av streamingtjänster och förändrade vanor — snarare än ett
+        pandemi-efterskalv.
+      </p>
+      <div class="quote">
+        "Att se en vändning just efter fem raka år av nedgång är ovanligt.
+        Om trenden håller i sig kan det handla om ett riktigt trendbrott,
+        inte bara ett starkt filmår." — [Namn, titel]
+      </div>
+      <table>
+        <tr><th>År</th><th>Biobesök</th><th>Källa</th></tr>
+        <tr><td>2016</td><td>17,8 miljoner</td><td>Sveriges Biografägareförbund</td></tr>
+        <tr><td>2025</td><td>9,7 miljoner</td><td>Svenska Filminstitutet</td></tr>
+        <tr><td>Sommaren 2026</td><td>+40% mot sommaren 2025</td><td>Branschuppgift, sommaren 2026</td></tr>
+      </table>
+      <div class="contact">
+        Kontakt: [Namn] · [mejl] · [telefon]<br>
+        Fullständig data, grafik i högupplöst format och ytterligare
+        källhänvisningar tillhandahålls på begäran.
+      </div>
+    </div>
+    <p class="sub" style="margin-top:14px;">
+      <a href="press.html">Öppna pressmeddelandet som egen sida →</a>
+      — praktiskt om du vill skicka eller visa bara det för en journalist.
+    </p>
+  </section>
+
+  <section id="struktur" class="reveal">
+    <div class="kicker">Presentationen</div>
+    <h2>Struktur för att lyfta budskapet</h2>
+    <p class="sub">Ordningen som får en journalist att stanna kvar i mejlet.</p>
+    <div class="summary-list">
+      <div class="summary-item"><div class="num">1</div><div><h3>Siffran först</h3><p>Öppna med huvudsiffran direkt — tre sekunder att övertyga.</p></div></div>
+      <div class="summary-item"><div class="num">2</div><div><h3>Varför nu</h3><p>Sommarens vändning är obekräftad i medierna — det är nyheten.</p></div></div>
+      <div class="summary-item"><div class="num">3</div><div><h3>Varför det spelar roll</h3><p>Koppla till det större: hur kulturkonsumtion förändras efter pandemin.</p></div></div>
+      <div class="summary-item"><div class="num">4</div><div><h3>Gör jobbet åt dem</h3><p>Grafik, källor och citat redan klara — noll friktion att säga ja.</p></div></div>
+      <div class="summary-item"><div class="num">5</div><div><h3>En tydlig nästa handling</h3><p>Avsluta med ett konkret erbjudande: fullständig data på begäran.</p></div></div>
+    </div>
+  </section>
+
+  <section id="kallor" class="reveal">
+    <div class="kicker">Underlag</div>
+    <h2>Källor</h2>
+    <p class="sub">Allt i caset — diagram, pressmeddelande, inlägg — bygger på dessa fyra.</p>
+    <div class="panel">
+      <ol class="sources-list">
+        <li><strong>Sveriges Biografägareförbund</strong> — pressmeddelanden för helåren 2016–2021, inklusive de exakta siffrorna för 2018–2021</li>
+        <li><strong>Svenska Filminstitutet</strong>, "Filmåret i siffror" — årliga rapporter 2016–2025, inklusive 2024- och 2025-siffrorna</li>
+        <li><strong>Myndigheten för kulturanalys</strong>, "Film på bio" — kompletterande siffror för 2023 och 2024, med en mindre metodskillnad mot Filminstitutet för 2024 (10,3 mot 10,6 miljoner)</li>
+        <li><strong>Branschuppgift om sommaren 2026</strong> (Hänt.se) — grunden för +40%-siffran; ingen bekräftad helårssiffra för 2026 finns ännu</li>
+      </ol>
+    </div>
+    <p class="sub" style="margin-top:14px;">
+      <a href="data.html">Öppna fullständigt dataunderlag →</a>
+      — varje siffra med källa, förbehåll och uträkning.
+    </p>
+  </section>
+
+  <section id="till-dig" class="reveal">
+    <div class="kicker">Sista ordet</div>
+    <h2>Till dig som läser det här</h2>
+    <div class="letter">
+      <p>
+        Vi har inte skickat det här för att fylla din inkorg. Vi har byggt
+        det för att göra ditt jobb enklare: siffrorna är kontrollerade,
+        källorna står med, grafiken är klar att publicera, och vinkeln är
+        redan tänkt igenom — fem år av nedgång, och nu de första tydliga
+        tecknen på att det vänder.
+      </p>
+      <p>
+        Vi tror det är värt en artikel. Hör av dig om du vill ha
+        rådatan, en kommentar, eller vill prata direkt med oss — vi
+        svarar samma dag.
+      </p>
+      <div class="sign">
+        Lowe Nasiell
+        <span>Growth Marketing-student, Berghs School of Communication</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('in-view'); });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const slides = document.querySelectorAll('.ig-slide');
+  const dotsWrap = document.getElementById('ig-dots');
+  let current = 0;
+  slides.forEach((s, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'ig-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = document.querySelectorAll('.ig-dot');
+  function goTo(i) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  setInterval(() => { goTo((current + 1) % slides.length); }, 3200);
+</script>
+</body>
+</html>
