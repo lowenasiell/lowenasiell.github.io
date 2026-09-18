@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Laptop Sales Intelligence – Scraping</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Space+Grotesk:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --background: #08060f;
+      --panel: rgba(20, 14, 36, 0.85);
+      --panel-light: rgba(20, 14, 36, 0.65);
+      --text: #f4f1fa;
+      --muted: rgba(244, 241, 250, 0.58);
+      --purple: #5227ff;
+      --pink: #ff9ffc;
+      --border: rgba(244, 241, 250, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(82, 39, 255, 0.2),
+          transparent 35%
+        ),
+        var(--background);
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Syne", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 32px 0 70px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 70px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover {
+      color: var(--pink);
+    }
+
+    .label {
+      color: var(--pink);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+     max-width: 760px;
+  margin: 16px 0 22px;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -3px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(
+        100deg,
+        var(--purple),
+        var(--pink)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin-bottom: 46px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.7;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 60px;
+    }
+
+    .stat {
+      padding: 25px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-4px);
+      border-color: var(--pink);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--pink);
+      font-family: "Syne", sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section {
+      margin-top: 55px;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 32px;
+    }
+
+    .section-description {
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .files {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .file-card {
+      padding: 28px;
+      color: var(--text);
+      text-decoration: none;
+      background: var(--panel-light);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .file-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--pink);
+      background: rgba(82, 39, 255, 0.12);
+    }
+
+    .file-card span {
+      display: block;
+      margin-bottom: 13px;
+      color: var(--pink);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .file-card h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+
+    .file-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .notice {
+      margin-top: 55px;
+      padding: 24px;
+      color: var(--muted);
+      line-height: 1.6;
+      background: rgba(82, 39, 255, 0.08);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--pink);
+      border-radius: 8px;
+    }
+
+    .notice strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 70px;
+      padding-top: 24px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .files {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <a class="back-link" href="../index.html">
+      ← Tillbaka till portfolion
+    </a>
+
+    <div class="label">
+      Web scraping · Försäljningsanalys
+    </div>
+
+    <h1>
+      Laptop Sales
+      <span class="gradient-text">Intelligence.</span>
+    </h1>
+
+    <p class="intro">
+      Ett scrapingprojekt där produktinformation från 117 laptops samlades
+      in automatiskt med Node.js och Cheerio. Datan används för att analysera
+      prissättning, sortiment, varumärken och möjliga efterfrågesignaler.
+    </p>
+
+    <section class="stats">
+      <div class="stat">
+        <strong>117</strong>
+        <span>Insamlade produkter</span>
+      </div>
+
+      <div class="stat">
+        <strong>$909</strong>
+        <span>Genomsnittligt pris</span>
+      </div>
+
+      <div class="stat">
+        <strong>38</strong>
+        <span>Budgetprodukter</span>
+      </div>
+
+      <div class="stat">
+        <strong>65</strong>
+        <span>Premiumprodukter</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Vad samlades in?</h2>
+
+      <p class="section-description">
+        För varje produkt samlades produktnamn, varumärke, pris, prissegment,
+        betyg, antal recensioner, produktbeskrivning och produktlänk in.
+        Produkterna sorterades därefter i budget-, mellan- och premiumsegment.
+        Antalet recensioner används som en möjlig efterfrågesignal, men ska
+        inte tolkas som bekräftad försäljning.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Projektfiler</h2>
+
+      <p class="section-description">
+        Här finns de två textfiler som ingår i scrapingprojektet: scriptet
+        som genomförde datainsamlingen och filen med det färdiga resultatet.
+      </p>
+
+      <div class="files">
+        <a
+          class="file-card"
+          href="script.txt"
+          target="_blank"
+          rel="noopener"
+        >
+          <span>Fil 01 · TXT</span>
+          <h3>Scraping-script</h3>
+          <p>
+            Node.js-scriptet som hämtade, strukturerade och analyserade
+            produktinformationen.
+          </p>
+        </a>
+
+        <a
+          class="file-card"
+          href="scraped-data.txt"
+          target="_blank"
+          rel="noopener"
+        >
+          <span>Fil 02 · TXT</span>
+          <h3>Insamlad data</h3>
+          <p>
+            Resultatet med prisanalys, prissegment, varumärken och samtliga
+            117 produkter.
+          </p>
+        </a>
+      </div>
+    </section>
+
+    <div class="notice">
+      <strong>Om datakällan:</strong>
+      Informationen kommer från Web Scrapers testsajt för e-handel.
+      Projektet demonstrerar hur scraping kan användas för att samla in
+      och strukturera produktdata för en försäljningsanalys.
+    </div>
+
+    <footer>
+      <span>Lowe Nasiell © 2026</span>
+      <span>Growth Marketing @ Berghs</span>
+    </footer>
+
+  </main>
+</body>
+</html>

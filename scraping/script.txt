@@ -1,0 +1,178 @@
+const fs = require("fs");
+const path = require("path");
+const cheerio = require("cheerio");
+
+const SOURCE_URL =
+  "https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops";
+
+function cleanText(text) {
+  return text.replace(/\s+/g, " ").trim();
+}
+
+function getPriceSegment(price) {
+  if (price < 500) return "Budget";
+  if (price <= 1000) return "Mellansegment";
+  return "Premium";
+}
+
+function calculateMedian(numbers) {
+  const sorted = [...numbers].sort((a, b) => a - b);
+  const middle = Math.floor(sorted.length / 2);
+
+  if (sorted.length % 2 === 0) {
+    return (sorted[middle - 1] + sorted[middle]) / 2;
+  }
+
+  return sorted[middle];
+}
+
+async function runScraper() {
+  console.log("Startar scraping av laptopprodukter...");
+
+  const response = await fetch(SOURCE_URL, {
+    headers: {
+      "User-Agent": "Student portfolio scraping project"
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Webbsidan kunde inte läsas. Status: ${response.status}`);
+  }
+
+  const html = await response.text();
+  const $ = cheerio.load(html);
+  const products = [];
+
+  $(".thumbnail").each((index, element) => {
+    const titleElement = $(element).find(".title");
+    const title = cleanText(
+      titleElement.attr("title") || titleElement.text()
+    );
+
+    const priceText = $(element).find(".price").text();
+    const priceUSD = Number(priceText.replace(/[^\d.]/g, ""));
+
+    const description = cleanText(
+      $(element).find(".description").text()
+    );
+
+    const reviewText = $(element).find(".review-count").text();
+    const reviews = Number(reviewText.replace(/[^\d]/g, "")) || 0;
+
+    const rating =
+      Number($(element).find("[data-rating]").attr("data-rating")) || 0;
+
+    const relativeLink = titleElement.attr("href") || "";
+    const productUrl = new URL(relativeLink, SOURCE_URL).href;
+
+    products.push({
+      title,
+      brand: title.split(" ")[0],
+      priceUSD,
+      priceSegment: getPriceSegment(priceUSD),
+      rating,
+      reviews,
+      description,
+      productUrl
+    });
+  });
+
+  if (products.length === 0) {
+    throw new Error("Inga produkter hittades. Kontrollera sidans struktur.");
+  }
+
+  const prices = products.map(product => product.priceUSD);
+
+  const averagePrice =
+    prices.reduce((sum, price) => sum + price, 0) / prices.length;
+
+  const medianPrice = calculateMedian(prices);
+
+  const segmentCounts = {
+    Budget: 0,
+    Mellansegment: 0,
+    Premium: 0
+  };
+
+  const brandCounts = {};
+
+  for (const product of products) {
+    segmentCounts[product.priceSegment]++;
+
+    brandCounts[product.brand] =
+      (brandCounts[product.brand] || 0) + 1;
+  }
+
+  const mostReviewed = [...products]
+    .sort((a, b) => b.reviews - a.reviews)
+    .slice(0, 10);
+
+  const largestBrands = Object.entries(brandCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10);
+
+  const output = [
+    "LAPTOP SALES INTELLIGENCE – INSAMLAD DATA",
+    "==========================================",
+    "",
+    `Källa: ${SOURCE_URL}`,
+    `Insamlad: ${new Date().toISOString()}`,
+    `Antal produkter: ${products.length}`,
+    "",
+    "VIKTIG INFORMATION",
+    "------------------",
+    "Webbsidan är en testsajt för scraping.",
+    "Resultatet används som teknisk försäljnings- och dataövning.",
+    "Antalet recensioner används som efterfrågesignal och är inte bevisad försäljning.",
+    "",
+    "PRISANALYS",
+    "----------",
+    `Genomsnittspris: $${averagePrice.toFixed(2)}`,
+    `Medianpris: $${medianPrice.toFixed(2)}`,
+    `Budgetprodukter under $500: ${segmentCounts.Budget}`,
+    `Mellansegment $500–$1000: ${segmentCounts.Mellansegment}`,
+    `Premiumprodukter över $1000: ${segmentCounts.Premium}`,
+    "",
+    "STÖRSTA VARUMÄRKENA I SORTIMENTET",
+    "---------------------------------",
+    ...largestBrands.map(
+      ([brand, count], index) =>
+        `${index + 1}. ${brand}: ${count} produkter`
+    ),
+    "",
+    "PRODUKTER MED FLEST RECENSIONER",
+    "-------------------------------",
+    ...mostReviewed.map(
+      (product, index) =>
+        `${index + 1}. ${product.title} – ${product.reviews} recensioner – $${product.priceUSD.toFixed(2)}`
+    ),
+    "",
+    "ALL INSAMLAD DATA",
+    "-----------------",
+    "Produkt\tVarumärke\tPris USD\tPrissegment\tBetyg\tRecensioner\tBeskrivning\tProduktlänk",
+    ...products.map(product =>
+      [
+        product.title,
+        product.brand,
+        product.priceUSD.toFixed(2),
+        product.priceSegment,
+        product.rating,
+        product.reviews,
+        product.description,
+        product.productUrl
+      ].join("\t")
+    )
+  ].join("\n");
+
+  const outputPath = path.join(__dirname, "scraped-data.txt");
+  fs.writeFileSync(outputPath, output, "utf8");
+
+  console.log(`Klart! ${products.length} produkter samlades in.`);
+  console.log(`Resultatet sparades i: ${outputPath}`);
+}
+
+runScraper().catch(error => {
+  console.error("Scrapingen misslyckades:");
+  console.error(error);
+  process.exit(1);
+});
