@@ -367,14 +367,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </article>
 
         <article class="entry">
-          <button class="entry__row" type="button" data-project="soon">
-            <span class="entry__num">03</span>
-            <span class="entry__title">Coming Soon...</span>
-            <span class="entry__cat">Content</span>
-            <span class="entry__year">2026</span>
-            <span class="entry__go">&#8599;</span>
-          </button>
-        </article>
+  <button class="entry__row" type="button" data-project="scraping">
+    <span class="entry__num">03</span>
+    <span class="entry__title">Laptop Sales Intelligence</span>
+    <span class="entry__cat">Scraping &amp; Sales</span>
+    <span class="entry__year">2026</span>
+    <span class="entry__go">&#8599;</span>
+  </button>
+</article>
 
       </div>
       <p class="add-note an d3">More projects are added as the year goes on.</p>
@@ -463,11 +463,14 @@ var PROJECTS={
          '<p><strong>Outcome.</strong> A complete, ready-to-send press kit with verified sources, publication-ready graphics and a clear argument for why the story earns coverage.</p>',
     link:'Projects/bio-comeback/index.html'
   },
-  soon:{
-    meta:'Content &middot; 2026',
-    title:'Coming Soon...',
-    body:'<p>The next project is in progress. Check back soon — new work lands here as the year goes on.</p>'
-  }
+  scraping:{
+  meta:'Scraping &amp; Sales &middot; 2026',
+  title:'Laptop Sales Intelligence',
+  body:'<p><strong>Brief.</strong> Samla in och strukturera produktdata från en e-handel med hjälp av web scraping.</p>'+
+       '<p><strong>Approach.</strong> Jag byggde ett Node.js-script med Cheerio som samlade in produktnamn, varumärke, pris, betyg, recensioner och produktlänkar från 117 laptops.</p>'+
+       '<p><strong>Outcome.</strong> Ett strukturerat dataset och en försäljningsanalys med genomsnittspris, prissegment, varumärkesfördelning och möjliga efterfrågesignaler.</p>',
+  link:'scraping/index.html'
+}
 };
 
 (function(){
