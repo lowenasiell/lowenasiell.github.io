@@ -146,6 +146,44 @@
   @media (max-width: 640px) {
     .arg-grid { grid-template-columns: 1fr 1fr; }
   }
+  /* Looker Studio dashboard */
+.looker-frame {
+  width: 100%;
+  height: 720px;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.looker-frame iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+
+.dashboard-fallback {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.dashboard-fallback a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.dashboard-fallback a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .looker-frame {
+    height: 560px;
+  }
+}
 </style>
 </head>
 <body>
@@ -155,6 +193,7 @@
     <a href="../../index.html" style="color:#e3b23c;">← Portfolio</a>
     <a href="#varfor">Nyhetsvärdet</a>
     <a href="#diagram">Diagrammet</a>
+    <a href="#dashboard">Dashboard</a>
     <a href="#linkedin">LinkedIn</a>
     <a href="#instagram">Instagram</a>
     <a href="#press">Pressmeddelande</a>
@@ -235,7 +274,30 @@
       </div>
     </div>
   </section>
+<section id="dashboard" class="reveal">
+  <div class="kicker">Interaktiv dashboard</div>
 
+  <h2>Utforska utvecklingen av svenska biobesök</h2>
+
+  <p class="sub">
+    Dashboarden visar utvecklingen av svenska biobesök under 2016–2025,
+    den kraftiga nedgången under pandemin samt preliminära uppgifter som
+    visar en ökning på cirka 40 procent under sommaren 2026 jämfört med
+    föregående år.
+  </p>
+
+  <div class="looker-frame">
+    <iframe
+      src="https://datastudio.google.com/embed/reporting/12a98f2b-92f5-4c15-b9a8-59826f907491/page/zm98F"
+      title="Dashboard över svenska biobesök"
+      loading="lazy"
+      frameborder="0"
+      style="border: 0;"
+      allowfullscreen
+      sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+    </iframe>
+  </div>
+</section>
   <section id="linkedin" class="reveal">
     <div class="kicker">Kanal 1</div>
     <h2>LinkedIn — den seriösa avsändaren</h2>
