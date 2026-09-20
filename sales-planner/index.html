@@ -330,6 +330,31 @@
       line-height: 1.65;
     }
 
+    .paper-sheet {
+      margin-top: 28px;
+      padding: clamp(14px, 3vw, 34px);
+      overflow: hidden;
+      color: #29253b;
+      background: #f7f3e9;
+      border: 1px solid #ded6c7;
+      border-radius: 4px;
+      box-shadow: 7px 9px 0 rgba(180, 168, 144, 0.2), 0 24px 70px rgba(0, 0, 0, 0.25);
+      transform: rotate(-0.3deg);
+    }
+
+    .paper-sheet svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .paper-caption {
+      margin: 18px 0 0;
+      color: #625d6d;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
     footer {
       display: flex;
       justify-content: space-between;
@@ -535,6 +560,66 @@
           </p>
         </article>
 
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sketch-title">
+      <div class="eyebrow">Ritad paper prototype</div>
+      <h2 id="sketch-title">Idén som skiss</h2>
+      <p class="section-description">
+        Den första skissen visar vad besökaren matar in, hur båda API:erna
+        används och vilket beslut kampanjplaneraren hjälper till med.
+      </p>
+
+      <div class="paper-sheet">
+        <svg viewBox="0 0 960 630" role="img" aria-labelledby="drawing-title drawing-desc" xmlns="http://www.w3.org/2000/svg">
+          <title id="drawing-title">Handritad skiss av Sales Campaign Planner</title>
+          <desc id="drawing-desc">Användaren väljer marknad och anger pris i kronor. Open-Meteo ger väder och Frankfurter ger valutakurs. Resultatet visar väder, lokalt pris och kampanjförslag.</desc>
+          <defs>
+            <pattern id="paper-lines" width="960" height="35" patternUnits="userSpaceOnUse">
+              <path d="M0 34.5H960" stroke="#9eb1d2" stroke-opacity=".22"/>
+            </pattern>
+            <marker id="pen-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+              <path d="M1 1L9 5 1 9" fill="none" stroke="#645490" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+          <rect x="0" y="0" width="960" height="630" fill="url(#paper-lines)"/>
+          <g fill="none" stroke="#353049" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M43 83Q43 69 57 70L896 67Q913 67 914 81L917 471Q919 485 904 486L55 488Q41 488 42 474Z"/>
+            <path d="M48 110Q420 108 912 111"/>
+            <circle cx="64" cy="91" r="4"/><circle cx="80" cy="91" r="4"/><circle cx="96" cy="91" r="4"/>
+            <path d="M479 130L478 461" stroke="#aaa0a9" stroke-dasharray="6 7"/>
+            <path d="M83 202Q82 194 91 194L430 192Q439 193 439 201L438 239Q437 247 429 247L92 249Q82 248 83 239Z"/>
+            <path d="M84 286Q83 277 92 277L428 276Q439 277 439 286L440 324Q439 333 429 334L92 335Q82 333 84 325Z"/>
+            <path d="M87 368Q87 360 97 359L427 359Q438 359 438 369L437 412Q436 421 426 421L98 422Q86 421 87 410Z" stroke="#7059a5" stroke-width="3"/>
+            <path d="M519 201Q518 191 530 190L658 189Q667 190 669 199L669 254Q667 263 657 263L531 264Q519 263 519 253Z"/>
+            <path d="M720 200Q721 190 731 189L864 190Q874 190 875 199L874 254Q873 263 863 264L733 264Q720 263 720 253Z"/>
+            <path d="M596 271C596 310 631 312 674 325" stroke="#7059a5" marker-end="url(#pen-arrow)"/>
+            <path d="M796 271C797 310 758 313 716 325" stroke="#7059a5" marker-end="url(#pen-arrow)"/>
+            <path d="M524 334Q524 325 534 326L858 325Q870 325 870 335L871 437Q870 449 857 449L537 451Q525 450 524 438Z"/>
+            <path d="M145 523C340 510 537 510 803 524" stroke="#7059a5" marker-end="url(#pen-arrow)"/>
+          </g>
+          <g fill="#353049" font-family="'Comic Sans MS', 'Segoe Print', cursive" font-size="21">
+            <text x="125" y="98" font-size="19">Sales Campaign Planner — första skissen</text>
+            <text x="80" y="156" font-size="23" font-weight="bold">1. Användaren väljer</text>
+            <text x="99" y="220">Marknad: London                 ⌄</text>
+            <text x="99" y="303">Produktpris: 499 kr</text>
+            <text x="154" y="394" font-weight="bold">Skapa kampanjförslag →</text>
+            <text x="517" y="157" font-size="23" font-weight="bold">2. Appen hämtar data</text>
+            <text x="539" y="218" font-size="19">Open-Meteo</text>
+            <text x="549" y="244" font-size="16">väder</text>
+            <text x="733" y="218" font-size="19">Frankfurter</text>
+            <text x="754" y="244" font-size="16">valutakurs</text>
+            <text x="544" y="359" font-size="19" font-weight="bold">3. Företaget får ett förslag</text>
+            <text x="544" y="390" font-size="18">16 °C   ·   £38   ·   utomhuskampanj</text>
+            <text x="545" y="423" font-size="16">Anpassa budskap och lokalt pris</text>
+            <text x="238" y="562" font-size="19">Ett knapptryck → två API:er → ett beslut</text>
+          </g>
+          <path d="M78 591q190 12 390-1" fill="none" stroke="#a19aaa" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <p class="paper-caption">
+          Skissen visar ett tänkt exempel. Siffrorna i den fungerande appen ovan hämtas när besökaren klickar på knappen.
+        </p>
       </div>
     </section>
 
