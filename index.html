@@ -509,6 +509,13 @@ salesplanner:{
   document.querySelectorAll('[data-project]').forEach(function(b){
     b.addEventListener('click',function(){
       var p=PROJECTS[b.dataset.project]; if(!p) return;
+
+      window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  event: 'portfolio_project_open',
+  project_name: b.dataset.project
+});
+
       meta.innerHTML=p.meta; ttl.textContent=p.title; body.innerHTML=p.body;
       if(p.link){ cta.href=p.link; cta.style.display='inline-flex'; }
       else cta.style.display='none';
@@ -526,6 +533,13 @@ function activateTab(name){
   var cur=document.querySelector('.view.is-active');
   var next=document.getElementById('tab-'+name);
   if(!next||next===cur) return;
+
+  window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  event: 'portfolio_section_view',
+  section_name: name
+});
+
   tabs.forEach(function(t){ t.classList.toggle('is-active',t.dataset.tab===name); });
   if(cur){
     cur.classList.add('is-out');
