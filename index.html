@@ -266,6 +266,36 @@ main{position:relative;height:100vh;padding-top:var(--nav-h)}
   *{animation:none!important;transition-duration:.01ms!important}
   .mask>*{transform:none}
   .an{opacity:1;transform:none}
+}.click-spark {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 100px;
+  pointer-events: none;
+  z-index: 9999;
+  transform-origin: left center;
+  animation: spark-animation 400ms ease-out forwards;
+}
+
+@keyframes spark-animation {
+  from {
+    transform:
+      translate(var(--x), var(--y))
+      rotate(var(--angle))
+      translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform:
+      translate(var(--x), var(--y))
+      rotate(var(--angle))
+      translateX(15px);
+    opacity: 0;
+  }
 }
 </style>
 </head>
@@ -678,6 +708,28 @@ function runCounters(scope){
   }
   document.querySelectorAll('.page-bg').forEach(setup);
 })();
+document.addEventListener("pointerdown", function (event) {
+  if (event.button !== 0) return;
+
+  for (let i = 0; i < 8; i++) {
+    const spark = document.createElement("span");
+
+    spark.className = "click-spark";
+    spark.style.setProperty("--x", event.clientX + "px");
+    spark.style.setProperty("--y", event.clientY + "px");
+    spark.style.setProperty("--angle", i * 45 + "deg");
+
+    document.body.appendChild(spark);
+
+    spark.addEventListener(
+      "animationend",
+      function () {
+        spark.remove();
+      },
+      { once: true }
+    );
+  }
+});
 </script>
 </body>
 </html>
