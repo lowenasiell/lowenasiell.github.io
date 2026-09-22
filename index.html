@@ -297,6 +297,215 @@ main{position:relative;height:100vh;padding-top:var(--nav-h)}
     opacity: 0;
   }
 }
+/* DEPTH PROJECT CARDS */
+
+.depth-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+  perspective: 1200px;
+}
+
+.depth-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  --lift: 0px;
+  --card-accent: #5227ff;
+
+  position: relative;
+  min-height: 390px;
+  padding: 28px;
+  overflow: hidden;
+  isolation: isolate;
+
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.025)
+    ),
+    #110c1d;
+
+  border: 1px solid rgba(244, 241, 250, 0.16);
+  border-radius: 28px;
+
+  transform:
+    perspective(1000px)
+    rotateX(var(--rx))
+    rotateY(var(--ry))
+    translateY(var(--lift));
+
+  transform-style: preserve-3d;
+  will-change: transform;
+backface-visibility: hidden;
+-webkit-backface-visibility: hidden;
+
+transition:
+  transform 90ms ease-out,
+  border-color 250ms ease,
+  box-shadow 250ms ease;
+}
+
+.depth-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at var(--mx) var(--my),
+    color-mix(in srgb, var(--card-accent) 45%, transparent),
+    transparent 42%
+  );
+
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.depth-card::after {
+  content: "";
+  position: absolute;
+  right: -90px;
+  bottom: -110px;
+  width: 270px;
+  height: 270px;
+  z-index: -2;
+
+  background: var(--card-accent);
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: 0.2;
+}
+
+.depth-card:hover {
+  --lift: -8px;
+
+  border-color: color-mix(
+    in srgb,
+    var(--card-accent) 70%,
+    white
+  );
+
+  box-shadow:
+    0 34px 65px rgba(0, 0, 0, 0.45),
+    0 0 40px color-mix(
+      in srgb,
+      var(--card-accent) 18%,
+      transparent
+    );
+}
+
+.depth-card:hover::before {
+  opacity: 1;
+}
+
+.depth-card__number {
+  display: block;
+  position: relative;
+  z-index: 2;
+
+  color: rgba(244, 241, 250, 0.55);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+
+  transform: translateZ(35px);
+}
+
+.depth-card__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 190px;
+  margin: 24px 0;
+
+  color: var(--card-accent);
+  font-family: "Syne", sans-serif;
+  font-size: clamp(30px, 4vw, 58px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  text-align: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--card-accent) 24%, transparent),
+      transparent
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+
+  transform: translateZ(65px);
+  transition: transform 250ms ease;
+}
+
+.depth-card:hover .depth-card__visual {
+  transform: translateZ(85px) scale(1.025);
+}
+
+.depth-card__content {
+  display: block;
+  position: relative;
+  z-index: 2;
+  transform: translateZ(42px);
+}
+
+.depth-card__content small {
+  display: block;
+  margin-bottom: 9px;
+
+  color: var(--card-accent);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.depth-card__content strong {
+  display: block;
+  margin-bottom: 8px;
+
+  color: var(--ink);
+  font-family: "Syne", sans-serif;
+  font-size: clamp(22px, 3vw, 32px);
+  line-height: 1.05;
+}
+
+.depth-card__content span {
+  color: var(--mid);
+  font-size: 15px;
+}
+
+@media (max-width: 760px) {
+  .depth-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .depth-card {
+    min-height: 350px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .depth-card,
+  .depth-card__visual {
+    transition: none;
+    transform: none;
+  }
+}
 </style>
 </head>
 <body>
@@ -374,59 +583,92 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <canvas class="page-bg" data-fx="topo" data-seed="2"></canvas>
     <div class="shell">
       <div class="label an"><span>&#8618;</span> <b>Work</b></div>
-      <div class="index-list an d1">
+     <div class="depth-grid">
 
-        <article class="entry">
-          <button class="entry__row" type="button" data-project="opera">
-            <span class="entry__num">01</span>
-            <span class="entry__title">The Future of Opera</span>
-            <span class="entry__cat">Pitch</span>
-            <span class="entry__year">2026</span>
-            <span class="entry__go">&#8599;</span>
-          </button>
-        </article>
-
-        <article class="entry">
-          <button class="entry__row" type="button" data-project="bio">
-            <span class="entry__num">02</span>
-            <span class="entry__title">Bio-comeback</span>
-            <span class="entry__cat">PR &amp; Data</span>
-            <span class="entry__year">2026</span>
-            <span class="entry__go">&#8599;</span>
-          </button>
-        </article>
-
-        <article class="entry">
-  <button class="entry__row" type="button" data-project="scraping">
-    <span class="entry__num">03</span>
-    <span class="entry__title">Laptop Sales Intelligence</span>
-    <span class="entry__cat">Scraping &amp; Sales</span>
-    <span class="entry__year">2026</span>
-    <span class="entry__go">&#8599;</span>
-  </button>
-</article>
-<article class="entry">
   <button
-    class="entry__row"
+    class="depth-card"
+    type="button"
+    data-project="opera"
+    style="--card-accent: #ff9ffc;"
+    aria-label="Öppna projektet The Future of Opera"
+  >
+    <span class="depth-card__number">PROJECT 01</span>
+
+    <span class="depth-card__visual">
+      OVATION
+    </span>
+
+    <span class="depth-card__content">
+      <small>Pitch · 2026</small>
+      <strong>The Future of Opera</strong>
+      <span>Campaign concept and storytelling</span>
+    </span>
+  </button>
+
+
+  <button
+    class="depth-card"
+    type="button"
+    data-project="bio"
+    style="--card-accent: #5227ff;"
+    aria-label="Öppna projektet Bio-comeback"
+  >
+    <span class="depth-card__number">PROJECT 02</span>
+
+    <span class="depth-card__visual">
+      BIO<br>COMEBACK
+    </span>
+
+    <span class="depth-card__content">
+      <small>PR &amp; Data · 2026</small>
+      <strong>Bio-comeback</strong>
+      <span>Data analysis, PR and visual storytelling</span>
+    </span>
+  </button>
+
+
+  <button
+    class="depth-card"
+    type="button"
+    data-project="scraping"
+    style="--card-accent: #b497cf;"
+    aria-label="Öppna projektet Laptop Sales Intelligence"
+  >
+    <span class="depth-card__number">PROJECT 03</span>
+
+    <span class="depth-card__visual">
+      SALES<br>DATA
+    </span>
+
+    <span class="depth-card__content">
+      <small>Scraping &amp; Sales · 2026</small>
+      <strong>Laptop Sales Intelligence</strong>
+      <span>Product scraping and sales analysis</span>
+    </span>
+  </button>
+
+
+  <button
+    class="depth-card"
     type="button"
     data-project="salesplanner"
+    style="--card-accent: #7e5cff;"
+    aria-label="Öppna projektet Sales Planner"
   >
-    <span class="entry__num">04</span>
-    <span class="entry__title">
-      Sales Campaign Planner
+    <span class="depth-card__number">PROJECT 04</span>
+
+    <span class="depth-card__visual">
+      SALES<br>PLANNER
     </span>
-    <span class="entry__cat">
-      API &amp; Sales
-    </span>
-    <span class="entry__year">
-      2026
-    </span>
-    <span class="entry__go">
-      &#8599;
+
+    <span class="depth-card__content">
+      <small>API Mashup · 2026</small>
+      <strong>Sales Planner</strong>
+      <span>Live API data for smarter sales planning</span>
     </span>
   </button>
-</article>
-      </div>
+
+</div>
       <p class="add-note an d3">More projects are added as the year goes on.</p>
     </div>
   </section>
@@ -738,6 +980,34 @@ document.addEventListener("pointerdown", function (event) {
     );
   }
 });
+
+document.querySelectorAll(".depth-card").forEach(function (card) {
+  card.addEventListener("pointermove", function (event) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const rect = card.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
+
+    const rotateX = (0.5 - y) * 8;
+    const rotateY = (x - 0.5) * 8;
+
+    card.style.setProperty("--rx", rotateX + "deg");
+    card.style.setProperty("--ry", rotateY + "deg");
+    card.style.setProperty("--mx", x * 100 + "%");
+    card.style.setProperty("--my", y * 100 + "%");
+  });
+
+  card.addEventListener("pointerleave", function () {
+    card.style.setProperty("--rx", "0deg");
+    card.style.setProperty("--ry", "0deg");
+    card.style.setProperty("--mx", "50%");
+    card.style.setProperty("--my", "50%");
+  });
+});
+
 </script>
 </body>
 </html>
