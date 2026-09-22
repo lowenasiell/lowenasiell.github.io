@@ -506,6 +506,45 @@ transition:
     transform: none;
   }
 }
+/* Mindre projektkort så att alla fyra syns */
+
+@media (min-width: 761px) {
+  .depth-grid {
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .depth-card {
+    min-height: 220px;
+    padding: 17px;
+    border-radius: 20px;
+  }
+
+  .depth-card__number {
+    font-size: 11px;
+  }
+
+  .depth-card__visual {
+    min-height: 90px;
+    margin: 10px 0;
+    border-radius: 16px;
+    font-size: clamp(25px, 3vw, 40px);
+  }
+
+  .depth-card__content small {
+    margin-bottom: 5px;
+    font-size: 10px;
+  }
+
+  .depth-card__content strong {
+    margin-bottom: 5px;
+    font-size: clamp(18px, 2vw, 25px);
+  }
+
+  .depth-card__content span {
+    font-size: 13px;
+  }
+}
 </style>
 </head>
 <body>
