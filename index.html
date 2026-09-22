@@ -734,14 +734,262 @@ transition:
     line-height: 1.35 !important;
   }
 }
+/* Genomskinlig meny framför sidans bakgrund */
+
+.nav {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.view {
+  top: 0 !important;
+  padding-top: var(--nav-h);
+}
+
+.page-bg {
+  top: 0 !important;
+}
+/* Introanimation när hemsidan öppnas */
+
+.site-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  perspective: 1000px;
+  background:
+    radial-gradient(circle at center, rgba(145, 71, 255, 0.55), transparent 42%),
+    linear-gradient(135deg, #08060f, #251243 55%, #09070f);
+  animation: intro-background-out 700ms ease 2.4s forwards;
+}
+
+.site-intro__glow {
+  position: absolute;
+  width: 55vw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(214, 107, 255, 0.45),
+    rgba(82, 39, 255, 0.12) 45%,
+    transparent 70%
+  );
+  filter: blur(18px);
+  animation: intro-glow 2.5s ease-out forwards;
+}
+
+.site-intro__ring {
+  position: absolute;
+  width: min(65vw, 850px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  opacity: 0;
+  animation: intro-ring 1.8s ease-out forwards;
+}
+
+.site-intro__ring--two {
+  animation-delay: 250ms;
+}
+
+.site-intro__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  transform-style: preserve-3d;
+}
+
+.site-intro__small {
+  display: block;
+  margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: "Space Grotesk", Arial, sans-serif;
+  font-size: clamp(10px, 1vw, 14px);
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: intro-small 800ms ease 500ms forwards;
+}
+
+.site-intro__title {
+  display: block;
+  color: #f4f1fa;
+  font-family: "Syne", Arial, sans-serif;
+  font-size: clamp(52px, 10vw, 150px);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 35px rgba(145, 71, 255, 0.5),
+    0 0 80px rgba(214, 107, 255, 0.3);
+  opacity: 0;
+  animation: intro-title-fly 2.5s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+
+.site-intro__skip {
+  position: absolute;
+  right: 25px;
+  bottom: 22px;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: "Space Grotesk", Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.site-intro.is-skipped {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 350ms ease;
+}
+
+@keyframes intro-title-fly {
+  0% {
+    opacity: 0;
+    transform: translateZ(-1000px) scale(0.15) rotateX(18deg);
+    filter: blur(18px);
+  }
+
+  35% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  72% {
+    opacity: 1;
+    transform: translateZ(0) scale(1) rotateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateZ(500px) scale(1.7);
+    filter: blur(10px);
+  }
+}
+
+@keyframes intro-small {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes intro-ring {
+  0% {
+    opacity: 0;
+    transform: scale(0.15);
+  }
+
+  35% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes intro-glow {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes intro-background-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-intro {
+    animation-duration: 1ms;
+    animation-delay: 300ms;
+  }
+
+  .site-intro__title,
+  .site-intro__small,
+  .site-intro__ring,
+  .site-intro__glow {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
 </style>
 </head>
+<script>
+  (function () {
+    const intro = document.getElementById("siteIntro");
+
+    if (!intro) return;
+
+    function closeIntro() {
+      intro.classList.add("is-skipped");
+
+      window.setTimeout(function () {
+        intro.remove();
+      }, 400);
+    }
+
+    intro.addEventListener("click", closeIntro);
+
+    window.setTimeout(function () {
+      if (document.body.contains(intro)) {
+        intro.remove();
+      }
+    }, 3200);
+  })();
+</script>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-586L3WSW"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+<div class="site-intro" id="siteIntro" aria-hidden="true">
+  <div class="site-intro__glow"></div>
+  <div class="site-intro__ring"></div>
+  <div class="site-intro__ring site-intro__ring--two"></div>
 
+  <div class="site-intro__content">
+    <span class="site-intro__small">Growth Marketing Portfolio</span>
+    <span class="site-intro__title">Lowe Nasiell</span>
+  </div>
+
+  <span class="site-intro__skip">Klicka för att hoppa över</span>
+</div>
 <header class="nav">
   <div class="nav__name">Lowe Nasiell</div>
   <div class="tabs" role="tablist">
