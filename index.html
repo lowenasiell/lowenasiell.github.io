@@ -545,6 +545,89 @@ transition:
     font-size: 13px;
   }
 }
+
+/* Bilder i projektkorten */
+
+.depth-card__visual {
+  padding: 0;
+  overflow: hidden;
+}
+
+.depth-card__visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  transition: transform 500ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.depth-card:hover .depth-card__visual img {
+  transform: scale(1.06);
+}
+
+/* Mindre projektkort – visar alla fyra tydligare */
+
+@media (min-width: 761px) {
+  #tab-work .shell {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .depth-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 12px;
+  }
+
+  .depth-card {
+    min-height: 0;
+    height: 315px;
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .depth-card__number {
+    font-size: 10px;
+  }
+
+  .depth-card__visual {
+    width: 100%;
+    height: 165px;
+    min-height: 0;
+    margin: 9px 0 11px;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+
+  .depth-card__visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+    transition: transform 500ms cubic-bezier(.16, 1, .3, 1);
+  }
+
+  .depth-card:hover .depth-card__visual img {
+    transform: scale(1.06);
+  }
+
+  .depth-card__content small {
+    margin-bottom: 3px;
+    font-size: 9px;
+  }
+
+  .depth-card__content strong {
+    margin-bottom: 3px;
+    font-size: 22px;
+  }
+
+  .depth-card__content span {
+    font-size: 12px;
+  }
+}
 </style>
 </head>
 <body>
@@ -634,9 +717,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="depth-card__number">PROJECT 01</span>
 
     <span class="depth-card__visual">
-      OVATION
-    </span>
-
+  <img
+    src="project-card-images/opera-card.png"
+    alt="Modern operascen för projektet The Future of Opera"
+  >
+</span>
     <span class="depth-card__content">
       <small>Pitch · 2026</small>
       <strong>The Future of Opera</strong>
@@ -655,8 +740,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="depth-card__number">PROJECT 02</span>
 
     <span class="depth-card__visual">
-      BIO<br>COMEBACK
-    </span>
+  <img
+    src="project-card-images/bio-card.png"
+    alt="Biograf och besöksdata för projektet Bio-comeback"
+  >
+</span>
 
     <span class="depth-card__content">
       <small>PR &amp; Data · 2026</small>
@@ -676,8 +764,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="depth-card__number">PROJECT 03</span>
 
     <span class="depth-card__visual">
-      SALES<br>DATA
-    </span>
+  <img
+    src="project-card-images/scraping-card.png"
+    alt="Produktdata och web scraping för Laptop Sales Intelligence"
+  >
+</span>
 
     <span class="depth-card__content">
       <small>Scraping &amp; Sales · 2026</small>
@@ -697,8 +788,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="depth-card__number">PROJECT 04</span>
 
     <span class="depth-card__visual">
-      SALES<br>PLANNER
-    </span>
+  <img
+    src="project-card-images/sales-planner-card.png"
+    alt="API och kampanjplanering för Sales Campaign Planner"
+  >
+</span>
 
     <span class="depth-card__content">
       <small>API Mashup · 2026</small>
