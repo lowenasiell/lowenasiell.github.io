@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f8f6f2">
 
-  <title>Bio Comeback — Lowe Nasiell</title>
+  <title>The Cinema Shift — Lowe Nasiell</title>
+
   <meta
     name="description"
-    content="Bio Comeback: dataanalys, dashboard och innehållspaket om svenska biobesök."
+    content="The Cinema Shift: turning Swedish cinema attendance data into a story through analysis, visualisation, PR and social content."
   >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,8 +72,7 @@
     }
 
     button:focus-visible,
-    a:focus-visible,
-    summary:focus-visible {
+    a:focus-visible {
       outline: 2px solid var(--brown);
       outline-offset: 5px;
     }
@@ -88,8 +88,8 @@
     }
 
     h2 {
-      font-size: clamp(30px, 4.3vw, 58px);
       max-width: 23ch;
+      font-size: clamp(30px, 4.3vw, 58px);
     }
 
     h3 {
@@ -106,8 +106,7 @@
       font-weight: 600;
     }
 
-    img,
-    video {
+    img {
       display: block;
       max-width: 100%;
     }
@@ -189,7 +188,9 @@
     }
 
     .hero h1 {
-      font-size: clamp(58px, 9.5vw, 138px);
+      min-width: 0;
+      max-width: 12ch;
+      font-size: clamp(54px, 8.2vw, 118px);
       letter-spacing: -.065em;
       animation: enter 1.3s var(--ease) both;
     }
@@ -200,6 +201,7 @@
     }
 
     .hero-top p {
+      flex: 0 1 250px;
       max-width: 250px;
       margin: 0 0 10px;
       font-size: 14px;
@@ -211,10 +213,7 @@
       height: clamp(300px, 40vw, 540px);
       margin-top: 35px;
       overflow: hidden;
-      background:
-        var(--ink)
-        url("../../images/bio-poster.webp")
-        center / cover no-repeat;
+      background: var(--ink);
       border-radius: 6px;
       isolation: isolate;
       animation: enter 1.5s .2s var(--ease) both;
@@ -232,16 +231,11 @@
 
     .cinema-poster {
       z-index: 0;
-    }
-
-    .cinema-video {
-      z-index: 1;
-      opacity: 0;
-      transition: opacity .8s ease;
-    }
-
-    .cinema.is-playing .cinema-video {
-      opacity: 1;
+      filter:
+        contrast(0.82)
+        brightness(0.95)
+        saturate(0.85);
+      object-position: center 55%;
     }
 
     .cinema::after {
@@ -250,12 +244,11 @@
       z-index: 2;
       inset: 0;
       pointer-events: none;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(0, 0, 0, .05) 25%,
-          rgba(0, 0, 0, .62) 100%
-        );
+      background: linear-gradient(
+        180deg,
+        rgba(25, 20, 15, 0.02) 30%,
+        rgba(25, 20, 15, 0.38) 100%
+      );
     }
 
     .film-label {
@@ -268,7 +261,7 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 20px;
-      color: #fffdf9;
+      color: var(--white);
     }
 
     .film-label-title {
@@ -282,7 +275,7 @@
       display: inline-flex;
       align-items: center;
       gap: 14px;
-      color: #fffdf9;
+      color: var(--white);
       font-size: 12px;
       text-decoration: none;
       white-space: nowrap;
@@ -1024,7 +1017,7 @@
       }
 
       .hero h1 {
-        font-size: clamp(52px, 12vw, 82px);
+        font-size: clamp(48px, 11vw, 80px);
       }
 
       .cinema {
@@ -1121,175 +1114,153 @@
         transform: none;
       }
     }
-    /* Ny biografbild med ljusare, varmt filter */
-#cinema {
-  background: var(--ink);
-}
-
-#cinema .cinema-poster {
-  filter:
-  contrast(0.82)
-  brightness(0.95)
-  saturate(0.85);
-
-  object-fit: cover;
-  object-position: center 55%;
-}
-
-/* Svag toning så att den vita texten fortfarande syns */
-#cinema::after {
-  background: linear-gradient(
-    180deg,
-    rgba(25, 20, 15, 0.02) 30%,
-    rgba(25, 20, 15, 0.38) 100%
-  );
-}
   </style>
 </head>
 
 <body>
   <main class="page">
-
-    <nav class="nav" aria-label="Sidnavigation">
-      <a class="logo" href="../../index.html" aria-label="Till portfolion">
-        LN
-      </a>
+    <nav class="nav" aria-label="Page navigation">
+      <a
+        class="logo"
+        href="../../index.html"
+        aria-label="Back to portfolio"
+      >LN</a>
 
       <div class="nav-links">
-        <a href="#varfor">Caset</a>
-        <a href="#diagram">Datan</a>
+        <a href="#varfor">The case</a>
+        <a href="#diagram">The data</a>
         <a href="#dashboard">Dashboard</a>
-        <a href="#linkedin">Innehållet</a>
-        <a href="#kallor">Källor</a>
+        <a href="#linkedin">The content</a>
+        <a href="#kallor">Sources</a>
         <a href="../../index.html">Portfolio ↗</a>
       </div>
     </nav>
 
     <header class="hero">
       <span class="eyebrow">
-        Lowe Nasiell / PR & Data / 2026
+        Lowe Nasiell / PR &amp; Data / 2026
       </span>
 
       <div class="hero-top">
-        <h1>Bio <em>Comeback</em></h1>
+        <h1>The Cinema <em>Shift</em></h1>
 
         <p>
-          Från statistik till en berättelse.<br>
-          Ett innehållspaket om svenska biobesök.
+          From statistics to a story.<br>
+          A content package exploring Swedish cinema attendance.
         </p>
       </div>
 
       <div class="cinema" id="cinema">
-  <img
-    class="cinema-media cinema-poster"
-    src="../../images/bio-comeback.jpg"
-    alt="En biografsalong med röda fåtöljer och varmt upplysta bordslampor"
-    fetchpriority="high"
-    decoding="async"
-  >
+        <img
+          class="cinema-media cinema-poster"
+          src="../../images/bio-comeback.jpg"
+          alt="Cinema interior"
+          fetchpriority="high"
+          decoding="async"
+        >
 
-  <div class="film-label">
-    <span class="film-label-title">
-      En lång nedgång.<br>
-      En möjlig ny början.
-    </span>
+        <div class="film-label">
+          <span class="film-label-title">
+            A long decline.<br>
+            A possible new beginning.
+          </span>
 
-    <a class="scroll-link" href="#varfor">
-      Scrolla vidare <span aria-hidden="true">↓</span>
-    </a>
-  </div>
-</div>
+          <a class="scroll-link" href="#varfor">
+            Scroll to explore <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
 
       <div class="project-meta">
         <span>BERGHS SCHOOL OF COMMUNICATION</span>
-        <span>ANALYS · PR · INNEHÅLL</span>
+        <span>ANALYSIS · PR · CONTENT</span>
         <span>2016—2026</span>
       </div>
 
       <div class="intro">
         <h2>
-          Efter en lång nedgång — nu syns tecken på en vändning
+          After years of decline, signs of a possible turnaround
         </h2>
 
         <p>
-          Ett komplett innehållspaket byggt kring en enda vinkel:
-          biobesöken i Sverige har fallit med cirka 46 procent sedan
-          2016, men sommaren 2026 visar de första tecknen på en möjlig
-          vändning. Allt nedan är byggt för att ge en journalist ett
-          tydligt och kontrollerbart underlag.
+          A complete content package built around one angle:
+          cinema attendance in Sweden has fallen by approximately
+          46 per cent since 2016, but summer 2026 shows early signs
+          of a possible turnaround. Everything below is designed to
+          give journalists clear evidence they can examine and verify.
         </p>
       </div>
     </header>
 
     <section id="varfor" class="reveal">
-      <div class="kicker">Viktig information om caset</div>
+      <div class="kicker">Understanding the case</div>
 
-      <h2>Varför det här är en nyhet</h2>
+      <h2>What makes this a story?</h2>
 
       <p class="sub">
-        Fem nyhetsvärderingskriterier tillämpade på samma budskap.
+        Five news values applied to one central message.
       </p>
 
       <div class="arg-grid">
         <article class="arg-card">
           <div class="n">01</div>
-          <h3>Aktualitet</h3>
+          <h3>Timeliness</h3>
           <p>
-            Färska delårssiffror visar att sommaren 2026 hade över
-            40 procent fler biobesök än samma period 2025. Helåret
-            är ännu inte avslutat.
+            Recent partial-year figures show that summer 2026
+            attracted over 40 per cent more cinema visits than the
+            same period in 2025. The full year is not yet complete.
           </p>
         </article>
 
         <article class="arg-card">
           <div class="n">02</div>
-          <h3>Väsentlighet</h3>
+          <h3>Significance</h3>
           <p>
-            Utvecklingen säger något större om hur människor
-            konsumerar film och kultur efter pandemin.
+            The development points to a wider question about how
+            people engage with film and culture after the pandemic.
           </p>
         </article>
 
         <article class="arg-card">
           <div class="n">03</div>
-          <h3>Sensation</h3>
+          <h3>Surprise</h3>
           <p>
-            En långvarig nedgång sedan 2016 följs av en oväntat
-            stark sommar — en utveckling med tydlig kontrast.
+            A long decline since 2016 is followed by an unexpectedly
+            strong summer — a development with a clear contrast.
           </p>
         </article>
 
         <article class="arg-card">
           <div class="n">04</div>
-          <h3>Identifikation</h3>
+          <h3>Relatability</h3>
           <p>
-            Biobesök är lätt att relatera till. Många har egna
-            erfarenheter och åsikter om varför de går oftare eller
-            mer sällan på bio.
+            Going to the cinema is easy to relate to. Many people
+            have their own experiences and opinions about why they
+            visit more often or less frequently.
           </p>
         </article>
 
         <article class="arg-card">
           <div class="n">05</div>
-          <h3>Enkelhet</h3>
+          <h3>Clarity</h3>
           <p>
-            Siffror, källor och grafik är sammanställda. Det ger
-            journalisten ett tydligt underlag att kontrollera och
-            arbeta vidare med.
+            Figures, sources and visuals are brought together,
+            giving journalists clear material to verify and
+            develop into a story.
           </p>
         </article>
       </div>
     </section>
 
     <section id="diagram" class="reveal">
-      <div class="kicker">Datan</div>
+      <div class="kicker">The data</div>
 
-      <h2>Biobesöken i Sverige, 2016–2025</h2>
+      <h2>Cinema attendance in Sweden, 2016–2025</h2>
 
       <p class="sub">
-        Antal biobesök per år, i miljoner. Ljusare punkter markerar
-        pandemiåren. Uppgiften för sommaren 2026 visas separat,
-        eftersom den inte är en helårssiffra.
+        Annual cinema visits, in millions. Lighter points indicate
+        the pandemic years. The summer 2026 figure is shown separately
+        because it is not a full-year total.
       </p>
 
       <div class="panel chart-panel">
@@ -1299,13 +1270,13 @@
           aria-labelledby="chartTitle chartDescription"
         >
           <title id="chartTitle">
-            Biobesöken i Sverige 2016–2025
+            Cinema attendance in Sweden, 2016–2025
           </title>
 
           <desc id="chartDescription">
-            Biobesöken minskar från 17,8 miljoner 2016 till
-            9,7 miljoner 2025. Under pandemin 2020 ligger besöken
-            omkring 5,7 miljoner.
+            Cinema attendance declines from 17.8 million visits in
+            2016 to 9.7 million in 2025. Attendance was approximately
+            5.7 million during the pandemic in 2020.
           </desc>
 
           <line class="grid-line" x1="60" y1="340" x2="780" y2="340"/>
@@ -1329,14 +1300,14 @@
           />
 
           <circle class="pt" cx="60" cy="55.2" r="5"/>
-          <text class="val-label" x="60" y="40">17,8M</text>
+          <text class="val-label" x="60" y="40">17.8M</text>
 
           <circle class="pt" cx="132" cy="71.2" r="5"/>
           <circle class="pt" cx="204" cy="78.2" r="5"/>
           <circle class="pt" cx="276" cy="85.6" r="5"/>
 
           <circle class="pt pt-pandemic" cx="348" cy="249.3" r="5"/>
-          <text class="val-label" x="348" y="234">5,7M</text>
+          <text class="val-label" x="348" y="234">5.7M</text>
 
           <circle class="pt pt-pandemic" cx="420" cy="243.6" r="5"/>
           <circle class="pt" cx="492" cy="173.6" r="5"/>
@@ -1344,7 +1315,7 @@
           <circle class="pt" cx="636" cy="170.4" r="5"/>
           <circle class="pt" cx="708" cy="184.8" r="5"/>
 
-          <text class="val-label" x="708" y="209">9,7M</text>
+          <text class="val-label" x="708" y="209">9.7M</text>
 
           <text class="axis-label" x="60" y="366" text-anchor="middle">2016</text>
           <text class="axis-label" x="348" y="366" text-anchor="middle">2020</text>
@@ -1353,42 +1324,46 @@
         </svg>
 
         <div class="legend">
-          <span><span class="dot"></span>Normalår</span>
-          <span><span class="dot dot-pandemic"></span>Pandemiår</span>
-          <span>Antal besök i miljoner</span>
+          <span>
+            <span class="dot"></span>Non-pandemic years
+          </span>
+          <span>
+            <span class="dot dot-pandemic"></span>Pandemic years
+          </span>
+          <span>Cinema visits in millions</span>
         </div>
 
         <div class="summer-note">
           <strong>+40%</strong>
           <p>
-            Sommaren 2026 hade över 40 procent fler biobesök än
-            samma period 2025. Uppgiften gäller sommaren.
-            Helårssiffra för 2026 saknas.
+            Summer 2026 attracted over 40 per cent more cinema visits
+            than the same period in 2025. This figure refers to the
+            summer only. A full-year figure for 2026 is not yet available.
           </p>
         </div>
       </div>
     </section>
 
     <section id="dashboard" class="reveal">
-      <div class="kicker">Interaktiv dashboard</div>
+      <div class="kicker">Interactive dashboard</div>
 
       <h2>
-        Svenska biobesök – nedgång, återhämtning och nordisk jämförelse
+        Swedish cinema: decline, recovery and a Nordic comparison
       </h2>
 
       <p class="sub">
-        Dashboarden visualiserar utvecklingen av svenska biobesök
-        mellan 2016 och 2025. Linjediagrammet visar den kraftiga
-        nedgången under pandemin och den efterföljande återhämtningen,
-        som ännu inte nått samma nivå som före pandemin. Den nordiska
-        jämförelsen visar även att Sverige har färre biobesök per
-        invånare än Danmark och Norge.
+        The dashboard visualises Swedish cinema attendance between
+        2016 and 2025. The line chart shows the sharp decline during
+        the pandemic and the subsequent recovery, which has not yet
+        returned to pre-pandemic levels. The Nordic comparison also
+        shows that Sweden has fewer cinema visits per person than
+        Denmark and Norway.
       </p>
 
       <div class="looker-frame">
         <iframe
           src="https://datastudio.google.com/embed/reporting/12a98f2b-92f5-4c15-b9a8-59826f907491/page/zm98F"
-          title="Dashboard över svenska biobesök"
+          title="Dashboard showing Swedish cinema attendance"
           loading="lazy"
           allowfullscreen
           sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
@@ -1402,50 +1377,57 @@
           target="_blank"
           rel="noopener"
         >
-          Öppna dashboarden i ett eget fönster <span>↗</span>
+          Open the dashboard in a new window <span>↗</span>
         </a>
+      </p>
+
+      <p class="dashboard-fallback">
+        The embedded dashboard contains Swedish labels.
       </p>
     </section>
 
     <section id="sheet" class="reveal">
-      <div class="kicker">Dataunderlag</div>
+      <div class="kicker">The dataset</div>
 
-      <h2>Datan bakom analysen</h2>
+      <h2>The data behind the analysis</h2>
 
       <p class="sub">
-        Här visas kalkylarket som ligger till grund för analysen av
-        svenska biobesök. Underlaget innehåller den data som användes
-        för att skapa diagrammen och visualiseringarna i projektet.
+        This spreadsheet contains the underlying data for the
+        analysis of Swedish cinema attendance. It includes the
+        figures used to create the project's charts and
+        visualisations.
       </p>
 
       <div class="looker-frame sheet-frame">
         <iframe
           src="https://docs.google.com/spreadsheets/d/1R2kEryX47uMVwPm7ahdz0ABiHkK-BS0-mkS4bvIfn1c/preview?gid=1092418624&rm=minimal"
-          title="Dataunderlag för svenska biobesök"
+          title="Underlying dataset for Swedish cinema attendance"
           loading="lazy"
         ></iframe>
       </div>
 
       <p class="dashboard-fallback">
-        Om kalkylarket inte visas kan du
+        If the spreadsheet does not appear, you can
         <a
           href="https://docs.google.com/spreadsheets/d/1R2kEryX47uMVwPm7ahdz0ABiHkK-BS0-mkS4bvIfn1c/edit?gid=1092418624"
           target="_blank"
           rel="noopener"
         >
-          öppna dataunderlaget i Google Sheets
+          open the dataset in Google Sheets
         </a>.
+        The original spreadsheet is in Swedish.
       </p>
     </section>
 
     <div class="channels">
       <section id="linkedin" class="reveal">
-        <div class="kicker">Kanal 1</div>
+        <div class="kicker">Channel 1</div>
 
-        <h2>LinkedIn — den seriösa avsändaren</h2>
+        <h2>LinkedIn — building credibility</h2>
 
         <p class="sub">
-          Syfte: bygga trovärdighet och skapa diskussion kring utvecklingen.
+          Purpose: establish credibility and encourage discussion
+          about the development.
         </p>
 
         <div class="li-card">
@@ -1455,32 +1437,32 @@
             <div>
               <p class="li-name">Lowe Nasiell</p>
               <p class="li-headline">
-                Growth Marketing-student @ Berghs School of Communication
+                Growth Marketing student @ Berghs School of Communication
               </p>
-              <p class="li-time">2 tim · 🌐</p>
+              <p class="li-time">2h · 🌐</p>
             </div>
           </div>
 
           <div class="li-body">
-            Efter en lång nedgång syns nu tecken på en möjlig
-            vändning för svenska biografer.<br><br>
+            After years of decline, there are signs of a possible
+            turnaround for Swedish cinemas.<br><br>
 
-            Vi har granskat statistiken för biobesök i Sverige,
+            We have examined cinema attendance in Sweden,
             2016–2026:<br><br>
 
-            → 2016: 17,8 miljoner besök<br>
-            → 2025: 9,7 miljoner besök<br>
-            → Sommaren 2026: över 40 procent fler besök än samma
-            period 2025<br><br>
+            → 2016: 17.8 million visits<br>
+            → 2025: 9.7 million visits<br>
+            → Summer 2026: over 40 per cent more visits than the same
+            period in 2025<br><br>
 
-            Vad tror ni ligger bakom den starkare biosommaren?
+            What do you think is behind the stronger cinema summer?
           </div>
 
           <div class="li-img">
             <svg
               viewBox="0 0 400 200"
               role="img"
-              aria-label="Illustration av minskningen i biobesök mellan 2016 och 2025"
+              aria-label="Illustration of the decline in cinema attendance between 2016 and 2025"
             >
               <path
                 fill="none"
@@ -1488,8 +1470,10 @@
                 stroke-width="3"
                 d="M 40,60 L 180,85 L 280,115 L 360,145"
               />
+
               <circle cx="40" cy="60" r="4" fill="#77614e"/>
               <circle cx="360" cy="145" r="4" fill="#77614e"/>
+
               <text
                 x="40"
                 y="175"
@@ -1497,6 +1481,7 @@
                 font-size="12"
                 font-family="Outfit, sans-serif"
               >2016</text>
+
               <text
                 x="330"
                 y="175"
@@ -1507,28 +1492,29 @@
             </svg>
           </div>
 
-          <div class="li-bar" aria-label="Illustration av LinkedIn-inlägg">
-            <span>👍 Gilla</span>
-            <span>💬 Kommentera</span>
-            <span>↻ Dela om</span>
-            <span>➤ Skicka</span>
+          <div class="li-bar" aria-label="LinkedIn post mockup">
+            <span>👍 Like</span>
+            <span>💬 Comment</span>
+            <span>↻ Repost</span>
+            <span>➤ Send</span>
           </div>
         </div>
 
         <p class="li-caption">
-          En professionell avsändarprofil, tydliga siffror och en
-          egen graf gör innehållet lättare att förstå och diskutera.
+          A professional author profile, clear figures and an
+          original chart make the content easier to understand
+          and discuss.
         </p>
       </section>
 
       <section id="instagram" class="reveal">
-        <div class="kicker">Kanal 2</div>
+        <div class="kicker">Channel 2</div>
 
-        <h2>Instagram-karusell — nå människor i flödet</h2>
+        <h2>Instagram — spark curiosity in the feed</h2>
 
         <p class="sub">
-          Fyra slides byggda för att väcka nyfikenhet och engagemang.
-          Klicka på punkterna för att bläddra.
+          Four slides designed to spark curiosity and engagement.
+          Select a dot or use the arrows to explore.
         </p>
 
         <div class="phone-wrap">
@@ -1542,30 +1528,30 @@
               <div
                 class="ig-slide-area"
                 role="region"
-                aria-roledescription="karusell"
-                aria-label="Instagram-inlägg om biobesök"
+                aria-roledescription="carousel"
+                aria-label="Instagram carousel about cinema attendance"
               >
                 <div class="ig-slide active" aria-hidden="false">
                   <p class="ig-large">
-                    Hur längesen är det du gick på bio?
+                    When was the last time you went to the cinema?
                   </p>
                 </div>
 
                 <div class="ig-slide" aria-hidden="true">
                   <p class="ig-small">2016 → 2025</p>
-                  <p class="ig-large">17,8M → 9,7M</p>
+                  <p class="ig-large">17.8M → 9.7M</p>
                 </div>
 
                 <div class="ig-slide" aria-hidden="true">
                   <p class="ig-number">+40%</p>
                   <p class="ig-small">
-                    fler biobesök sommaren 2026
+                    more cinema visits in summer 2026
                   </p>
                 </div>
 
                 <div class="ig-slide" aria-hidden="true">
-                  <p class="ig-large">Dela dina bio-minnen</p>
-                  <p class="ig-small">i kommentarerna 👇</p>
+                  <p class="ig-large">Share your cinema memories</p>
+                  <p class="ig-small">in the comments 👇</p>
                 </div>
               </div>
 
@@ -1574,7 +1560,7 @@
                   class="ig-arrow"
                   id="igPrev"
                   type="button"
-                  aria-label="Föregående bild"
+                  aria-label="Previous slide"
                 >←</button>
 
                 <div class="ig-dots" id="ig-dots"></div>
@@ -1583,14 +1569,14 @@
                   class="ig-arrow"
                   id="igNext"
                   type="button"
-                  aria-label="Nästa bild"
+                  aria-label="Next slide"
                 >→</button>
 
                 <button
                   class="ig-pause"
                   id="igPause"
                   type="button"
-                  aria-label="Pausa automatisk bläddring"
+                  aria-label="Pause automatic slideshow"
                 >Ⅱ</button>
               </div>
 
@@ -1602,9 +1588,10 @@
 
               <div class="ig-caption">
                 <b>lowenasiell</b>
-                Plot twist: den svenska biosommaren blev starkare 🎬
-                Sommaren 2026 hade över 40 procent fler besök än
-                samma period 2025. Är det början på en vändning?
+                Plot twist: Sweden had a stronger cinema summer 🎬
+                Summer 2026 attracted over 40 per cent more visits
+                than the same period in 2025. Could this be the
+                beginning of a turnaround?
               </div>
             </div>
           </div>
@@ -1613,155 +1600,165 @@
     </div>
 
     <section id="press" class="reveal">
-      <div class="kicker">Kanal 3</div>
+      <div class="kicker">Channel 3</div>
 
-      <h2>Pressmeddelandet</h2>
+      <h2>The press release</h2>
 
       <p class="sub">
-        Ett utkast som sammanfattar nyhetsvinkeln, siffrorna och
-        de viktigaste förbehållen.
+        A draft bringing together the news angle, the figures
+        and the key qualifications.
       </p>
 
       <article class="press-doc">
-        <p class="kicker">Pressmeddelande</p>
+        <p class="kicker">Press release</p>
 
         <h3>
-          Efter en lång nedgång — nu syns tecken på en möjlig
-          vändning för svenska biobesök
+          After years of decline, Swedish cinema attendance
+          shows signs of a possible turnaround
         </h3>
 
-        <p class="meta">Stockholm, september 2026</p>
+        <p class="meta">Stockholm, September 2026</p>
 
         <p>
-          Biobesöken i Sverige har minskat med cirka 46 procent sedan
-          2016, från 17,8 miljoner besök till 9,7 miljoner besök 2025.
-          Det är den lägsta normalårsnivån i den redovisade perioden.
-          Färska sommarsiffror för 2026 visar samtidigt en ökning på
-          över 40 procent jämfört med samma period föregående år.
+          Cinema attendance in Sweden has fallen by approximately
+          46 per cent since 2016, from 17.8 million visits to
+          9.7 million in 2025. This is the lowest non-pandemic annual
+          total in the period examined. Recent summer figures for
+          2026 meanwhile show an increase of over 40 per cent
+          compared with the same period the previous year.
         </p>
 
         <p>
-          Besöken återhämtade sig till omkring 10–11 miljoner under
-          2022 och 2023, men minskade därefter igen under 2024 och 2025.
-          Den starkare sommaren 2026 väcker därför frågan om
-          utvecklingen kan vara på väg att vända. Eftersom helåret
-          inte är avslutat går det ännu inte att slå fast att det
-          handlar om ett trendbrott.
+          Attendance recovered to around 10–11 million during
+          2022 and 2023, before declining again in 2024 and 2025.
+          The stronger summer of 2026 therefore raises the question
+          of whether the direction may be changing. As the full
+          year is not yet complete, it is too early to establish
+          a confirmed reversal of the trend.
         </p>
 
         <div class="quote">
-          <strong>Inför publicering:</strong>
-          Ett verifierat expertcitat från en representant för
-          biobranschen bör hämtas in. Sommarsiffran är delårsdata och
-          ska därför inte beskrivas som ett fastställt trendbrott.
+          <strong>Before publication:</strong>
+          Obtain a verified expert quote from a representative of
+          the cinema industry. The summer figure is partial-year
+          data and should not be presented as a confirmed trend reversal.
         </div>
 
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Period</th>
-                <th>Biobesök</th>
-                <th>Källa</th>
+                <th scope="col">Period</th>
+                <th scope="col">Cinema attendance</th>
+                <th scope="col">Source</th>
               </tr>
             </thead>
 
             <tbody>
               <tr>
                 <td>2016</td>
-                <td>17,8 miljoner</td>
-                <td>Sveriges Biografägareförbund</td>
+                <td>17.8 million</td>
+                <td>Swedish Cinema Owners' Association</td>
               </tr>
+
               <tr>
                 <td>2025</td>
-                <td>9,7 miljoner</td>
-                <td>Svenska Filminstitutet</td>
+                <td>9.7 million</td>
+                <td>Swedish Film Institute</td>
               </tr>
+
               <tr>
-                <td>Sommaren 2026</td>
-                <td>Över +40 procent mot 2025</td>
-                <td>Publicerad branschuppgift</td>
+                <td>Summer 2026</td>
+                <td>Over 40 per cent higher than summer 2025</td>
+                <td>Published industry figure</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <div class="contact">
-          Kontakt: Lowe Nasiell · kontaktuppgifter lämnas vid förfrågan<br>
-          Fullständig data, grafik och ytterligare källhänvisningar
-          tillhandahålls på begäran.
+          Contact: Lowe Nasiell · contact details available on request<br>
+          The complete dataset, graphics and further source
+          references are available on request.
         </div>
       </article>
 
       <p class="sub">
         <a class="section-link" href="press.html">
-          Öppna pressmeddelandet som egen sida <span>→</span>
+          Open the original press release <span>→</span>
         </a>
         <br>
-        Praktiskt om du endast vill visa pressmeddelandet.
+        A separate Swedish-language page containing the press release.
       </p>
     </section>
 
     <section id="struktur" class="reveal">
-      <div class="kicker">Presentationen</div>
+      <div class="kicker">The presentation</div>
 
-      <h2>Struktur för att lyfta budskapet</h2>
+      <h2>A structure that brings the story forward</h2>
 
       <p class="sub">
-        Ordningen som används för att göra innehållet tydligt och relevant.
+        The sequence used to make the content clear and relevant.
       </p>
 
       <div class="summary-list">
         <article class="summary-item">
           <div class="num">1</div>
+
           <div>
-            <h3>Siffran först</h3>
+            <h3>Lead with the number</h3>
             <p>
-              Öppna med huvudsiffran för att snabbt tydliggöra utvecklingen.
+              Open with the key figure to make the development
+              immediately clear.
             </p>
           </div>
         </article>
 
         <article class="summary-item">
           <div class="num">2</div>
+
           <div>
-            <h3>Varför nu</h3>
+            <h3>Explain why now</h3>
             <p>
-              Den aktuella kroken är den starka sommaren 2026.
-              Uppgiften är publicerad, men helårsutfallet är ännu inte klart.
+              The timely hook is the strong summer of 2026.
+              The figure has been published, but the full-year
+              outcome is not yet available.
             </p>
           </div>
         </article>
 
         <article class="summary-item">
           <div class="num">3</div>
+
           <div>
-            <h3>Varför det spelar roll</h3>
+            <h3>Show why it matters</h3>
             <p>
-              Koppla siffrorna till hur kultur- och filmkonsumtionen
-              förändrats efter pandemin.
+              Connect the figures to changes in how people
+              engage with film and culture after the pandemic.
             </p>
           </div>
         </article>
 
         <article class="summary-item">
           <div class="num">4</div>
+
           <div>
-            <h3>Gör underlaget tillgängligt</h3>
+            <h3>Make the evidence accessible</h3>
             <p>
-              Grafik, källor och dataunderlag är sammanställda och
-              enkla att kontrollera.
+              Bring together graphics, sources and underlying
+              data so they are easy to examine and verify.
             </p>
           </div>
         </article>
 
         <article class="summary-item">
           <div class="num">5</div>
+
           <div>
-            <h3>En tydlig nästa handling</h3>
+            <h3>Offer a clear next step</h3>
             <p>
-              Avsluta med ett konkret erbjudande om fullständig
-              data, grafik eller ytterligare information.
+              Finish with a specific offer of the full dataset,
+              graphics or further information.
             </p>
           </div>
         </article>
@@ -1769,12 +1766,13 @@
     </section>
 
     <section id="kallor" class="reveal">
-      <div class="kicker">Underlag</div>
+      <div class="kicker">The evidence</div>
 
-      <h2>Källor</h2>
+      <h2>Sources</h2>
 
       <p class="sub">
-        Diagrammet, pressmeddelandet och inläggen bygger på följande underlag.
+        The chart, press release and social posts are based on
+        the following source material.
       </p>
 
       <div class="panel">
@@ -1785,9 +1783,10 @@
               target="_blank"
               rel="noopener"
             >
-              <strong>Sveriges Biografägareförbund</strong>
+              <strong>Swedish Cinema Owners' Association</strong>
             </a>
-            — pressmeddelanden och branschstatistik för tidigare helår.
+            — press releases and industry statistics for previous
+            full years.
           </li>
 
           <li>
@@ -1797,10 +1796,10 @@
               rel="noopener"
             >
               <strong>
-                Svenska Filminstitutet – Filmåret i siffror 2025
+                Swedish Film Institute — Film Year in Figures 2025
               </strong>
             </a>
-            — statistik om biobesök och svensk film.
+            — statistics on cinema attendance and Swedish film.
           </li>
 
           <li>
@@ -1810,10 +1809,11 @@
               rel="noopener"
             >
               <strong>
-                Myndigheten för kulturanalys – Film på bio 2024
+                Swedish Agency for Cultural Policy Analysis —
+                Film in Cinemas 2024
               </strong>
             </a>
-            — kompletterande statistik och metodunderlag.
+            — supplementary statistics and methodological information.
           </li>
 
           <li>
@@ -1822,55 +1822,58 @@
               target="_blank"
               rel="noopener"
             >
-              <strong>Sveriges Radio, augusti 2026</strong>
+              <strong>Swedish Radio, August 2026</strong>
             </a>
-            — uppgiften om över 40 procent fler biobesök under sommaren.
-            Ingen färdig helårssiffra för 2026 finns ännu.
+            — the report of over 40 per cent more cinema visits
+            during the summer. No completed full-year figure for
+            2026 is yet available.
           </li>
         </ol>
       </div>
 
       <p class="sub">
         <a class="section-link" href="data.html">
-          Öppna fullständigt dataunderlag <span>→</span>
+          Open the complete data documentation <span>→</span>
         </a>
         <br>
-        Varje siffra med källa, förbehåll och uträkning.
+        Each figure with its source, qualifications and calculation.
+        Original documentation in Swedish.
       </p>
     </section>
 
     <section id="till-dig" class="reveal">
-      <div class="kicker">Sista ordet</div>
+      <div class="kicker">A final note</div>
 
-      <h2>Till dig som läser det här</h2>
+      <h2>For the person reading this</h2>
 
       <div class="letter">
         <p>
-          Det här innehållspaketet är framtaget för att göra
-          utvecklingen av svenska biobesök tydlig och lätt att förstå.
-          Siffrorna är sammanställda, källorna redovisas och grafiken
-          är förberedd för flera olika kanaler.
+          This content package was created to make the development
+          of Swedish cinema attendance clear and easy to understand.
+          The figures have been compiled, the sources are disclosed
+          and the graphics are prepared for several different channels.
         </p>
 
         <p>
-          Vinkeln är en långvarig nedgång sedan 2016 och de första
-          tecknen på en möjlig vändning under sommaren 2026. Eftersom
-          året ännu inte är avslutat presenteras sommarsiffran som
-          delårsdata och inte som ett fastställt trendbrott.
+          The angle combines a long-term decline since 2016 with
+          the first signs of a possible turnaround during summer
+          2026. As the year is not yet complete, the summer figure
+          is presented as partial-year data rather than evidence
+          of a confirmed reversal of the trend.
         </p>
 
         <div class="sign">
           Lowe Nasiell
           <span>
-            Growth Marketing-student, Berghs School of Communication
+            Growth Marketing student, Berghs School of Communication
           </span>
         </div>
       </div>
     </section>
 
     <footer>
-      <span>Bio Comeback — Lowe Nasiell</span>
-      <a href="../../index.html">Till portfolion ↗</a>
+      <span>The Cinema Shift — Lowe Nasiell</span>
+      <a href="../../index.html">Back to portfolio ↗</a>
     </footer>
   </main>
 
@@ -1882,7 +1885,7 @@
         "(prefers-reduced-motion: reduce)"
       );
 
-      /* Sektioner som kommer in när man scrollar. */
+      /* Scroll reveal animations. */
       const revealElements = document.querySelectorAll(".reveal");
 
       if (
@@ -1909,63 +1912,66 @@
           revealObserver.observe(element);
         });
       }
-/* Mjuk scrollrörelse för biografbilden. */
-const cinemaImage = document.querySelector(
-  "#cinema .cinema-poster"
-);
 
-if (cinemaImage) {
-  let imageFramePending = false;
+      /* Gentle scroll movement for the cinema image. */
+      const cinemaImage = document.querySelector(
+        "#cinema .cinema-poster"
+      );
 
-  function updateCinemaImage() {
-    imageFramePending = false;
+      if (cinemaImage) {
+        let imageFramePending = false;
 
-    if (motionPreference.matches) {
-      cinemaImage.style.transform = "none";
-      return;
-    }
+        function updateCinemaImage() {
+          imageFramePending = false;
 
-    const rect = cinemaImage.parentElement.getBoundingClientRect();
+          if (motionPreference.matches) {
+            cinemaImage.style.transform = "none";
+            return;
+          }
 
-    const progress = Math.max(
-      0,
-      Math.min(
-        1,
-        (window.innerHeight - rect.top) /
-        (window.innerHeight + rect.height)
-      )
-    );
+          const rect =
+            cinemaImage.parentElement.getBoundingClientRect();
 
-    const movement = (progress - 0.5) * 24;
-    const scale = 1.08 + progress * 0.03;
+          const progress = Math.max(
+            0,
+            Math.min(
+              1,
+              (window.innerHeight - rect.top) /
+              (window.innerHeight + rect.height)
+            )
+          );
 
-    cinemaImage.style.transform =
-      "translateY(" + movement + "px) scale(" + scale + ")";
-  }
+          const movement = (progress - 0.5) * 24;
+          const scale = 1.08 + progress * 0.03;
 
-  window.addEventListener(
-    "scroll",
-    function () {
-      if (!imageFramePending) {
-        imageFramePending = true;
-        window.requestAnimationFrame(updateCinemaImage);
+          cinemaImage.style.transform =
+            "translateY(" + movement + "px) scale(" + scale + ")";
+        }
+
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (!imageFramePending) {
+              imageFramePending = true;
+              window.requestAnimationFrame(updateCinemaImage);
+            }
+          },
+          { passive: true }
+        );
+
+        window.addEventListener("resize", updateCinemaImage);
+
+        if (motionPreference.addEventListener) {
+          motionPreference.addEventListener(
+            "change",
+            updateCinemaImage
+          );
+        }
+
+        updateCinemaImage();
       }
-    },
-    { passive: true }
-  );
 
-  window.addEventListener("resize", updateCinemaImage);
-
-  if (motionPreference.addEventListener) {
-    motionPreference.addEventListener(
-      "change",
-      updateCinemaImage
-    );
-  }
-
-  updateCinemaImage();
-}
-      /* Instagram-karusell. */
+      /* Instagram carousel. */
       const carousel = document.getElementById("instagramCarousel");
 
       if (!carousel) {
@@ -1981,6 +1987,16 @@ if (cinemaImage) {
       const nextButton = document.getElementById("igNext");
       const pauseButton = document.getElementById("igPause");
 
+      if (
+        !slides.length ||
+        !dotsWrap ||
+        !previousButton ||
+        !nextButton ||
+        !pauseButton
+      ) {
+        return;
+      }
+
       let current = 0;
       let timer = null;
       let userPaused = motionPreference.matches;
@@ -1993,7 +2009,8 @@ if (cinemaImage) {
 
         dot.type = "button";
         dot.className = "ig-dot" + (index === 0 ? " active" : "");
-        dot.setAttribute("aria-label", "Visa bild " + (index + 1));
+        dot.setAttribute("aria-label", "Show slide " + (index + 1));
+
         dot.setAttribute(
           "aria-current",
           index === 0 ? "true" : "false"
@@ -2009,7 +2026,8 @@ if (cinemaImage) {
       });
 
       function goTo(index) {
-        const next = (index + slides.length) % slides.length;
+        const next =
+          ((index % slides.length) + slides.length) % slides.length;
 
         slides[current].classList.remove("active");
         slides[current].setAttribute("aria-hidden", "true");
@@ -2043,11 +2061,12 @@ if (cinemaImage) {
 
       function updatePauseButton() {
         pauseButton.textContent = userPaused ? "▶" : "Ⅱ";
+
         pauseButton.setAttribute(
           "aria-label",
           userPaused
-            ? "Starta automatisk bläddring"
-            : "Pausa automatisk bläddring"
+            ? "Start automatic slideshow"
+            : "Pause automatic slideshow"
         );
       }
 
