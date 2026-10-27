@@ -1,11 +1,24 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Google Tag Manager: samma container som tidigare. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Lowe Nasiell — A different kind of growth.</title>
+
+<meta
+  name="description"
+  content="Creative thinking, real-world experiments and selected projects by Lowe Nasiell. Growth Marketing at Berghs, Stockholm."
+>
+
+<!-- Existing Google Tag Manager container -->
 <script>
 (function(w,d,s,l,i){
   w[l]=w[l]||[];
-  w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  w[l].push({
+    'gtm.start':new Date().getTime(),
+    event:'gtm.js'
+  });
   var f=d.getElementsByTagName(s)[0],
       j=d.createElement(s),
       dl=l!='dataLayer'?'&l='+l:'';
@@ -15,16 +28,18 @@
 })(window,document,'script','dataLayer','GTM-586L3WSW');
 </script>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lowe Nasiell — A different kind of growth.</title>
-<meta name="description" content="Creative thinking, real-world experiments and selected projects by Lowe Nasiell. Growth Marketing at Berghs, Stockholm.">
-
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='20' fill='%23bba5fc'/%3E%3Ctext x='8' y='30' font-size='30' font-family='sans-serif' font-weight='bold'%3EN%3C/text%3E%3C/svg%3E">
+<link
+  rel="icon"
+  href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='20' fill='%23bba5fc'/%3E%3Ctext x='8' y='30' font-size='30' font-family='sans-serif' font-weight='bold'%3EN%3C/text%3E%3C/svg%3E"
+>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Outfit:wght@400;500;600&family=Bodoni+Moda:ital,opsz,wght@1,6..96,500&display=swap" rel="stylesheet">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Outfit:wght@400;500;600&family=Bodoni+Moda:ital,opsz,wght@1,6..96,500&display=swap"
+  rel="stylesheet"
+>
 
 <style>
 :root{
@@ -39,11 +54,7 @@
 }
 
 *{box-sizing:border-box}
-
-html{
-  scroll-behavior:smooth;
-  scroll-padding-top:90px;
-}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
 
 body{
   margin:0;
@@ -53,18 +64,8 @@ body{
   overflow-x:clip;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button{
-  font:inherit;
-  color:inherit;
-  border:0;
-  cursor:pointer;
-}
-
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;border:0;cursor:pointer}
 h1,h2,h3,p,figure{margin:0}
 
 img,video{
@@ -81,11 +82,7 @@ em{
 }
 
 ::selection{background:#ded2c1}
-
-:focus-visible{
-  outline:2px solid var(--blue);
-  outline-offset:5px;
-}
+:focus-visible{outline:2px solid var(--blue);outline-offset:5px}
 
 .section{padding:110px var(--pad)}
 
@@ -118,22 +115,9 @@ sup{font-size:.5em}
 
 .nav a{pointer-events:auto}
 .nav.on-photo{color:white}
-
-.wordmark{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.ln-logo{
-  width:42px;
-  height:42px;
-}
-
-.brand-name{
-  font-size:12px;
-  letter-spacing:.1em;
-}
+.wordmark{display:flex;align-items:center;gap:14px}
+.ln-logo{width:42px;height:42px}
+.brand-name{font-size:12px;letter-spacing:.1em}
 
 .nav nav{
   display:flex;
@@ -169,7 +153,7 @@ sup{font-size:.5em}
   z-index:60;
 }
 
-/* First screen */
+/* Hero */
 
 .hero{
   height:100svh;
@@ -256,10 +240,7 @@ sup{font-size:.5em}
   opacity:calc(1 - var(--hero-exit,0));
 }
 
-.hero-orbit svg{
-  width:100%;
-  height:100%;
-}
+.hero-orbit svg{width:100%;height:100%}
 
 .hero-bottom{
   display:grid;
@@ -273,10 +254,7 @@ sup{font-size:.5em}
   line-height:1.2;
 }
 
-.hero-intro{
-  font-size:14px;
-  line-height:1.55;
-}
+.hero-intro{font-size:14px;line-height:1.55}
 
 .scroll-cue{
   font-size:11px;
@@ -314,10 +292,7 @@ sup{font-size:.5em}
 
 /* About */
 
-.about{
-  background:#fffdfa;
-  overflow:hidden;
-}
+.about{background:#fffdfa;overflow:hidden}
 
 .about-layout{
   display:grid;
@@ -350,8 +325,9 @@ sup{font-size:.5em}
 .about-photo img{
   filter:grayscale(1);
   object-position:50% 45%;
-  transform:scale(var(--photo-scale,1.06))
-            translateY(var(--photo-y,0px));
+  transform:
+    scale(var(--photo-scale,1.06))
+    translateY(var(--photo-y,0px));
 }
 
 .photo-caption{
@@ -402,17 +378,10 @@ sup{font-size:.5em}
   transform:translateX(var(--marquee,0px));
 }
 
-.skills-strip i{
-  display:flex;
-  color:var(--blue);
-}
+.skills-strip i{display:flex;color:var(--blue)}
+.skills-strip svg{width:30px;height:30px}
 
-.skills-strip svg{
-  width:30px;
-  height:30px;
-}
-
-/* Moving project preview */
+/* Animated project preview */
 
 .project-stage{
   height:180svh;
@@ -483,7 +452,7 @@ sup{font-size:.5em}
   text-align:right;
 }
 
-/* Work heading */
+/* Work */
 
 .work-heading{padding-bottom:70px}
 
@@ -518,7 +487,7 @@ sup{font-size:.5em}
   letter-spacing:.08em;
 }
 
-/* Scroll down to move through the projects horizontally */
+/* Horizontal project journey */
 
 .horizontal-work{
   height:330svh;
@@ -650,10 +619,7 @@ sup{font-size:.5em}
   transform-origin:left;
 }
 
-.horizontal-buttons{
-  display:flex;
-  gap:20px;
-}
+.horizontal-buttons{display:flex;gap:20px}
 
 .horizontal-buttons button{
   background:none;
@@ -687,10 +653,7 @@ sup{font-size:.5em}
   transform:translateY(10px);
 }
 
-.word.lit{
-  opacity:1;
-  transform:none;
-}
+.word.lit{opacity:1;transform:none}
 
 .perspective-bottom{
   display:flex;
@@ -883,10 +846,7 @@ sup{font-size:.5em}
   letter-spacing:.06em;
 }
 
-.hello-button svg{
-  width:55px;
-  height:55px;
-}
+.hello-button svg{width:55px;height:55px}
 
 .linkedin-contact,
 .email{
@@ -911,12 +871,7 @@ sup{font-size:.5em}
 }
 
 .email span{overflow-wrap:anywhere}
-
-.contact-icon{
-  flex-shrink:0;
-  width:26px;
-  height:26px;
-}
+.contact-icon{flex-shrink:0;width:26px;height:26px}
 
 .email .contact-icon{
   width:clamp(24px,3vw,42px);
@@ -939,10 +894,7 @@ sup{font-size:.5em}
   gap:8px;
 }
 
-.footer .contact-icon{
-  width:17px;
-  height:17px;
-}
+.footer .contact-icon{width:17px;height:17px}
 
 .footer-name{
   font-size:23.5vw;
@@ -953,7 +905,7 @@ sup{font-size:.5em}
   margin-top:55px;
 }
 
-/* Project dialog */
+/* Project window */
 
 dialog{
   border:1px solid var(--line);
@@ -1013,7 +965,7 @@ dialog h2{
   font-size:12px;
 }
 
-/* Scroll animations */
+/* Motion */
 
 .reveal{opacity:1}
 
@@ -1025,15 +977,13 @@ dialog h2{
     transform 1s cubic-bezier(.16,1,.3,1);
 }
 
-.js .reveal.visible{
-  opacity:1;
-  transform:none;
-}
+.js .reveal.visible{opacity:1;transform:none}
 
 .js .motion-reveal{
   opacity:var(--motion-opacity,1);
-  transform:translateY(var(--motion-y,0px))
-            scale(var(--motion-scale,1));
+  transform:
+    translateY(var(--motion-y,0px))
+    scale(var(--motion-scale,1));
   will-change:transform,opacity;
 }
 
@@ -1058,50 +1008,26 @@ dialog h2{
 
 @media(max-width:900px){
   .section{padding:80px var(--pad)}
-
-  .hero-meta span:last-child,
-  .hero-intro{display:none}
-
+  .hero-meta span:last-child,.hero-intro{display:none}
   .hero-bottom{grid-template-columns:1fr auto}
   .about-layout{gap:35px}
   .about-right>p{font-size:16px}
-
-  .edu-row{
-    grid-template-columns:25px 1.5fr 1fr;
-    gap:15px;
-  }
-
+  .edu-row{grid-template-columns:25px 1.5fr 1fr;gap:15px}
   .edu-mark{display:none}
   .footer{flex-wrap:wrap}
-
-  .fan-card{
-    width:250px;
-    left:-125px;
-    height:210px;
-  }
-
+  .fan-card{width:250px;left:-125px;height:210px}
   .fan-card img{height:160px}
   .skills-strip{margin-bottom:-80px}
 }
 
 @media(max-width:700px){
   .brand-name{display:none}
-
-  .nav nav{
-    gap:13px;
-    font-size:12px;
-  }
-
+  .nav nav{gap:13px;font-size:12px}
   .horizontal-work{height:360svh}
   .horizontal-case{width:min(75vw,43svh)}
   .horizontal-track{gap:24px}
   .horizontal-sticky{padding-top:80px}
-
-  .horizontal-bottom>span{
-    max-width:150px;
-    font-size:10px;
-  }
-
+  .horizontal-bottom>span{max-width:150px;font-size:10px}
   .horizontal-progress{display:none}
 }
 
@@ -1109,12 +1035,7 @@ dialog h2{
 
 @media(max-width:600px){
   .nav{padding:18px var(--pad)}
-
-  .ln-logo{
-    width:30px;
-    height:30px;
-  }
-
+  .ln-logo{width:30px;height:30px}
   .hero{gap:16px}
   .hero-meta{font-size:10px}
 
@@ -1136,102 +1057,36 @@ dialog h2{
   .hero-bottom{display:block}
   .hero-bottom>p{font-size:22px}
   .scroll-cue{margin-top:18px}
-
-  .eyebrow{
-    font-size:10px;
-    margin-bottom:45px;
-  }
-
-  .eyebrow>span:last-child{
-    max-width:150px;
-    text-align:right;
-  }
-
-  .about-layout{
-    grid-template-columns:1fr;
-    gap:40px;
-  }
-
+  .eyebrow{font-size:10px;margin-bottom:45px}
+  .eyebrow>span:last-child{max-width:150px;text-align:right}
+  .about-layout{grid-template-columns:1fr;gap:40px}
   .about h2{font-size:56px}
   .about-photo{height:230px}
   .about-lead{font-size:20px}
-
-  .skills-strip{
-    margin-top:60px;
-    font-size:27px;
-    gap:25px;
-  }
-
+  .skills-strip{margin-top:60px;font-size:27px;gap:25px}
   .project-stage{height:160svh}
-
-  .stage-meta{
-    top:90px;
-    font-size:10px;
-  }
-
+  .stage-meta{top:90px;font-size:10px}
   .stage-meta span:last-child{display:none}
-
-  .stage-title{
-    font-size:48px;
-    top:24%;
-  }
-
-  .fan-card{
-    width:190px;
-    height:177px;
-    left:-95px;
-  }
-
+  .stage-title{font-size:48px;top:24%}
+  .fan-card{width:190px;height:177px;left:-95px}
   .fan-card img{height:129px}
-
-  .fan-card figcaption{
-    font-size:9px;
-    line-height:1.3;
-  }
-
+  .fan-card figcaption{font-size:9px;line-height:1.3}
   .stage-caption{font-size:14px}
   .work-heading h2{font-size:80px}
-
-  .work-heading-bottom,
-  .perspective-bottom{display:block}
-
-  .work-heading-bottom span{
-    display:block;
-    margin-top:25px;
-  }
-
+  .work-heading-bottom,.perspective-bottom{display:block}
+  .work-heading-bottom span{display:block;margin-top:25px}
   .perspective h2{font-size:57px}
   .perspective-bottom p{margin-top:25px}
-
-  .edu-row{
-    grid-template-columns:22px 1fr;
-    padding:27px 0;
-  }
-
+  .edu-row{grid-template-columns:22px 1fr;padding:27px 0}
   .edu-row>p{grid-column:2}
   .education>h2{margin-bottom:45px}
   .toolbox{grid-template-columns:1fr}
   .contact-middle{align-items:start}
   .contact-middle p{font-size:16px}
-
-  .hello-button{
-    width:110px;
-    height:110px;
-    gap:8px;
-  }
-
-  .hello-button svg{
-    width:35px;
-    height:35px;
-  }
-
+  .hello-button{width:110px;height:110px;gap:8px}
+  .hello-button svg{width:35px;height:35px}
   .hello-button span{font-size:10px}
-
-  .email{
-    font-size:clamp(16px,4.5vw,22px);
-    gap:10px;
-  }
-
+  .email{font-size:clamp(16px,4.5vw,22px);gap:10px}
   .linkedin-contact{font-size:16px}
   dialog{padding:55px 24px 30px}
   .horizontal-title h3{font-size:24px}
@@ -1240,12 +1095,7 @@ dialog h2{
 /* Short screens */
 
 @media(max-height:650px) and (min-width:601px){
-  .hero{
-    min-height:500px;
-    padding-top:85px;
-    gap:12px;
-  }
-
+  .hero{min-height:500px;padding-top:85px;gap:12px}
   .hero-name{font-size:min(16vw,22svh)}
   .hero-bottom>p{font-size:19px}
   .hero-intro{font-size:12px}
@@ -1284,12 +1134,7 @@ dialog h2{
 
   .hero-landscape{transform:none!important}
   .hero-video{opacity:0}
-
-  .word{
-    opacity:1;
-    transform:none;
-  }
-
+  .word{opacity:1;transform:none}
   .project-stage{height:auto}
 
   .stage-sticky{
@@ -1349,11 +1194,6 @@ dialog h2{
 </head>
 
 <body>
-<!--
-Behåll mapparna projects/, scraping/ och sales-planner/.
-API-appen och scraping-filerna ligger där, precis som tidigare.
-Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
--->
 
 <!-- Google Tag Manager (noscript) -->
 <noscript>
@@ -1470,7 +1310,9 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
           src="images/scraping.webp"
           alt="A working desk with a laptop"
           loading="lazy">
-        <span class="photo-caption">LESS GUESSING. MORE TESTING.</span>
+        <span class="photo-caption">
+          LESS GUESSING. MORE TESTING.
+        </span>
       </div>
 
       <p class="reveal">
@@ -1496,37 +1338,37 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
   <div class="skills-strip">
     <span>STRATEGY</span>
     <i>
-      <svg class="ln-logo" viewBox="0 0 100 100" aria-hidden="true">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
         <path d="M14 18v64h34V66H30V18zM44 82V18h16l24 38V18h16v64H84L60 44v38z" fill="currentColor"/>
       </svg>
     </i>
     <span>CONTENT</span>
     <i>
-      <svg class="ln-logo" viewBox="0 0 100 100" aria-hidden="true">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
         <path d="M14 18v64h34V66H30V18zM44 82V18h16l24 38V18h16v64H84L60 44v38z" fill="currentColor"/>
       </svg>
     </i>
     <span>DATA</span>
     <i>
-      <svg class="ln-logo" viewBox="0 0 100 100" aria-hidden="true">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
         <path d="M14 18v64h34V66H30V18zM44 82V18h16l24 38V18h16v64H84L60 44v38z" fill="currentColor"/>
       </svg>
     </i>
     <span>EXPERIMENTS</span>
     <i>
-      <svg class="ln-logo" viewBox="0 0 100 100" aria-hidden="true">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
         <path d="M14 18v64h34V66H30V18zM44 82V18h16l24 38V18h16v64H84L60 44v38z" fill="currentColor"/>
       </svg>
     </i>
     <span>STRATEGY</span>
     <i>
-      <svg class="ln-logo" viewBox="0 0 100 100" aria-hidden="true">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
         <path d="M14 18v64h34V66H30V18zM44 82V18h16l24 38V18h16v64H84L60 44v38z" fill="currentColor"/>
       </svg>
     </i>
     <span>CONTENT</span>
     <i>
-      <svg class="ln-logo" viewBox="0 0 100 100" aria-hidden="true">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
         <path d="M14 18v64h34V66H30V18zM44 82V18h16l24 38V18h16v64H84L60 44v38z" fill="currentColor"/>
       </svg>
     </i>
@@ -1537,6 +1379,7 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
 
 <section class="project-stage" aria-label="A glimpse of selected projects">
   <div class="stage-sticky">
+
     <div class="stage-meta">
       <span>CREATIVE THINKING. REAL-WORLD PROJECTS.</span>
       <span>KEEP EXPLORING</span>
@@ -1548,31 +1391,42 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
     </h2>
 
     <div class="project-fan">
+
       <figure class="fan-card">
-        <img src="images/work-opera.webp" alt="Theatre project">
+        <img
+          src="images/work-opera.webp"
+          alt="The Future of Opera — theatre project">
         <figcaption>01 — THE FUTURE OF OPERA</figcaption>
       </figure>
 
       <figure class="fan-card">
-        <img src="images/bio-comeback.jpg" alt="Bio Comeback">
-      <figcaption>02 — THE CINEMA SHIFT</figcaption>
+        <img
+          src="images/bio-comeback.jpg"
+          alt="The Cinema Shift — cinema interior">
+        <figcaption>02 — THE CINEMA SHIFT</figcaption>
       </figure>
 
       <figure class="fan-card">
-        <img src="images/laptop-poster.webp" alt="Data collection project">
-        <figcaption>03 — LAPTOP SALES INTELLIGENCE</figcaption>
+        <img
+          src="images/laptop-sales.jpg"
+          alt="Beyond the Price Tag — laptop product data project">
+        <figcaption>03 — BEYOND THE PRICE TAG</figcaption>
       </figure>
 
       <figure class="fan-card">
-        <img src="images/sales-planner-mobile.png" alt="Campaign planning project">
+        <img
+          src="images/sales-planner-english.png"
+          alt="Sales Campaign Planner displayed in English on a phone">
         <figcaption>04 — SALES CAMPAIGN PLANNER</figcaption>
       </figure>
+
     </div>
 
     <p class="stage-caption">
       A little imagination.<br>
       A lot of getting things into the world.
     </p>
+
   </div>
 </section>
 
@@ -1600,6 +1454,7 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
 
 <section class="horizontal-work" aria-label="Selected projects">
   <div class="horizontal-sticky">
+
     <div class="horizontal-top">
       <span>SELECTED PROJECTS</span>
       <span class="horizontal-count">01 / 05</span>
@@ -1615,7 +1470,10 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
           data-open-case="opera"
           data-project="opera"
           aria-label="Open The Future of Opera">
-          <img src="images/work-opera.webp" alt="" loading="lazy">
+          <img
+            src="images/work-opera.webp"
+            alt=""
+            loading="lazy">
         </button>
 
         <button
@@ -1637,19 +1495,18 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
           class="horizontal-media"
           data-open-case="bio"
           data-project="bio"
-          aria-label="Open Bio-comeback">
-         <img
-  src="images/bio-comeback.jpg"
-  alt="Biografsalong — Bio Comeback"
-  loading="lazy"
->
+          aria-label="Open The Cinema Shift">
+          <img
+            src="images/bio-comeback.jpg"
+            alt="The Cinema Shift — cinema interior"
+            loading="lazy">
         </button>
 
         <button
           class="horizontal-title"
           data-open-case="bio"
           data-project="bio">
-         <h3>The Cinema Shift</h3>
+          <h3>The Cinema Shift</h3>
         </button>
 
         <p class="horizontal-description">
@@ -1664,19 +1521,18 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
           class="horizontal-media"
           data-open-case="scraping"
           data-project="scraping"
-          aria-label="Open Laptop Sales Intelligence">
+          aria-label="Open Beyond the Price Tag">
           <img
-  src="images/laptop-sales.jpg"
-  alt="Laptop Sales Intelligence"
-  loading="lazy"
->
+            src="images/laptop-sales.jpg"
+            alt="Beyond the Price Tag"
+            loading="lazy">
         </button>
 
         <button
           class="horizontal-title"
           data-open-case="scraping"
           data-project="scraping">
-          <h3>Laptop Sales Intelligence</h3>
+          <h3>Beyond the Price Tag</h3>
         </button>
 
         <p class="horizontal-description">
@@ -1692,11 +1548,10 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
           data-open-case="salesplanner"
           data-project="salesplanner"
           aria-label="Open Sales Campaign Planner">
-         <img
-  src="images/sales-planner-mobile.png"
-  alt="Sales Campaign Planner i en mobil"
-  loading="lazy"
->
+          <img
+            src="images/sales-planner-english.png"
+            alt="Sales Campaign Planner displayed in English on a phone"
+            loading="lazy">
         </button>
 
         <button
@@ -1719,7 +1574,10 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
           data-open-case="inprogress"
           data-project="inprogress"
           aria-label="Open In progress">
-          <img src="images/in-progress.svg" alt="" loading="lazy">
+          <img
+            src="images/in-progress.svg"
+            alt=""
+            loading="lazy">
         </button>
 
         <button
@@ -1744,14 +1602,20 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
       </div>
 
       <div class="horizontal-buttons">
-        <button class="horizontal-prev" aria-label="Previous projects">
+        <button
+          class="horizontal-prev"
+          aria-label="Previous projects">
           Previous
         </button>
-        <button class="horizontal-next" aria-label="Next projects">
+
+        <button
+          class="horizontal-next"
+          aria-label="Next projects">
           Next
         </button>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -1910,10 +1774,12 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
         </svg>
       </span>
     </article>
+
   </div>
 
   <div class="toolbox">
     <span>IN MY TOOLBOX</span>
+
     <div>
       <span>Content strategy</span>
       <span>Meta Ads</span>
@@ -1945,8 +1811,11 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
       Collaborations, projects, or just a conversation.
     </p>
 
-    <a class="hello-button" href="mailto:lowe.nasiell@student.berghs.se">
+    <a
+      class="hello-button"
+      href="mailto:lowe.nasiell@student.berghs.se">
       <span>LET'S TALK</span>
+
       <i>
         <svg class="ln-logo" viewBox="0 0 100 100" aria-hidden="true">
           <path d="M14 18v64h34V66H30V18zM44 82V18h16l24 38V18h16v64H84L60 44v38z" fill="currentColor"/>
@@ -1961,19 +1830,26 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
     target="_blank"
     rel="noopener noreferrer">
     <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="1" y="1" width="22" height="22" rx="3" fill="currentColor"/>
+      <rect
+        x="1" y="1" width="22" height="22"
+        rx="3" fill="currentColor"/>
       <path
         d="M6 10v8M10 18v-8m0 3c0-4 7-4 7 0v5"
         fill="none"
         stroke="var(--icon-cutout,#eee7db)"
         stroke-width="2.3"/>
-      <circle cx="6" cy="6.5" r="1.3" fill="var(--icon-cutout,#eee7db)"/>
+      <circle
+        cx="6" cy="6.5" r="1.3"
+        fill="var(--icon-cutout,#eee7db)"/>
     </svg>
     <span>Connect on LinkedIn</span>
   </a>
 
   <a class="email" href="mailto:lowe.nasiell@student.berghs.se">
-    <svg class="contact-icon gmail-icon" viewBox="0 0 24 20" aria-hidden="true">
+    <svg
+      class="contact-icon gmail-icon"
+      viewBox="0 0 24 20"
+      aria-hidden="true">
       <path
         d="M2 18V3l10 7L22 3v15"
         fill="none"
@@ -1997,13 +1873,17 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
       target="_blank"
       rel="noopener noreferrer">
       <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="1" y="1" width="22" height="22" rx="3" fill="currentColor"/>
+        <rect
+          x="1" y="1" width="22" height="22"
+          rx="3" fill="currentColor"/>
         <path
           d="M6 10v8M10 18v-8m0 3c0-4 7-4 7 0v5"
           fill="none"
           stroke="var(--icon-cutout,#eee7db)"
           stroke-width="2.3"/>
-        <circle cx="6" cy="6.5" r="1.3" fill="var(--icon-cutout,#eee7db)"/>
+        <circle
+          cx="6" cy="6.5" r="1.3"
+          fill="var(--icon-cutout,#eee7db)"/>
       </svg>
       <span>LINKEDIN</span>
     </a>
@@ -2020,21 +1900,30 @@ Lägg images/ och videos/ från mediapaketet bredvid denna index.html.
 <!-- PROJECT WINDOW -->
 
 <dialog id="overlay">
-  <button id="ovClose" class="dialog-close" aria-label="Close project">
+  <button
+    id="ovClose"
+    class="dialog-close"
+    aria-label="Close project">
     CLOSE ×
   </button>
+
   <div id="ovMeta" class="dialog-meta"></div>
   <h2 id="ovTitle"></h2>
   <div id="ovBody" class="dialog-body"></div>
-  <p class="dialog-note">Selected student project · Lowe Nasiell</p>
+
+  <p class="dialog-note">
+    Selected student project · Lowe Nasiell
+  </p>
 </dialog>
 
 <script>
 document.documentElement.classList.add('js');
 
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reduced =
+  matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const clamp = (x, a = 0, b = 1) =>
+  Math.min(b, Math.max(a, x));
 
 /* Reveal elements */
 
@@ -2114,11 +2003,13 @@ function paintScrollMotion(viewportHeight) {
     const rect = element.getBoundingClientRect();
 
     const enter = clamp(
-      (viewportHeight - rect.top) / (viewportHeight * .75)
+      (viewportHeight - rect.top) /
+      (viewportHeight * .75)
     );
 
     const exit = clamp(
-      -rect.bottom / (viewportHeight * .35)
+      -rect.bottom /
+      (viewportHeight * .35)
     );
 
     element.style.setProperty(
@@ -2139,8 +2030,10 @@ function paintScrollMotion(viewportHeight) {
 
   motionPhotos.forEach(element => {
     const rect = element.getBoundingClientRect();
+
     const p = clamp(
-      (viewportHeight - rect.top) / (viewportHeight + rect.height)
+      (viewportHeight - rect.top) /
+      (viewportHeight + rect.height)
     );
 
     element.style.setProperty(
@@ -2148,13 +2041,18 @@ function paintScrollMotion(viewportHeight) {
       1.16 - Math.sin(p * Math.PI) * .12
     );
 
-    element.style.setProperty('--photo-y', `${(p - .5) * 28}px`);
+    element.style.setProperty(
+      '--photo-y',
+      `${(p - .5) * 28}px`
+    );
   });
 
   const footer = document.querySelector('.footer-name');
   const footerRect = footer.getBoundingClientRect();
+
   const footerProgress = clamp(
-    (viewportHeight - footerRect.top) / viewportHeight
+    (viewportHeight - footerRect.top) /
+    viewportHeight
   );
 
   footer.style.transform =
@@ -2180,8 +2078,10 @@ function update() {
     paintScrollMotion(viewportHeight);
 
     const stageRect = stage.getBoundingClientRect();
+
     const stageProgress = clamp(
-      -stageRect.top / (stage.offsetHeight - viewportHeight)
+      -stageRect.top /
+      (stage.offsetHeight - viewportHeight)
     );
 
     stage.style.setProperty('--stage-p', stageProgress);
@@ -2261,11 +2161,7 @@ addEventListener('scroll', () => {
 addEventListener('resize', update);
 update();
 
-/*
-Projektinformation och länkar från den befintliga portfolion.
-API-anropen ligger kvar i sales-planner/index.html.
-Scraping-materialet ligger kvar i scraping/.
-*/
+/* Project information — existing project paths retained */
 
 const PROJECTS = {
   opera: {
@@ -2279,7 +2175,7 @@ const PROJECTS = {
 
   bio: {
     meta: "PR &amp; Data · 2026",
-   title: "The Cinema Shift",
+    title: "The Cinema Shift",
     body:
       "<p><strong>Brief.</strong> Turn a public dataset into a story a journalist would actually want to write about.</p>" +
       "<p><strong>Approach.</strong> Swedish cinema attendance has fallen 46% since 2016 — but summer 2026 showed the first signs of a turnaround. I led with the turnaround rather than the decline, because the decline was already known and the recovery wasn't. Built a full content package around it: press release, data page, social assets and a pitch structure.</p>" +
@@ -2289,11 +2185,11 @@ const PROJECTS = {
 
   scraping: {
     meta: "Scraping &amp; Sales · 2026",
-    title: "Laptop Sales Intelligence",
+    title: "Beyond the Price Tag",
     body:
-      "<p><strong>Brief.</strong> Samla in och strukturera produktdata från en e-handel med hjälp av web scraping.</p>" +
-      "<p><strong>Approach.</strong> Jag byggde ett Node.js-script med Cheerio som samlade in produktnamn, varumärke, pris, betyg, recensioner och produktlänkar från 117 laptops.</p>" +
-      "<p><strong>Outcome.</strong> Ett strukturerat dataset och en försäljningsanalys med genomsnittspris, prissegment, varumärkesfördelning och möjliga efterfrågesignaler.</p>",
+      "<p><strong>Brief.</strong> Collect and structure product information from an e-commerce website using web scraping.</p>" +
+      "<p><strong>Approach.</strong> I built a Node.js script with Cheerio to collect names, brands, prices, ratings, review counts and product links for 117 laptops from an e-commerce test website.</p>" +
+      "<p><strong>Outcome.</strong> A structured dataset and product analysis covering average price, price segments, brand distribution and possible demand signals. Review counts are not confirmed sales.</p>",
     link: "scraping/index.html"
   },
 
@@ -2301,9 +2197,9 @@ const PROJECTS = {
     meta: "API Mashup &middot; Sales &middot; 2026",
     title: "Sales Campaign Planner",
     body:
-      "<p><strong>Brief.</strong> Skapa en digital lösning som kombinerar data från två API:er.</p>" +
-      "<p><strong>Approach.</strong> Appen hämtar väderinformation från Open-Meteo och aktuell valutakurs från Frankfurter. Informationen kombineras för att skapa ett lokalt produktpris och ett väderanpassat kampanjförslag.</p>" +
-      "<p><strong>Outcome.</strong> En fungerande webbapp som hjälper företag att planera internationella försäljningskampanjer.</p>",
+      "<p><strong>Brief.</strong> Build a digital tool that combines information from two APIs.</p>" +
+      "<p><strong>Approach.</strong> The app combines weather information from Open-Meteo with the latest available reference exchange rate from Frankfurter. It converts a SEK product price into local currency and uses weather-based rules to suggest a campaign theme.</p>" +
+      "<p><strong>Outcome.</strong> A working web app and a paper prototype demonstrating how two data sources can support international campaign planning. Suggestions are starting points, not predictions of performance.</p>",
     link: "sales-planner/index.html"
   }
 };
@@ -2324,7 +2220,7 @@ const projectLinks = Object.fromEntries(
     .map(([key, project]) => [key, project.link])
 );
 
-/* Projektfönster och befintligt dataLayer-event */
+/* Project dialog and existing dataLayer event */
 
 const dialog = document.querySelector('dialog');
 
@@ -2332,8 +2228,11 @@ window.openPortfolioCase = key => {
   const project = cases[key];
   if (!project) return;
 
-  dialog.querySelector('.dialog-meta').innerHTML = project.meta;
-  dialog.querySelector('h2').textContent = project.title;
+  dialog.querySelector('.dialog-meta').innerHTML =
+    project.meta;
+
+  dialog.querySelector('h2').textContent =
+    project.title;
 
   dialog.querySelector('.dialog-body').innerHTML =
     project.body +
@@ -2353,6 +2252,7 @@ window.openPortfolioCase = key => {
 
   if (key !== 'inprogress') {
     window.dataLayer = window.dataLayer || [];
+
     window.dataLayer.push({
       event: 'portfolio_project_open',
       project_name: key
@@ -2360,9 +2260,10 @@ window.openPortfolioCase = key => {
   }
 };
 
-document.querySelector('.dialog-close').addEventListener('click', () => {
-  dialog.close();
-});
+document.querySelector('.dialog-close')
+  .addEventListener('click', () => {
+    dialog.close();
+  });
 
 dialog.addEventListener('click', event => {
   if (event.target === dialog) {
@@ -2403,7 +2304,12 @@ magnet.addEventListener('pointerleave', () => {
 const nav = document.querySelector('.nav');
 
 new IntersectionObserver(
-  ([entry]) => nav.classList.toggle('on-photo', entry.isIntersecting),
+  ([entry]) => {
+    nav.classList.toggle(
+      'on-photo',
+      entry.isIntersecting
+    );
+  },
   { threshold: .1 }
 ).observe(document.querySelector('.hero'));
 
@@ -2411,21 +2317,25 @@ new IntersectionObserver(
 
 const imageObserver = new IntersectionObserver(
   entries => entries.forEach(entry => {
-    entry.target.classList.toggle('image-visible', entry.isIntersecting);
+    entry.target.classList.toggle(
+      'image-visible',
+      entry.isIntersecting
+    );
   }),
   { threshold: .15 }
 );
 
-document.querySelectorAll('.about-photo,.edu-row').forEach(element => {
-  imageObserver.observe(element);
-});
+document.querySelectorAll('.about-photo,.edu-row')
+  .forEach(element => {
+    imageObserver.observe(element);
+  });
 
 /* Hero video */
 
-const natureVideo = document.querySelector('.hero-video');
+const natureVideo =
+  document.querySelector('.hero-video');
 
 if (natureVideo && !reduced) {
-  // Sätt ljudlöst läge innan uppspelningen startas.
   natureVideo.muted = true;
   natureVideo.defaultMuted = true;
   natureVideo.autoplay = true;
@@ -2434,22 +2344,33 @@ if (natureVideo && !reduced) {
   natureVideo.controls = false;
 
   function startNatureVideo() {
-    if (document.hidden || !natureVideo.paused) return;
+    if (
+      document.hidden ||
+      !natureVideo.paused
+    ) return;
 
     natureVideo.play().catch(() => {
-      // Webbläsaren kan kräva att besökaren interagerar först.
+      // Some browsers require interaction before playback.
     });
   }
 
-  // Försök direkt och igen när videon är redo.
   startNatureVideo();
-  natureVideo.addEventListener('canplay', startNatureVideo);
-  window.addEventListener('pageshow', startNatureVideo);
 
-  // Reservstart vid första klicket om autoplay blockeras.
-  document.addEventListener('pointerdown', startNatureVideo, {
-    once: true
-  });
+  natureVideo.addEventListener(
+    'canplay',
+    startNatureVideo
+  );
+
+  window.addEventListener(
+    'pageshow',
+    startNatureVideo
+  );
+
+  document.addEventListener(
+    'pointerdown',
+    startNatureVideo,
+    { once: true }
+  );
 
   new IntersectionObserver(([entry]) => {
     if (entry.isIntersecting) {
@@ -2460,20 +2381,30 @@ if (natureVideo && !reduced) {
   }).observe(natureVideo);
 }
 
-/* Smooth education hover */
+/* Education hover */
 
 const eduList = document.querySelector('.edu-list');
 const eduPanel = document.querySelector('.edu-hover-panel');
 
 function highlightEducation(row) {
   eduPanel.style.height = row.offsetHeight + 'px';
-  eduPanel.style.transform = `translateY(${row.offsetTop}px)`;
+
+  eduPanel.style.transform =
+    `translateY(${row.offsetTop}px)`;
+
   eduList.classList.add('hovering');
 }
 
 document.querySelectorAll('.edu-row').forEach(row => {
-  row.addEventListener('pointerenter', () => highlightEducation(row));
-  row.addEventListener('focusin', () => highlightEducation(row));
+  row.addEventListener(
+    'pointerenter',
+    () => highlightEducation(row)
+  );
+
+  row.addEventListener(
+    'focusin',
+    () => highlightEducation(row)
+  );
 });
 
 eduList.addEventListener('pointerleave', () => {
@@ -2488,24 +2419,36 @@ eduList.addEventListener('focusout', event => {
 
 /* Horizontal project journey */
 
-const horizontalWork = document.querySelector('.horizontal-work');
-const horizontalTrack = document.querySelector('.horizontal-track');
+const horizontalWork =
+  document.querySelector('.horizontal-work');
+
+const horizontalTrack =
+  document.querySelector('.horizontal-track');
+
 const horizontalCards = [
   ...document.querySelectorAll('.horizontal-case')
 ];
-const horizontalBar = document.querySelector('.horizontal-progress i');
-const horizontalCount = document.querySelector('.horizontal-count');
+
+const horizontalBar =
+  document.querySelector('.horizontal-progress i');
+
+const horizontalCount =
+  document.querySelector('.horizontal-count');
 
 let horizontalPending = false;
 
 function paintHorizontal() {
   horizontalPending = false;
 
-  const rect = horizontalWork.getBoundingClientRect();
+  const rect =
+    horizontalWork.getBoundingClientRect();
 
   const p = clamp(
     -rect.top /
-    Math.max(1, horizontalWork.offsetHeight - innerHeight)
+    Math.max(
+      1,
+      horizontalWork.offsetHeight - innerHeight
+    )
   );
 
   if (!reduced) {
@@ -2521,7 +2464,8 @@ function paintHorizontal() {
     horizontalTrack.style.transform =
       `translate3d(${-p * distance}px,0,0)`;
 
-    horizontalBar.style.transform = `scaleX(${p})`;
+    horizontalBar.style.transform =
+      `scaleX(${p})`;
   }
 
   const visible = horizontalCards
@@ -2531,15 +2475,18 @@ function paintHorizontal() {
       return {
         card,
         score: Math.abs(
-          bounds.left + bounds.width / 2 - innerWidth / 2
+          bounds.left +
+          bounds.width / 2 -
+          innerWidth / 2
         )
       };
     })
     .sort((a, b) => a.score - b.score);
 
   horizontalCount.textContent =
-    String(horizontalCards.indexOf(visible[0].card) + 1)
-      .padStart(2, '0') + ' / 05';
+    String(
+      horizontalCards.indexOf(visible[0].card) + 1
+    ).padStart(2, '0') + ' / 05';
 
   horizontalCards.forEach(card => {
     const video = card.querySelector('video');
@@ -2570,10 +2517,21 @@ function requestHorizontal() {
   }
 }
 
-addEventListener('scroll', requestHorizontal, { passive: true });
-addEventListener('resize', requestHorizontal);
+addEventListener(
+  'scroll',
+  requestHorizontal,
+  { passive: true }
+);
 
-document.addEventListener('visibilitychange', requestHorizontal);
+addEventListener(
+  'resize',
+  requestHorizontal
+);
+
+document.addEventListener(
+  'visibilitychange',
+  requestHorizontal
+);
 
 horizontalTrack.addEventListener(
   'scroll',
@@ -2581,48 +2539,60 @@ horizontalTrack.addEventListener(
   { passive: true }
 );
 
-document.querySelectorAll('[data-open-case]').forEach(button => {
-  button.addEventListener('click', () => {
-    window.openPortfolioCase(button.dataset.openCase);
+document.querySelectorAll('[data-open-case]')
+  .forEach(button => {
+    button.addEventListener('click', () => {
+      window.openPortfolioCase(
+        button.dataset.openCase
+      );
+    });
   });
-});
 
 function stepHorizontal(direction) {
   if (reduced) {
     horizontalTrack.scrollBy({
-      left: direction * horizontalCards[0].offsetWidth,
+      left:
+        direction *
+        horizontalCards[0].offsetWidth,
       behavior: 'smooth'
     });
     return;
   }
 
-  const rect = horizontalWork.getBoundingClientRect();
-  const span = horizontalWork.offsetHeight - innerHeight;
-  const p = clamp(-rect.top / Math.max(1, span));
+  const rect =
+    horizontalWork.getBoundingClientRect();
+
+  const span =
+    horizontalWork.offsetHeight - innerHeight;
+
+  const p = clamp(
+    -rect.top / Math.max(1, span)
+  );
 
   scrollTo({
-    top: scrollY + rect.top + clamp(p + direction * .25) * span,
+    top:
+      scrollY +
+      rect.top +
+      clamp(p + direction * .25) * span,
     behavior: 'smooth'
   });
 }
 
-document.querySelector('.horizontal-prev').addEventListener(
-  'click',
-  () => stepHorizontal(-1)
-);
+document.querySelector('.horizontal-prev')
+  .addEventListener(
+    'click',
+    () => stepHorizontal(-1)
+  );
 
-document.querySelector('.horizontal-next').addEventListener(
-  'click',
-  () => stepHorizontal(1)
-);
+document.querySelector('.horizontal-next')
+  .addEventListener(
+    'click',
+    () => stepHorizontal(1)
+  );
 
 paintHorizontal();
 
-/*
-Befintligt dataLayer-event för sektioner.
-Samma eventnamn och section_name som tidigare,
-men nu när besökaren scrollar mellan delarna.
-*/
+/* Existing section-view dataLayer event */
 
 let activeSection = 'home';
 
@@ -2639,7 +2609,9 @@ function trackSection() {
   let current = 'home';
 
   trackedSections.forEach(section => {
-    if (section.getBoundingClientRect().top <= marker) {
+    if (
+      section.getBoundingClientRect().top <= marker
+    ) {
       current = section.id;
     }
   });
@@ -2648,6 +2620,7 @@ function trackSection() {
     activeSection = current;
 
     window.dataLayer = window.dataLayer || [];
+
     window.dataLayer.push({
       event: 'portfolio_section_view',
       section_name: current
@@ -2655,10 +2628,15 @@ function trackSection() {
   }
 }
 
-addEventListener('scroll', trackSection, { passive: true });
+addEventListener(
+  'scroll',
+  trackSection,
+  { passive: true }
+);
+
 trackSection();
 
-/* Keep focused project cards visible */
+/* Keep keyboard-focused project cards visible */
 
 horizontalCards.forEach((card, index) => {
   card.addEventListener('focusin', () => {
@@ -2670,15 +2648,23 @@ horizontalCards.forEach((card, index) => {
       return;
     }
 
-    const total = horizontalWork.offsetHeight - innerHeight;
-    const top = scrollY + horizontalWork.getBoundingClientRect().top;
+    const total =
+      horizontalWork.offsetHeight - innerHeight;
+
+    const top =
+      scrollY +
+      horizontalWork.getBoundingClientRect().top;
 
     scrollTo({
-      top: top + total * index / (horizontalCards.length - 1),
+      top:
+        top +
+        total * index /
+        (horizontalCards.length - 1),
       behavior: 'smooth'
     });
   });
 });
 </script>
+
 </body>
 </html>
