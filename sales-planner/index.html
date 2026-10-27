@@ -1,31 +1,48 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Sales Campaign Planner – Lowe Nasiell</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="theme-color" content="#f3eee5">
+
+  <meta
+    name="description"
+    content="Sales Campaign Planner by Lowe Nasiell. A working API mashup combining weather and exchange rates for international campaign ideas."
+  >
+
+  <title>Sales Campaign Planner — Lowe Nasiell</title>
+
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,500;1,600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   >
 
   <style>
     :root {
-      --bg: #08060f;
-      --panel: #12101a;
-      --panel-light: #1a1625;
-      --text: #f4f1fa;
-      --muted: rgba(244, 241, 250, 0.62);
-      --dim: rgba(244, 241, 250, 0.38);
-      --purple: #5227ff;
-      --pink: #ff9ffc;
-      --lavender: #b497cf;
-      --green: #80f0b2;
-      --line: rgba(244, 241, 250, 0.13);
+      --paper: #f3eee5;
+      --white: #fcfaf6;
+      --ink: #292720;
+      --muted: #70685e;
+      --sand: #e6dccd;
+      --brown: #806651;
+      --line: rgba(67, 53, 35, 0.15);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     * {
@@ -34,25 +51,55 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 45px;
     }
 
     body {
       margin: 0;
-      min-height: 100vh;
-      color: var(--text);
-      font-family: "Space Grotesk", sans-serif;
-      background:
-        radial-gradient(
-          circle at 85% 5%,
-          rgba(82, 39, 255, 0.24),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 10% 80%,
-          rgba(255, 159, 252, 0.1),
-          transparent 30%
-        ),
-        var(--bg);
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Outfit", sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: #d5c4ac;
+    }
+
+    a {
+      color: inherit;
+      text-underline-offset: 5px;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--brown);
+      outline-offset: 6px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    figure {
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 600;
+      line-height: 1.04;
+      letter-spacing: -0.055em;
+    }
+
+    em {
+      font-family: "Bodoni Moda", Georgia, serif;
+      font-weight: 500;
     }
 
     button,
@@ -61,867 +108,2299 @@
       font: inherit;
     }
 
-    .container {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 30px 0 70px;
+    button,
+    a,
+    input,
+    select {
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-bottom: 70px;
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    .back-link:hover {
-      color: var(--text);
+    .wrap {
+      width: min(1320px, calc(100% - 100px));
+      margin-inline: auto;
     }
 
     .eyebrow {
-      color: var(--pink);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
     }
 
-    h1,
-    h2,
-    h3 {
-      font-family: "Syne", sans-serif;
+    .skip {
+      position: absolute;
+      top: -100px;
+      left: 20px;
+      z-index: 60;
+      padding: 12px;
+      background: var(--white);
     }
 
-    h1 {
-      max-width: 900px;
-      margin: 16px 0 22px;
-      font-size: clamp(48px, 8vw, 94px);
-      line-height: 0.94;
-      letter-spacing: -0.055em;
+    .skip:focus {
+      top: 80px;
     }
 
-    .gradient {
-      color: transparent;
-      background: linear-gradient(90deg, var(--purple), var(--pink));
-      background-clip: text;
-      -webkit-background-clip: text;
+    .progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      z-index: 50;
+      width: 100%;
+      height: 3px;
+      background: var(--brown);
+      transform: scaleX(0);
+      transform-origin: left;
     }
 
-    .intro {
-      max-width: 760px;
-      margin: 0 0 48px;
-      color: var(--muted);
-      font-size: 19px;
-      line-height: 1.7;
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      padding: 28px 50px;
     }
 
-    .app {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      text-decoration: none;
+    }
+
+    .monogram {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: 35px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.13em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.55;
+    }
+
+    .hero {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 18px;
+      align-items: center;
+      min-height: calc(100svh - 92px);
+      padding-block: 70px 100px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .hero h1 {
+      margin: 25px 0 30px;
+      font-size: clamp(60px, 7.5vw, 112px);
+      line-height: 0.96;
+    }
+
+    .hero h1 em {
+      display: block;
+      color: var(--brown);
+      line-height: 1.13;
+    }
+
+    .hero-copy {
+      max-width: 440px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 25px;
+      margin-top: 35px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .text-link span {
+      transition: transform 0.7s var(--ease);
+    }
+
+    .text-link:hover span {
+      transform: translateY(4px);
+    }
+
+    .photo {
+      position: relative;
+      padding: 14px 14px 45px;
+      background: var(--white);
+      box-shadow: 0 30px 70px rgba(91, 69, 37, 0.1);
+      transform: rotate(3deg);
+    }
+
+    .photo-window {
+      overflow: hidden;
+      aspect-ratio: 4 / 4.4;
+      background: var(--sand);
+    }
+
+    .photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 55% center;
+      transform: scale(1.08);
+      will-change: transform;
+    }
+
+    .photo figcaption {
+      position: absolute;
+      bottom: 14px;
+      left: 17px;
+      font-size: 10px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .section {
+      padding-block: clamp(90px, 11vw, 165px);
+    }
+
+    .heading {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 50px;
+      margin-bottom: 65px;
+    }
+
+    .heading .eyebrow {
+      padding-top: 12px;
+    }
+
+    .heading h2 {
+      font-size: clamp(43px, 5.8vw, 82px);
+    }
+
+    .lead {
+      max-width: 700px;
+      margin-left: auto;
+      font-size: clamp(21px, 2.4vw, 31px);
+      line-height: 1.5;
+    }
+
+    .offwhite {
+      background: var(--white);
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      margin-top: 65px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 28px 65px rgba(83, 64, 39, 0.04);
     }
 
     .panel {
-      padding: 30px;
-      background: rgba(18, 16, 26, 0.94);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+      padding: clamp(25px, 3.4vw, 48px);
+      background: var(--paper);
     }
 
-    .panel h2 {
-      margin: 0 0 8px;
-      font-size: 28px;
+    .panel h3 {
+      margin: 20px 0 12px;
+      font-size: 34px;
     }
 
     .panel-copy {
-      margin: 0 0 26px;
       color: var(--muted);
-      line-height: 1.6;
+      font-size: 15px;
     }
 
     label {
       display: block;
-      margin: 20px 0 8px;
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 600;
+      margin: 25px 0 9px;
+      font-size: 13px;
+      font-weight: 500;
     }
 
-    select,
-    input {
+    input,
+    select {
       width: 100%;
-      min-height: 52px;
-      padding: 0 15px;
-      color: var(--text);
-      background: var(--panel-light);
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      outline: none;
+      min-height: 54px;
+      padding: 12px 15px;
+      color: var(--ink);
+      background: var(--white);
+      border: 1px solid rgba(128, 102, 81, 0.22);
+      border-radius: 9px;
+      font-size: 16px;
     }
 
-    select:focus,
-    input:focus {
-      border-color: var(--pink);
+    input:focus,
+    select:focus {
+      outline: 2px solid rgba(128, 102, 81, 0.4);
+      outline-offset: 2px;
     }
 
     .run-button {
       width: 100%;
-      min-height: 54px;
-      margin-top: 24px;
-      color: #0b0711;
-      font-weight: 700;
-      cursor: pointer;
-      background: linear-gradient(90deg, var(--pink), var(--lavender));
+      min-height: 55px;
+      margin-top: 28px;
+      padding: 14px 20px;
+      color: var(--white);
+      background: var(--brown);
       border: 0;
-      border-radius: 999px;
-      transition: transform 0.2s ease;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 15px;
+      transition:
+        background 0.4s ease,
+        transform 0.6s var(--ease);
     }
 
     .run-button:hover {
+      background: #66503d;
       transform: translateY(-2px);
     }
 
     .run-button:disabled {
       cursor: wait;
-      opacity: 0.65;
+      opacity: 0.6;
+      transform: none;
     }
 
     .result {
+      position: relative;
       display: flex;
       flex-direction: column;
-      min-height: 390px;
-      background:
-        linear-gradient(
-          145deg,
-          rgba(82, 39, 255, 0.18),
-          transparent 55%
-        ),
-        rgba(18, 16, 26, 0.94);
+      min-height: 540px;
+      background: #e8dfd1;
     }
 
     .status {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 8px;
-      width: fit-content;
-      margin-bottom: 24px;
-      color: var(--green);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      gap: 9px;
+      color: var(--brown);
+      font-size: 10px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
     .status::before {
-      width: 8px;
-      height: 8px;
-      content: "";
+      width: 7px;
+      height: 7px;
+      flex-shrink: 0;
       background: currentColor;
       border-radius: 50%;
-      box-shadow: 0 0 16px currentColor;
+      content: "";
     }
 
-    .result h2 {
-      margin: 0 0 10px;
-      font-size: clamp(30px, 4vw, 48px);
-      line-height: 1.05;
+    .result h3 {
+      margin-top: 35px;
+      font-size: clamp(37px, 4vw, 58px);
     }
 
     .result-text {
-      margin: 0 0 28px;
-      color: var(--muted);
-      line-height: 1.65;
+      margin: 20px 0 30px;
+      color: #62594d;
+      font-size: 16px;
     }
 
-    .result-grid {
+    .metrics {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
       margin-top: auto;
     }
 
     .metric {
-      padding: 18px;
-      background: rgba(244, 241, 250, 0.05);
-      border: 1px solid var(--line);
-      border-radius: 13px;
+      min-width: 0;
+      padding-top: 18px;
+      border-top: 1px solid rgba(128, 102, 81, 0.27);
     }
 
     .metric span {
       display: block;
-      margin-bottom: 7px;
-      color: var(--dim);
-      font-size: 12px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
     .metric strong {
-      font-family: "Syne", sans-serif;
-      font-size: 20px;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: clamp(18px, 2vw, 27px);
+      font-weight: 500;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .data-note,
+    .small-note {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
     }
 
     .error {
-      margin: 18px 0 0;
-      color: #ffaaaa;
-      line-height: 1.5;
+      margin-top: 18px;
+      color: #913c2b;
+      font-size: 14px;
     }
 
-    .section {
-      margin-top: 80px;
-      padding-top: 34px;
+    .result.updating {
+      animation: result-in 1s var(--ease) both;
+    }
+
+    .sources {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 75px;
+      margin-top: 65px;
+    }
+
+    .source {
+      padding-top: 30px;
       border-top: 1px solid var(--line);
     }
 
-    .section h2 {
-      margin: 10px 0 14px;
-      font-size: clamp(30px, 5vw, 48px);
+    .source h3 {
+      margin: 25px 0;
+      font-size: 44px;
     }
 
-    .section-description {
-      max-width: 780px;
+    .source p {
+      max-width: 480px;
       color: var(--muted);
-      font-size: 17px;
-      line-height: 1.7;
+      font-size: 18px;
     }
 
-    .cards,
-    .flow {
+    .interlude {
+      position: relative;
       display: grid;
-      gap: 16px;
-      margin-top: 28px;
-    }
-
-    .cards {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .flow {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .card,
-    .flow-step {
-      padding: 25px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-    }
-
-    .card span,
-    .flow-step span {
-      color: var(--pink);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .card h3,
-    .flow-step h3 {
-      margin: 12px 0 10px;
-      font-size: 22px;
-    }
-
-    .card p,
-    .flow-step p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .paper-sheet {
-      margin-top: 28px;
-      padding: clamp(14px, 3vw, 34px);
+      place-items: center;
+      min-height: 75svh;
+      padding: 100px 24px;
       overflow: hidden;
-      color: #29253b;
-      background: #f7f3e9;
-      border: 1px solid #ded6c7;
-      border-radius: 4px;
-      box-shadow: 7px 9px 0 rgba(180, 168, 144, 0.2), 0 24px 70px rgba(0, 0, 0, 0.25);
-      transform: rotate(-0.3deg);
+      background: var(--sand);
     }
 
-    .paper-sheet svg {
+    .interlude-copy {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .interlude h2 {
+      margin-top: 30px;
+      font-size: clamp(54px, 8vw, 118px);
+    }
+
+    .waves {
+      position: absolute;
+      inset: -20%;
+      width: 140%;
+      height: 140%;
+      opacity: 0.25;
+      pointer-events: none;
+      animation: tide 18s ease-in-out infinite alternate;
+    }
+
+    .waves path {
+      fill: none;
+      stroke: var(--brown);
+      stroke-width: 0.7;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 45px;
+    }
+
+    .step {
+      padding-top: 25px;
+      border-top: 1px solid var(--line);
+    }
+
+    .step h3 {
+      margin: 30px 0 20px;
+      font-size: 32px;
+    }
+
+    .step p {
+      color: var(--muted);
+    }
+
+    .paper-section {
+      background: #e7dece;
+    }
+
+    .paper {
+      padding: 30px;
+      background: #faf5e9;
+      border: 1px solid #c4b79e;
+      box-shadow:
+        7px 9px 0 rgba(186, 169, 139, 0.19),
+        0 25px 65px rgba(93, 71, 43, 0.08);
+      transform: rotate(-0.7deg);
+    }
+
+    .sketch-scroll {
+      overflow-x: auto;
+    }
+
+    .paper svg {
       display: block;
       width: 100%;
+      min-width: 640px;
       height: auto;
     }
 
-    .paper-caption {
-      margin: 18px 0 0;
-      color: #625d6d;
-      font-size: 14px;
-      line-height: 1.55;
+    .paper figcaption {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 13px;
     }
 
-    footer {
+    .rule {
+      display: grid;
+      grid-template-columns: 0.7fr 1fr 1.4fr;
+      align-items: baseline;
+      gap: 40px;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .rule h3 {
+      font-size: 30px;
+    }
+
+    .rule p {
+      color: var(--muted);
+    }
+
+    .rule .eyebrow {
+      color: var(--brown);
+    }
+
+    .limitations {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+
+    .limitations h3 {
+      margin-bottom: 22px;
+      font-size: 35px;
+    }
+
+    .limitations p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .closing {
+      padding: 110px 0;
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .closing h2 {
+      margin-bottom: 35px;
+      font-size: clamp(50px, 7vw, 100px);
+    }
+
+    .footer {
       display: flex;
       justify-content: space-between;
-      gap: 20px;
-      margin-top: 80px;
-      padding-top: 24px;
-      color: var(--dim);
-      border-top: 1px solid var(--line);
+      gap: 25px;
+      padding-block: 30px;
+      color: var(--muted);
+      font-size: 12px;
     }
 
-    @media (max-width: 820px) {
-      .app,
-      .cards,
-      .flow,
-      .result-grid {
+    .motion-ready [data-reveal] {
+      opacity: 0;
+      transform: translateY(40px);
+      transition:
+        opacity 1.2s var(--ease),
+        transform 1.5s var(--ease);
+    }
+
+    .motion-ready [data-reveal].visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @keyframes tide {
+      from {
+        transform:
+          translate(-2%, -2%)
+          rotate(-6deg)
+          scale(1);
+      }
+
+      to {
+        transform:
+          translate(3%, 3%)
+          rotate(5deg)
+          scale(1.05);
+      }
+    }
+
+    @keyframes result-in {
+      from {
+        opacity: 0.55;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 950px) {
+      .wrap {
+        width: calc(100% - 48px);
+      }
+
+      .nav {
+        padding: 25px 24px;
+      }
+
+      .hero-grid {
+        gap: 40px;
+      }
+
+      .hero h1 {
+        font-size: 8vw;
+      }
+
+      .heading {
+        gap: 30px;
+      }
+
+      .workspace {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .metric {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 15px;
+      }
+
+      .metric span {
+        margin: 0;
+      }
+
+      .sources {
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .nav-links {
+        gap: 18px;
+        font-size: 12px;
+      }
+
+      .nav-links .desktop {
+        display: none;
+      }
+
+      .brand .eyebrow {
+        font-size: 9px;
+      }
+
+      .hero {
+        padding-block: 50px 80px;
+      }
+
+      .hero-grid,
+      .heading,
+      .workspace,
+      .sources,
+      .steps,
+      .limitations {
         grid-template-columns: 1fr;
       }
+
+      .hero-grid {
+        gap: 55px;
+      }
+
+      .hero h1 {
+        font-size: clamp(59px, 14vw, 86px);
+      }
+
+      .hero-copy {
+        font-size: 17px;
+      }
+
+      .photo {
+        width: 86%;
+        margin-inline: auto;
+      }
+
+      .photo-window {
+        aspect-ratio: 1;
+      }
+
+      .section {
+        padding-block: 85px;
+      }
+
+      .heading {
+        gap: 25px;
+        margin-bottom: 40px;
+      }
+
+      .heading h2 {
+        font-size: 47px;
+      }
+
+      .workspace {
+        margin-top: 40px;
+      }
+
+      .result {
+        min-height: 490px;
+      }
+
+      .metrics {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .metric {
+        display: block;
+      }
+
+      .metric span {
+        margin-bottom: 10px;
+      }
+
+      .metric strong {
+        font-size: 18px;
+      }
+
+      .sources {
+        gap: 45px;
+        margin-top: 40px;
+      }
+
+      .interlude {
+        min-height: 60svh;
+      }
+
+      .steps {
+        gap: 45px;
+      }
+
+      .paper {
+        padding: 16px;
+      }
+
+      .rule {
+        grid-template-columns: 1fr;
+        gap: 13px;
+      }
+
+      .limitations {
+        gap: 45px;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 8px;
+      }
     }
 
-    @media (max-width: 520px) {
-      .container {
-        width: calc(100% - 24px);
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
 
-      .panel {
-        padding: 22px;
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
       }
 
-      footer {
-        flex-direction: column;
+      .motion-ready [data-reveal] {
+        opacity: 1;
+        transform: none;
+      }
+
+      .photo img {
+        transform: none !important;
       }
     }
   </style>
 </head>
 
-<body>
-  <main class="container">
+<body id="top">
 
-    <a class="back-link" href="../index.html">
-      ← Tillbaka till portfolion
+  <a class="skip" href="#main">
+    Skip to content
+  </a>
+
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a
+      class="brand"
+      href="https://lowenasiell.github.io/"
+      aria-label="Lowe Nasiell — portfolio"
+    >
+      <span class="monogram">LN</span>
+      <span class="eyebrow">Lowe Nasiell</span>
     </a>
 
-    <div class="eyebrow">
-      API-mashup · försäljning · 2026
-    </div>
+    <nav class="nav-links" aria-label="Project navigation">
+      <a href="#planner">
+        Try the planner
+      </a>
 
-    <h1>
-      Sales Campaign
-      <span class="gradient">Planner.</span>
-    </h1>
+      <a class="desktop" href="#sources">
+        The APIs
+      </a>
 
-    <p class="intro">
-      En fungerande webbapp som kombinerar väderdata och valutakurser
-      för att hjälpa ett företag anpassa kampanj och produktpris efter
-      en internationell marknad.
-    </p>
+      <a class="desktop" href="#prototype">
+        The prototype
+      </a>
+    </nav>
+  </header>
 
-    <section class="app">
+  <main id="main">
 
-      <div class="panel">
+    <!-- HERO -->
 
-        <h2>Planera kampanjen</h2>
+    <section
+      class="hero"
+      aria-labelledby="project-title"
+    >
+      <div class="wrap hero-grid">
 
-        <p class="panel-copy">
-          Välj marknad och ange produktens svenska pris.
-        </p>
+        <div>
+          <p class="eyebrow">
+            Selected project / API mashup / 2026
+          </p>
 
-        <label for="market">Marknad</label>
+          <h1 id="project-title">
+            Sales Campaign<br>
+            <em>Planner</em>
+          </h1>
 
-        <select id="market">
-          <option value="london">London, Storbritannien</option>
-          <option value="berlin">Berlin, Tyskland</option>
-          <option value="copenhagen">Köpenhamn, Danmark</option>
-          <option value="oslo">Oslo, Norge</option>
-          <option value="newyork">New York, USA</option>
-          <option value="tokyo">Tokyo, Japan</option>
-          <option value="stockholm">Stockholm, Sverige</option>
-        </select>
+          <p class="hero-copy">
+            Weather and exchange rates. Smarter planning.
+            A working web app that brings local context
+            into an international campaign idea.
+          </p>
 
-        <label for="price">Produktpris i SEK</label>
-
-        <input
-          id="price"
-          type="number"
-          min="1"
-          step="1"
-          value="499"
-        >
-
-        <button class="run-button" id="runButton" type="button">
-          Skapa kampanjförslag
-        </button>
-
-        <p class="error" id="error" hidden></p>
-
-      </div>
-
-      <div class="panel result" aria-live="polite">
-
-        <div class="status" id="status">
-          Redo att analysera
+          <a class="text-link" href="#planner">
+            Try the live planner
+            <span aria-hidden="true">↓</span>
+          </a>
         </div>
 
-        <h2 id="resultTitle">
-          Välj en marknad
+        <figure class="photo">
+          <div class="photo-window">
+            <img
+              id="heroImage"
+              src="../images/sales-planner-english.png"
+              alt="Sales Campaign Planner displayed in English on a phone"
+              fetchpriority="high"
+              decoding="async"
+            >
+          </div>
+
+          <figcaption>
+            The original concept / A planner in your pocket
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- WORKING APPLICATION -->
+
+    <section
+      class="section offwhite"
+      id="planner"
+      aria-labelledby="planner-title"
+    >
+      <div class="wrap">
+
+        <div class="heading" data-reveal>
+          <p class="eyebrow">
+            01 / A working idea
+          </p>
+
+          <h2 id="planner-title">
+            One market.<br>
+            <em>A little more context.</em>
+          </h2>
+        </div>
+
+        <p class="lead" data-reveal>
+          Choose a city and enter a price in Swedish kronor.
+          The app combines current weather conditions with
+          an exchange rate to suggest a campaign direction
+          and show a converted price.
+        </p>
+
+        <div class="workspace" data-reveal>
+
+          <form class="panel" id="plannerForm">
+            <p class="eyebrow">
+              Your starting point
+            </p>
+
+            <h3>Plan your campaign.</h3>
+
+            <p class="panel-copy">
+              Select a market and enter your product’s
+              price in SEK.
+            </p>
+
+            <label for="market">Market</label>
+
+            <select id="market" name="market">
+              <option value="london">
+                London, United Kingdom
+              </option>
+
+              <option value="berlin">
+                Berlin, Germany
+              </option>
+
+              <option value="copenhagen">
+                Copenhagen, Denmark
+              </option>
+
+              <option value="oslo">
+                Oslo, Norway
+              </option>
+
+              <option value="newyork">
+                New York, United States
+              </option>
+
+              <option value="tokyo">
+                Tokyo, Japan
+              </option>
+
+              <option value="stockholm">
+                Stockholm, Sweden
+              </option>
+            </select>
+
+            <label for="price">
+              Product price in SEK
+            </label>
+
+            <input
+              id="price"
+              name="price"
+              type="number"
+              min="1"
+              step="1"
+              value="499"
+              inputmode="numeric"
+              required
+            >
+
+            <button
+              class="run-button"
+              id="runButton"
+              type="submit"
+            >
+              Create campaign suggestion ↗
+            </button>
+
+            <p
+              class="error"
+              id="error"
+              role="alert"
+              hidden
+            ></p>
+
+            <p class="small-note">
+              An educational prototype. Suggestions use fixed
+              rules, not a prediction of campaign performance.
+            </p>
+          </form>
+
+          <div
+            class="panel result"
+            id="resultPanel"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-busy="false"
+          >
+            <p class="status" id="status">
+              Ready to explore
+            </p>
+
+            <h3 id="resultTitle">
+              Choose your<br>
+              next market.
+            </h3>
+
+            <p class="result-text" id="resultText">
+              Your weather context, converted price and
+              campaign direction will appear here when
+              you run the planner.
+            </p>
+
+            <div class="metrics">
+              <div class="metric">
+                <span>Weather</span>
+                <strong id="weatherValue">—</strong>
+              </div>
+
+              <div class="metric">
+                <span>Local price</span>
+                <strong id="priceValue">—</strong>
+              </div>
+
+              <div class="metric">
+                <span>Campaign</span>
+                <strong id="campaignValue">—</strong>
+              </div>
+            </div>
+
+            <p class="data-note" id="dataNote">
+              Open-Meteo + Frankfurter. Data is requested
+              when you submit the form.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- API SOURCES -->
+
+    <section
+      class="section"
+      id="sources"
+      aria-labelledby="sources-title"
+    >
+      <div class="wrap">
+
+        <div class="heading" data-reveal>
+          <p class="eyebrow">
+            02 / Two sources, one result
+          </p>
+
+          <h2 id="sources-title">
+            Different information.<br>
+            <em>A shared purpose.</em>
+          </h2>
+        </div>
+
+        <div class="sources">
+
+          <article class="source" data-reveal>
+            <p class="eyebrow">
+              API 01 / Local conditions
+            </p>
+
+            <h3>Open-Meteo</h3>
+
+            <p>
+              Provides temperature, precipitation and a weather
+              code for the selected city. These inputs determine
+              which campaign theme the prototype suggests.
+            </p>
+
+            <a
+              class="text-link"
+              href="https://open-meteo.com/en/docs"
+              target="_blank"
+              rel="noopener"
+            >
+              Explore the weather API
+              <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+
+          <article class="source" data-reveal>
+            <p class="eyebrow">
+              API 02 / Local currency
+            </p>
+
+            <h3>Frankfurter</h3>
+
+            <p>
+              Provides the latest available reference exchange
+              rate to convert SEK into the market’s currency.
+              For Stockholm, SEK stays SEK and no currency
+              request is needed.
+            </p>
+
+            <a
+              class="text-link"
+              href="https://frankfurter.dev/"
+              target="_blank"
+              rel="noopener"
+            >
+              Explore the currency API
+              <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FLOWING TRANSITION -->
+
+    <section
+      class="interlude"
+      aria-labelledby="interlude-title"
+    >
+      <svg
+        class="waves"
+        viewBox="0 0 1000 700"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <g id="waveLines"></g>
+      </svg>
+
+      <div class="interlude-copy" data-reveal>
+        <p class="eyebrow">
+          The thought behind the tool
+        </p>
+
+        <h2 id="interlude-title">
+          Think across borders.<br>
+          <em>Plan for the moment.</em>
+        </h2>
+      </div>
+    </section>
+
+    <!-- USER FLOW -->
+
+    <section
+      class="section"
+      aria-labelledby="flow-title"
+    >
+      <div class="wrap">
+
+        <div class="heading" data-reveal>
+          <p class="eyebrow">
+            03 / How it comes together
+          </p>
+
+          <h2 id="flow-title">
+            A simple flow.<br>
+            <em>A useful connection.</em>
+          </h2>
+        </div>
+
+        <div class="steps">
+
+          <article class="step" data-reveal>
+            <p class="eyebrow">01 / Choose</p>
+
+            <h3>Start with a market.</h3>
+
+            <p>
+              Select one of seven cities and enter a product
+              price in SEK. Each city is connected to its
+              coordinates and local currency.
+            </p>
+          </article>
+
+          <article class="step" data-reveal>
+            <p class="eyebrow">02 / Connect</p>
+
+            <h3>Bring the data together.</h3>
+
+            <p>
+              The app requests weather and, for international
+              markets, an exchange rate. The two requests
+              run in parallel.
+            </p>
+          </article>
+
+          <article class="step" data-reveal>
+            <p class="eyebrow">03 / Consider</p>
+
+            <h3>Explore a direction.</h3>
+
+            <p>
+              The app returns a weather-based theme and
+              a converted price. A marketer can use that
+              context as a starting point for an idea.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PAPER PROTOTYPE -->
+
+    <section
+      class="section paper-section"
+      id="prototype"
+      aria-labelledby="prototype-title"
+    >
+      <div class="wrap">
+
+        <div class="heading" data-reveal>
+          <p class="eyebrow">
+            04 / The paper prototype
+          </p>
+
+          <h2 id="prototype-title">
+            Before the interface,<br>
+            <em>there was an idea.</em>
+          </h2>
+        </div>
+
+        <figure class="paper" data-reveal>
+          <div
+            class="sketch-scroll"
+            tabindex="0"
+            role="region"
+            aria-label="Paper prototype diagram. Scroll horizontally on small screens."
+          >
+            <svg
+              viewBox="0 0 960 600"
+              role="img"
+              aria-labelledby="drawing-title drawing-desc"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title id="drawing-title">
+                Sales Campaign Planner — paper prototype
+              </title>
+
+              <desc id="drawing-desc">
+                A user selects London and enters 499 SEK.
+                Open-Meteo supplies weather and Frankfurter
+                supplies an exchange rate. The result combines
+                temperature, local price and a campaign theme.
+                All example values are illustrative.
+              </desc>
+
+              <defs>
+                <pattern
+                  id="paperLines"
+                  width="960"
+                  height="35"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <path
+                    d="M0 34.5H960"
+                    stroke="#9ba8b4"
+                    stroke-opacity=".22"
+                  />
+                </pattern>
+
+                <marker
+                  id="penArrow"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="8"
+                  markerHeight="8"
+                  orient="auto-start-reverse"
+                >
+                  <path
+                    d="M1 1L9 5 1 9"
+                    fill="none"
+                    stroke="#806651"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </marker>
+              </defs>
+
+              <rect
+                width="960"
+                height="600"
+                fill="url(#paperLines)"
+              />
+
+              <g
+                fill="none"
+                stroke="#51483e"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M43 83Q43 69 57 70L896 67Q913 67 914 81L917 471Q919 485 904 486L55 488Q41 488 42 474Z"/>
+
+                <path d="M48 110Q420 108 912 111"/>
+
+                <circle cx="64" cy="91" r="4"/>
+                <circle cx="80" cy="91" r="4"/>
+                <circle cx="96" cy="91" r="4"/>
+
+                <path
+                  d="M479 130L478 461"
+                  stroke="#aaa08e"
+                  stroke-dasharray="6 7"
+                />
+
+                <path d="M83 202Q82 194 91 194L430 192Q439 193 439 201L438 239Q437 247 429 247L92 249Q82 248 83 239Z"/>
+
+                <path d="M84 286Q83 277 92 277L428 276Q439 277 439 286L440 324Q439 333 429 334L92 335Q82 333 84 325Z"/>
+
+                <path
+                  d="M87 368Q87 360 97 359L427 359Q438 359 438 369L437 412Q436 421 426 421L98 422Q86 421 87 410Z"
+                  stroke="#806651"
+                  stroke-width="3"
+                />
+
+                <path d="M519 201Q518 191 530 190L658 189Q667 190 669 199L669 254Q667 263 657 263L531 264Q519 263 519 253Z"/>
+
+                <path d="M720 200Q721 190 731 189L864 190Q874 190 875 199L874 254Q873 263 863 264L733 264Q720 263 720 253Z"/>
+
+                <path
+                  d="M596 271C596 310 631 312 674 325"
+                  stroke="#806651"
+                  marker-end="url(#penArrow)"
+                />
+
+                <path
+                  d="M796 271C797 310 758 313 716 325"
+                  stroke="#806651"
+                  marker-end="url(#penArrow)"
+                />
+
+                <path d="M524 334Q524 325 534 326L858 325Q870 325 870 335L871 437Q870 449 857 449L537 451Q525 450 524 438Z"/>
+
+                <path
+                  d="M145 523C340 510 537 510 803 524"
+                  stroke="#806651"
+                  marker-end="url(#penArrow)"
+                />
+              </g>
+
+              <g
+                fill="#51483e"
+                font-family="'Segoe Print', 'Comic Sans MS', cursive"
+                font-size="20"
+              >
+                <text x="125" y="98" font-size="18">
+                  Sales Campaign Planner — the first sketch
+                </text>
+
+                <text
+                  x="80"
+                  y="156"
+                  font-size="23"
+                  font-weight="bold"
+                >
+                  1. Choose a market
+                </text>
+
+                <text x="99" y="224">
+                  Market: London
+                </text>
+
+                <text x="410" y="224">⌄</text>
+
+                <text x="99" y="309">
+                  Product price: 499 SEK
+                </text>
+
+                <text x="137" y="395" font-size="19">
+                  Create suggestion →
+                </text>
+
+                <text
+                  x="517"
+                  y="157"
+                  font-size="23"
+                  font-weight="bold"
+                >
+                  2. Connect the APIs
+                </text>
+
+                <text x="532" y="220" font-size="19">
+                  Open-Meteo
+                </text>
+
+                <text x="550" y="246" font-size="16">
+                  Weather
+                </text>
+
+                <text x="728" y="220" font-size="19">
+                  Frankfurter
+                </text>
+
+                <text x="737" y="246" font-size="16">
+                  Exchange rate
+                </text>
+
+                <text
+                  x="544"
+                  y="359"
+                  font-size="20"
+                  font-weight="bold"
+                >
+                  3. Explore a campaign idea
+                </text>
+
+                <text x="544" y="392" font-size="17">
+                  16 °C · £38 · Outdoor theme
+                </text>
+
+                <text x="545" y="423" font-size="16">
+                  Local context + converted price
+                </text>
+
+                <text x="230" y="562" font-size="20">
+                  One action → two APIs → one suggestion
+                </text>
+              </g>
+            </svg>
+          </div>
+
+          <figcaption>
+            Illustrative example only. The working app above
+            requests fresh data when you submit the form.
+            On a small screen, swipe across the sketch
+            to see it in full.
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- CAMPAIGN LOGIC -->
+
+    <section
+      class="section"
+      aria-labelledby="rules-title"
+    >
+      <div class="wrap">
+
+        <div class="heading" data-reveal>
+          <p class="eyebrow">
+            05 / The logic behind the suggestion
+          </p>
+
+          <h2 id="rules-title">
+            Simple rules.<br>
+            <em>Transparent reasoning.</em>
+          </h2>
+        </div>
+
+        <article class="rule" data-reveal>
+          <p class="eyebrow">Snow conditions</p>
+          <h3>Winter</h3>
+          <p>
+            Consider winter clothing, warm footwear
+            or indoor activities.
+          </p>
+        </article>
+
+        <article class="rule" data-reveal>
+          <p class="eyebrow">Rain or precipitation</p>
+          <h3>Rainy day</h3>
+          <p>
+            Consider rainwear, umbrellas or a message
+            around home delivery.
+          </p>
+        </article>
+
+        <article class="rule" data-reveal>
+          <p class="eyebrow">22 °C or warmer</p>
+          <h3>Summer</h3>
+          <p>
+            Consider sunglasses, cold drinks
+            or other summer products.
+          </p>
+        </article>
+
+        <article class="rule" data-reveal>
+          <p class="eyebrow">8 °C or colder</p>
+          <h3>Cold weather</h3>
+          <p>
+            Consider warm clothing, coffee
+            or indoor activities.
+          </p>
+        </article>
+
+        <article class="rule" data-reveal>
+          <p class="eyebrow">Other conditions</p>
+          <h3>Outdoor</h3>
+          <p>
+            Consider everyday products, fitness products
+            or outdoor activities.
+          </p>
+        </article>
+
+        <p class="small-note">
+          Rules are checked from top to bottom. Snow and
+          precipitation take priority over temperature.
+          These are example themes, not product-specific
+          recommendations.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- REFLECTION -->
+
+    <section
+      class="section offwhite"
+      aria-labelledby="perspective-title"
+    >
+      <div class="wrap">
+
+        <div class="heading" data-reveal>
+          <p class="eyebrow">
+            06 / Keeping it in perspective
+          </p>
+
+          <h2 id="perspective-title">
+            A starting point.<br>
+            <em>Not the whole strategy.</em>
+          </h2>
+        </div>
+
+        <div class="limitations">
+
+          <article data-reveal>
+            <h3>Context is useful.</h3>
+
+            <p>
+              Local weather can inspire a more relevant
+              message. A converted price makes the original
+              SEK amount easier to understand in another
+              currency. Together, they demonstrate how
+              separate data sources can support one interface.
+            </p>
+          </article>
+
+          <article data-reveal>
+            <h3>Judgement still matters.</h3>
+
+            <p>
+              The app does not account for product fit,
+              margins, taxes, shipping, competitors or
+              audience research. Reference exchange rates
+              are not checkout quotes. Any campaign idea
+              needs to be adapted and tested before launch.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+
+    <section
+      class="closing"
+      aria-labelledby="closing-title"
+    >
+      <div class="wrap" data-reveal>
+        <h2 id="closing-title">
+          Global possibilities.<br>
+          <em>A local perspective.</em>
         </h2>
 
-        <p class="result-text" id="resultText">
-          När du klickar på knappen hämtar appen aktuell information
-          från två olika API:er.
-        </p>
-
-        <div class="result-grid">
-
-          <div class="metric">
-            <span>Väder</span>
-            <strong id="weatherValue">–</strong>
-          </div>
-
-          <div class="metric">
-            <span>Lokalt pris</span>
-            <strong id="priceValue">–</strong>
-          </div>
-
-          <div class="metric">
-            <span>Kampanj</span>
-            <strong id="campaignValue">–</strong>
-          </div>
-
-        </div>
+        <a href="https://lowenasiell.github.io/">
+          Back to the portfolio ↗
+        </a>
       </div>
     </section>
-
-    <section class="section">
-
-      <div class="eyebrow">
-        Två datakällor
-      </div>
-
-      <h2>API:erna bakom lösningen</h2>
-
-      <p class="section-description">
-        Ett API gör det möjligt för webbappen att automatiskt hämta
-        information från en annan tjänst. Här används två API:er och
-        informationen kombineras till ett gemensamt resultat.
-      </p>
-
-      <div class="cards">
-
-        <article class="card">
-          <span>API 01</span>
-          <h3>Open-Meteo</h3>
-          <p>
-            Hämtar aktuell temperatur, nederbörd och väderinformation
-            för den valda staden.
-          </p>
-        </article>
-
-        <article class="card">
-          <span>API 02</span>
-          <h3>Frankfurter</h3>
-          <p>
-            Hämtar aktuell valutakurs och räknar om produktpriset
-            från SEK till marknadens lokala valuta.
-          </p>
-        </article>
-
-      </div>
-    </section>
-
-    <section class="section">
-
-      <div class="eyebrow">
-        Paper prototype
-      </div>
-
-      <h2>Så skapar API:erna en lösning</h2>
-
-      <div class="flow">
-
-        <article class="flow-step">
-          <span>Steg 01</span>
-          <h3>Användaren väljer</h3>
-          <p>
-            En marknad väljs och ett produktpris i svenska kronor anges.
-          </p>
-        </article>
-
-        <article class="flow-step">
-          <span>Steg 02</span>
-          <h3>Appen hämtar data</h3>
-          <p>
-            Väder och valutakurs hämtas automatiskt från de två API:erna.
-          </p>
-        </article>
-
-        <article class="flow-step">
-          <span>Steg 03</span>
-          <h3>Företaget får råd</h3>
-          <p>
-            Appen visar ett lokalt pris och rekommenderar en kampanj
-            som passar vädret.
-          </p>
-        </article>
-
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="sketch-title">
-      <div class="eyebrow">Ritad paper prototype</div>
-      <h2 id="sketch-title">Idén som skiss</h2>
-      <p class="section-description">
-        Den första skissen visar vad besökaren matar in, hur båda API:erna
-        används och vilket beslut kampanjplaneraren hjälper till med.
-      </p>
-
-      <div class="paper-sheet">
-        <svg viewBox="0 0 960 630" role="img" aria-labelledby="drawing-title drawing-desc" xmlns="http://www.w3.org/2000/svg">
-          <title id="drawing-title">Handritad skiss av Sales Campaign Planner</title>
-          <desc id="drawing-desc">Användaren väljer marknad och anger pris i kronor. Open-Meteo ger väder och Frankfurter ger valutakurs. Resultatet visar väder, lokalt pris och kampanjförslag.</desc>
-          <defs>
-            <pattern id="paper-lines" width="960" height="35" patternUnits="userSpaceOnUse">
-              <path d="M0 34.5H960" stroke="#9eb1d2" stroke-opacity=".22"/>
-            </pattern>
-            <marker id="pen-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
-              <path d="M1 1L9 5 1 9" fill="none" stroke="#645490" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </marker>
-          </defs>
-          <rect x="0" y="0" width="960" height="630" fill="url(#paper-lines)"/>
-          <g fill="none" stroke="#353049" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M43 83Q43 69 57 70L896 67Q913 67 914 81L917 471Q919 485 904 486L55 488Q41 488 42 474Z"/>
-            <path d="M48 110Q420 108 912 111"/>
-            <circle cx="64" cy="91" r="4"/><circle cx="80" cy="91" r="4"/><circle cx="96" cy="91" r="4"/>
-            <path d="M479 130L478 461" stroke="#aaa0a9" stroke-dasharray="6 7"/>
-            <path d="M83 202Q82 194 91 194L430 192Q439 193 439 201L438 239Q437 247 429 247L92 249Q82 248 83 239Z"/>
-            <path d="M84 286Q83 277 92 277L428 276Q439 277 439 286L440 324Q439 333 429 334L92 335Q82 333 84 325Z"/>
-            <path d="M87 368Q87 360 97 359L427 359Q438 359 438 369L437 412Q436 421 426 421L98 422Q86 421 87 410Z" stroke="#7059a5" stroke-width="3"/>
-            <path d="M519 201Q518 191 530 190L658 189Q667 190 669 199L669 254Q667 263 657 263L531 264Q519 263 519 253Z"/>
-            <path d="M720 200Q721 190 731 189L864 190Q874 190 875 199L874 254Q873 263 863 264L733 264Q720 263 720 253Z"/>
-            <path d="M596 271C596 310 631 312 674 325" stroke="#7059a5" marker-end="url(#pen-arrow)"/>
-            <path d="M796 271C797 310 758 313 716 325" stroke="#7059a5" marker-end="url(#pen-arrow)"/>
-            <path d="M524 334Q524 325 534 326L858 325Q870 325 870 335L871 437Q870 449 857 449L537 451Q525 450 524 438Z"/>
-            <path d="M145 523C340 510 537 510 803 524" stroke="#7059a5" marker-end="url(#pen-arrow)"/>
-          </g>
-          <g fill="#353049" font-family="'Comic Sans MS', 'Segoe Print', cursive" font-size="21">
-            <text x="125" y="98" font-size="19">Sales Campaign Planner — första skissen</text>
-            <text x="80" y="156" font-size="23" font-weight="bold">1. Användaren väljer</text>
-            <text x="99" y="220">Marknad: London                 ⌄</text>
-            <text x="99" y="303">Produktpris: 499 kr</text>
-            <text x="154" y="394" font-weight="bold">Skapa kampanjförslag →</text>
-            <text x="517" y="157" font-size="23" font-weight="bold">2. Appen hämtar data</text>
-            <text x="539" y="218" font-size="19">Open-Meteo</text>
-            <text x="549" y="244" font-size="16">väder</text>
-            <text x="733" y="218" font-size="19">Frankfurter</text>
-            <text x="754" y="244" font-size="16">valutakurs</text>
-            <text x="544" y="359" font-size="19" font-weight="bold">3. Företaget får ett förslag</text>
-            <text x="544" y="390" font-size="18">16 °C   ·   £38   ·   utomhuskampanj</text>
-            <text x="545" y="423" font-size="16">Anpassa budskap och lokalt pris</text>
-            <text x="238" y="562" font-size="19">Ett knapptryck → två API:er → ett beslut</text>
-          </g>
-          <path d="M78 591q190 12 390-1" fill="none" stroke="#a19aaa" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <p class="paper-caption">
-          Skissen visar ett tänkt exempel. Siffrorna i den fungerande appen ovan hämtas när besökaren klickar på knappen.
-        </p>
-      </div>
-    </section>
-
-    <footer>
-      <span>Lowe Nasiell © 2026</span>
-      <span>Growth Marketing @ Berghs</span>
-    </footer>
 
   </main>
 
+  <footer class="wrap footer">
+    <span>Lowe Nasiell © 2026</span>
+
+    <span>
+      Growth Marketing / Berghs School of Communication
+    </span>
+
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
   <script>
-    const markets = {
-      london: {
-        city: "London",
-        lat: 51.5072,
-        lon: -0.1276,
-        currency: "GBP",
-        locale: "en-GB"
-      },
+    (() => {
+      "use strict";
 
-      berlin: {
-        city: "Berlin",
-        lat: 52.52,
-        lon: 13.405,
-        currency: "EUR",
-        locale: "de-DE"
-      },
+      /*
+       * MARKETS
+       */
 
-      copenhagen: {
-        city: "Köpenhamn",
-        lat: 55.6761,
-        lon: 12.5683,
-        currency: "DKK",
-        locale: "da-DK"
-      },
+      const markets = {
+        london: {
+          city: "London",
+          lat: 51.5072,
+          lon: -0.1276,
+          currency: "GBP"
+        },
 
-      oslo: {
-        city: "Oslo",
-        lat: 59.9139,
-        lon: 10.7522,
-        currency: "NOK",
-        locale: "nb-NO"
-      },
+        berlin: {
+          city: "Berlin",
+          lat: 52.52,
+          lon: 13.405,
+          currency: "EUR"
+        },
 
-      newyork: {
-        city: "New York",
-        lat: 40.7128,
-        lon: -74.006,
-        currency: "USD",
-        locale: "en-US"
-      },
+        copenhagen: {
+          city: "Copenhagen",
+          lat: 55.6761,
+          lon: 12.5683,
+          currency: "DKK"
+        },
 
-      tokyo: {
-        city: "Tokyo",
-        lat: 35.6762,
-        lon: 139.6503,
-        currency: "JPY",
-        locale: "ja-JP"
-      },
+        oslo: {
+          city: "Oslo",
+          lat: 59.9139,
+          lon: 10.7522,
+          currency: "NOK"
+        },
 
-      stockholm: {
-        city: "Stockholm",
-        lat: 59.3293,
-        lon: 18.0686,
-        currency: "SEK",
-        locale: "sv-SE"
-      }
-    };
+        newyork: {
+          city: "New York",
+          lat: 40.7128,
+          lon: -74.006,
+          currency: "USD"
+        },
 
-    const weatherNames = {
-      0: "klart",
-      1: "mest klart",
-      2: "halvklart",
-      3: "mulet",
-      45: "dimma",
-      48: "dimma",
-      51: "lätt duggregn",
-      53: "duggregn",
-      55: "kraftigt duggregn",
-      61: "lätt regn",
-      63: "regn",
-      65: "kraftigt regn",
-      71: "lätt snö",
-      73: "snö",
-      75: "kraftig snö",
-      80: "regnskurar",
-      81: "regnskurar",
-      82: "kraftiga regnskurar",
-      95: "åska"
-    };
+        tokyo: {
+          city: "Tokyo",
+          lat: 35.6762,
+          lon: 139.6503,
+          currency: "JPY"
+        },
 
-    const marketSelect = document.getElementById("market");
-    const priceInput = document.getElementById("price");
-    const runButton = document.getElementById("runButton");
-    const errorBox = document.getElementById("error");
-    const statusBox = document.getElementById("status");
-    const resultTitle = document.getElementById("resultTitle");
-    const resultText = document.getElementById("resultText");
-    const weatherValue = document.getElementById("weatherValue");
-    const priceValue = document.getElementById("priceValue");
-    const campaignValue = document.getElementById("campaignValue");
-
-    function getCampaign(temperature, precipitation, weatherCode) {
-      const rainyCodes = [
-        51, 53, 55, 61, 63, 65, 80, 81, 82, 95
-      ];
-
-      const snowyCodes = [
-        71, 73, 75
-      ];
-
-      if (snowyCodes.includes(weatherCode)) {
-        return {
-          short: "Vinter",
-          products:
-            "vinterkläder, varma skor eller produkter för inomhusaktiviteter"
-        };
-      }
-
-      if (
-        rainyCodes.includes(weatherCode) ||
-        precipitation > 0
-      ) {
-        return {
-          short: "Regn",
-          products:
-            "regnkläder, paraplyer eller produkter med hemleverans"
-        };
-      }
-
-      if (temperature >= 22) {
-        return {
-          short: "Sommar",
-          products:
-            "solglasögon, kalla drycker eller andra sommarprodukter"
-        };
-      }
-
-      if (temperature <= 8) {
-        return {
-          short: "Kyla",
-          products:
-            "varma kläder, kaffe eller produkter för inomhusaktiviteter"
-        };
-      }
-
-      return {
-        short: "Utomhus",
-        products:
-          "vardagsprodukter, träningsprodukter eller utomhusaktiviteter"
+        stockholm: {
+          city: "Stockholm",
+          lat: 59.3293,
+          lon: 18.0686,
+          currency: "SEK"
+        }
       };
-    }
 
-    function formatMoney(value, market) {
-      return new Intl.NumberFormat(market.locale, {
-        style: "currency",
-        currency: market.currency,
-        maximumFractionDigits:
-          market.currency === "JPY" ? 0 : 2
-      }).format(value);
-    }
+      /*
+       * WEATHER DESCRIPTIONS
+       */
 
-    async function getExchangeRate(currency) {
-      if (currency === "SEK") {
-        return 1;
+      const weatherNames = {
+        0: "clear skies",
+        1: "mainly clear skies",
+        2: "partly cloudy skies",
+        3: "overcast skies",
+        45: "fog",
+        48: "freezing fog",
+        51: "light drizzle",
+        53: "drizzle",
+        55: "heavy drizzle",
+        56: "freezing drizzle",
+        57: "heavy freezing drizzle",
+        61: "light rain",
+        63: "rain",
+        65: "heavy rain",
+        66: "freezing rain",
+        67: "heavy freezing rain",
+        71: "light snow",
+        73: "snow",
+        75: "heavy snow",
+        77: "snow grains",
+        80: "rain showers",
+        81: "rain showers",
+        82: "heavy rain showers",
+        85: "snow showers",
+        86: "heavy snow showers",
+        95: "thunderstorms",
+        96: "thunderstorms with hail",
+        99: "thunderstorms with heavy hail"
+      };
+
+      const $ = id => document.getElementById(id);
+
+      const form = $("plannerForm");
+      const marketSelect = $("market");
+      const priceInput = $("price");
+      const runButton = $("runButton");
+      const errorBox = $("error");
+      const statusBox = $("status");
+      const resultPanel = $("resultPanel");
+      const resultTitle = $("resultTitle");
+      const resultText = $("resultText");
+      const weatherValue = $("weatherValue");
+      const priceValue = $("priceValue");
+      const campaignValue = $("campaignValue");
+      const dataNote = $("dataNote");
+
+      /*
+       * CAMPAIGN RULES
+       */
+
+      function getCampaign(
+        temperature,
+        precipitation,
+        code
+      ) {
+        const snowCodes = [
+          71, 73, 75, 77, 85, 86
+        ];
+
+        const rainCodes = [
+          51, 53, 55, 56, 57,
+          61, 63, 65, 66, 67,
+          80, 81, 82,
+          95, 96, 99
+        ];
+
+        if (snowCodes.includes(code)) {
+          return {
+            short: "Winter",
+            products:
+              "winter clothing, warm footwear or products for indoor activities"
+          };
+        }
+
+        if (
+          rainCodes.includes(code) ||
+          precipitation > 0
+        ) {
+          return {
+            short: "Rainy day",
+            products:
+              "rainwear, umbrellas or a message around home delivery"
+          };
+        }
+
+        if (temperature >= 22) {
+          return {
+            short: "Summer",
+            products:
+              "sunglasses, cold drinks or other summer products"
+          };
+        }
+
+        if (temperature <= 8) {
+          return {
+            short: "Cold weather",
+            products:
+              "warm clothing, coffee or products for indoor activities"
+          };
+        }
+
+        return {
+          short: "Outdoor",
+          products:
+            "everyday products, fitness products or outdoor activities"
+        };
       }
 
-      const url =
-        "https://api.frankfurter.dev/v2/rate/sek/" +
-        currency.toLowerCase();
+      /*
+       * CLEAR PREVIOUS RESULTS
+       */
 
-      const response = await fetch(url);
+      function clearMetrics() {
+        weatherValue.textContent = "—";
+        priceValue.textContent = "—";
+        campaignValue.textContent = "—";
+      }
 
-      if (!response.ok) {
-        throw new Error(
-          "Valutakursen kunde inte hämtas."
+      function resetResult() {
+        errorBox.hidden = true;
+
+        clearMetrics();
+
+        statusBox.textContent =
+          "Ready to explore";
+
+        resultTitle.textContent =
+          "Choose your next market.";
+
+        resultText.textContent =
+          "Run the planner to see a suggestion for your selected market and price.";
+
+        dataNote.textContent =
+          "Open-Meteo + Frankfurter. Data is requested when you submit the form.";
+      }
+
+      /*
+       * REQUEST JSON FROM AN API
+       */
+
+      async function fetchJSON(url, signal) {
+        const response = await fetch(
+          url,
+          { signal }
         );
-      }
 
-      const data = await response.json();
-
-      return data.rate;
-    }
-
-    async function createSuggestion() {
-      const selectedMarket = markets[marketSelect.value];
-      const price = Number(priceInput.value);
-
-      errorBox.hidden = true;
-
-      if (!price || price <= 0) {
-        errorBox.textContent =
-          "Ange ett produktpris som är högre än 0 kronor.";
-
-        errorBox.hidden = false;
-
-        return;
-      }
-
-      runButton.disabled = true;
-      runButton.textContent = "Hämtar information…";
-      statusBox.textContent = "Kontaktar API:erna";
-
-      try {
-        const weatherUrl =
-          "https://api.open-meteo.com/v1/forecast" +
-          "?latitude=" + selectedMarket.lat +
-          "&longitude=" + selectedMarket.lon +
-          "&current=temperature_2m,precipitation,weather_code" +
-          "&timezone=auto";
-
-        const results = await Promise.all([
-          fetch(weatherUrl),
-          getExchangeRate(selectedMarket.currency)
-        ]);
-
-        const weatherResponse = results[0];
-        const exchangeRate = results[1];
-
-        if (!weatherResponse.ok) {
+        if (!response.ok) {
           throw new Error(
-            "Väderinformationen kunde inte hämtas."
+            "A data provider is temporarily unavailable."
           );
         }
 
-        const weatherData = await weatherResponse.json();
+        return response.json();
+      }
 
-        const currentWeather = weatherData.current;
+      /*
+       * EXCHANGE RATE
+       */
 
-        const temperature =
-          currentWeather.temperature_2m;
+      async function getExchangeRate(
+        currency,
+        signal
+      ) {
+        if (currency === "SEK") {
+          return {
+            rate: 1,
+            date: null
+          };
+        }
 
-        const precipitation =
-          currentWeather.precipitation;
+        const url =
+          "https://api.frankfurter.dev/v2/rate/sek/" +
+          currency.toLowerCase();
 
-        const weatherCode =
-          currentWeather.weather_code;
-
-        const weatherDescription =
-          weatherNames[weatherCode] ||
-          "växlande väder";
-
-        const campaign = getCampaign(
-          temperature,
-          precipitation,
-          weatherCode
+        const data = await fetchJSON(
+          url,
+          signal
         );
 
-        const localPrice =
-          price * exchangeRate;
+        if (
+          !Number.isFinite(data.rate) ||
+          data.rate <= 0
+        ) {
+          throw new Error(
+            "The exchange rate response was incomplete."
+          );
+        }
 
-        resultTitle.textContent =
-          selectedMarket.city +
-          ": " +
-          campaign.short.toLowerCase() +
-          "kampanj";
+        return {
+          rate: data.rate,
+          date: data.date || null
+        };
+      }
 
-        resultText.textContent =
-          "I " +
-          selectedMarket.city +
-          " är det just nu " +
-          weatherDescription +
-          " och " +
-          temperature +
-          " °C. Företaget kan därför lyfta fram " +
-          campaign.products +
-          ". Det svenska priset " +
-          price.toLocaleString("sv-SE") +
-          " kr visas även i kundens lokala valuta.";
+      function formatMoney(value, currency) {
+        return new Intl.NumberFormat(
+          "en-GB",
+          {
+            style: "currency",
+            currency,
+            maximumFractionDigits:
+              currency === "JPY" ? 0 : 2
+          }
+        ).format(value);
+      }
 
-        weatherValue.textContent =
-          temperature + " °C";
+      /*
+       * CREATE CAMPAIGN SUGGESTION
+       */
 
-        priceValue.textContent =
-          formatMoney(localPrice, selectedMarket);
+      async function createSuggestion(event) {
+        event.preventDefault();
 
-        campaignValue.textContent =
-          campaign.short;
+        if (runButton.disabled) {
+          return;
+        }
 
-        statusBox.textContent =
-          "Live-data hämtad";
-      } catch (error) {
-        statusBox.textContent =
-          "Något gick fel";
+        errorBox.hidden = true;
 
-        errorBox.textContent =
-          error.message +
-          " Kontrollera internetanslutningen och försök igen.";
+        const market =
+          markets[marketSelect.value];
 
-        errorBox.hidden = false;
-      } finally {
-        runButton.disabled = false;
+        const price =
+          Number(priceInput.value);
+
+        if (
+          !market ||
+          !Number.isFinite(price) ||
+          price < 1 ||
+          !form.reportValidity()
+        ) {
+          errorBox.textContent =
+            "Enter a valid product price of at least 1 SEK.";
+
+          errorBox.hidden = false;
+
+          return;
+        }
+
+        const controller =
+          new AbortController();
+
+        const timeout = window.setTimeout(
+          () => controller.abort(),
+          20000
+        );
+
+        runButton.disabled = true;
+        marketSelect.disabled = true;
+        priceInput.disabled = true;
 
         runButton.textContent =
-          "Skapa kampanjförslag";
-      }
-    }
+          "Connecting the data…";
 
-    runButton.addEventListener(
-      "click",
-      createSuggestion
-    );
+        resultPanel.setAttribute(
+          "aria-busy",
+          "true"
+        );
+
+        clearMetrics();
+
+        statusBox.textContent =
+          "Contacting the APIs";
+
+        resultTitle.textContent =
+          "A little local context…";
+
+        resultText.textContent =
+          "Fetching weather and the latest available exchange rate.";
+
+        dataNote.textContent = "";
+
+        try {
+          const weatherUrl =
+            "https://api.open-meteo.com/v1/forecast" +
+            "?latitude=" + market.lat +
+            "&longitude=" + market.lon +
+            "&current=temperature_2m,precipitation,weather_code" +
+            "&timezone=auto";
+
+          const [
+            weatherData,
+            exchange
+          ] = await Promise.all([
+            fetchJSON(
+              weatherUrl,
+              controller.signal
+            ),
+
+            getExchangeRate(
+              market.currency,
+              controller.signal
+            )
+          ]);
+
+          const current =
+            weatherData.current;
+
+          if (
+            !current ||
+            ![
+              current.temperature_2m,
+              current.precipitation,
+              current.weather_code
+            ].every(Number.isFinite)
+          ) {
+            throw new Error(
+              "The weather response was incomplete."
+            );
+          }
+
+          const campaign = getCampaign(
+            current.temperature_2m,
+            current.precipitation,
+            current.weather_code
+          );
+
+          const localPrice =
+            price * exchange.rate;
+
+          if (!Number.isFinite(localPrice)) {
+            throw new Error(
+              "The entered price is too large to convert."
+            );
+          }
+
+          const temperature =
+            new Intl.NumberFormat(
+              "en-GB",
+              {
+                maximumFractionDigits: 1
+              }
+            ).format(
+              current.temperature_2m
+            );
+
+          const description =
+            weatherNames[current.weather_code] ||
+            "changeable weather";
+
+          resultTitle.textContent =
+            market.city +
+            ": " +
+            campaign.short.toLowerCase() +
+            " campaign.";
+
+          resultText.textContent =
+            "Current conditions in " +
+            market.city +
+            " show " +
+            description +
+            " and " +
+            temperature +
+            " °C. Consider " +
+            campaign.products +
+            ". Your " +
+            new Intl.NumberFormat(
+              "en-GB"
+            ).format(price) +
+            " SEK price converts to " +
+            formatMoney(
+              localPrice,
+              market.currency
+            ) +
+            ".";
+
+          weatherValue.textContent =
+            temperature + " °C";
+
+          priceValue.textContent =
+            formatMoney(
+              localPrice,
+              market.currency
+            );
+
+          campaignValue.textContent =
+            campaign.short;
+
+          statusBox.textContent =
+            "Data received · " +
+            market.city;
+
+          const weatherTime =
+            current.time
+              ? current.time.replace("T", " ")
+              : "latest available";
+
+          const currencyNote =
+            market.currency === "SEK"
+              ? "SEK → SEK: no conversion needed."
+              : "Exchange rate date: " +
+                (exchange.date || "not provided") +
+                ". Reference rate; excludes fees and taxes.";
+
+          dataNote.textContent =
+            "Weather model time: " +
+            weatherTime +
+            " (" +
+            (weatherData.timezone || "local time") +
+            "). " +
+            currencyNote;
+
+          resultPanel.classList.remove(
+            "updating"
+          );
+
+          void resultPanel.offsetWidth;
+
+          resultPanel.classList.add(
+            "updating"
+          );
+
+        } catch (error) {
+          controller.abort();
+
+          clearMetrics();
+
+          statusBox.textContent =
+            "Unable to load data";
+
+          resultTitle.textContent =
+            "Let’s try that again.";
+
+          resultText.textContent =
+            "A complete suggestion could not be created. No example data has been substituted.";
+
+          dataNote.textContent = "";
+
+          errorBox.textContent =
+            error.name === "AbortError"
+              ? "The request took too long. Please try again."
+              : error.message +
+                " Check your connection and try again.";
+
+          errorBox.hidden = false;
+
+        } finally {
+          window.clearTimeout(timeout);
+
+          runButton.disabled = false;
+          marketSelect.disabled = false;
+          priceInput.disabled = false;
+
+          runButton.textContent =
+            "Create campaign suggestion ↗";
+
+          resultPanel.setAttribute(
+            "aria-busy",
+            "false"
+          );
+        }
+      }
+
+      form.addEventListener(
+        "submit",
+        createSuggestion
+      );
+
+      marketSelect.addEventListener(
+        "change",
+        resetResult
+      );
+
+      priceInput.addEventListener(
+        "input",
+        resetResult
+      );
+
+      /*
+       * SMOOTH SCROLL ANIMATIONS
+       */
+
+      const motion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      );
+
+      const reveals =
+        document.querySelectorAll(
+          "[data-reveal]"
+        );
+
+      let observer;
+
+      function setupReveals() {
+        if (observer) {
+          observer.disconnect();
+        }
+
+        document.documentElement.classList.remove(
+          "motion-ready"
+        );
+
+        if (
+          motion.matches ||
+          !("IntersectionObserver" in window)
+        ) {
+          reveals.forEach(element => {
+            element.classList.add(
+              "visible"
+            );
+          });
+
+          return;
+        }
+
+        observer = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add(
+                  "visible"
+                );
+
+                observer.unobserve(
+                  entry.target
+                );
+              }
+            });
+          },
+          {
+            threshold: 0.08
+          }
+        );
+
+        reveals.forEach(element => {
+          observer.observe(element);
+        });
+
+        document.documentElement.classList.add(
+          "motion-ready"
+        );
+      }
+
+      /*
+       * FLOWING BACKGROUND LINES
+       */
+
+      const lines = $("waveLines");
+
+      for (let i = 0; i < 22; i++) {
+        const path =
+          document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+          );
+
+        const y = 20 + i * 30;
+
+        path.setAttribute(
+          "d",
+          `M -100 ${y}
+           C 150 ${y - 200},
+             330 ${y + 230},
+             540 ${y}
+           S 840 ${y - 190},
+             1100 ${y + 40}`
+        );
+
+        lines.appendChild(path);
+      }
+
+      /*
+       * READING PROGRESS AND PHOTO MOVEMENT
+       */
+
+      const progress =
+        document.querySelector(
+          ".progress"
+        );
+
+      const image =
+        $("heroImage");
+
+      const hero =
+        document.querySelector(
+          ".hero"
+        );
+
+      let framePending = false;
+
+      function renderScroll() {
+        framePending = false;
+
+        const maximumScroll =
+          document.documentElement.scrollHeight -
+          window.innerHeight;
+
+        const fraction =
+          maximumScroll > 0
+            ? Math.max(
+                0,
+                Math.min(
+                  1,
+                  window.scrollY / maximumScroll
+                )
+              )
+            : 0;
+
+        progress.style.transform =
+          `scaleX(${fraction})`;
+
+        if (motion.matches) {
+          image.style.transform = "none";
+        } else {
+          const rectangle =
+            hero.getBoundingClientRect();
+
+          if (rectangle.bottom > 0) {
+            const amount = Math.max(
+              0,
+              Math.min(
+                1,
+                -rectangle.top / rectangle.height
+              )
+            );
+
+            image.style.transform =
+              `translateY(${amount * 20}px)
+               scale(${1.08 + amount * 0.04})`;
+          }
+        }
+      }
+
+      function queueScroll() {
+        if (
+          !framePending &&
+          !document.hidden
+        ) {
+          framePending = true;
+
+          window.requestAnimationFrame(
+            renderScroll
+          );
+        }
+      }
+
+      window.addEventListener(
+        "scroll",
+        queueScroll,
+        {
+          passive: true
+        }
+      );
+
+      window.addEventListener(
+        "resize",
+        queueScroll
+      );
+
+      document.addEventListener(
+        "visibilitychange",
+        () => {
+          const waves =
+            document.querySelector(
+              ".waves"
+            );
+
+          waves.style.animationPlayState =
+            document.hidden
+              ? "paused"
+              : "running";
+
+          queueScroll();
+        }
+      );
+
+      if (motion.addEventListener) {
+        motion.addEventListener(
+          "change",
+          () => {
+            setupReveals();
+            queueScroll();
+          }
+        );
+      }
+
+      setupReveals();
+      renderScroll();
+    })();
   </script>
+
 </body>
 </html>
