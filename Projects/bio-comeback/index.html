@@ -1121,6 +1121,29 @@
         transform: none;
       }
     }
+    /* Ny biografbild med ljusare, varmt filter */
+#cinema {
+  background: var(--ink);
+}
+
+#cinema .cinema-poster {
+  filter:
+    brightness(1.4)
+    contrast(1.04)
+    saturate(0.92);
+
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+/* Svag toning så att den vita texten fortfarande syns */
+#cinema::after {
+  background: linear-gradient(
+    180deg,
+    rgba(25, 20, 15, 0.02) 30%,
+    rgba(25, 20, 15, 0.38) 100%
+  );
+}
   </style>
 </head>
 
@@ -1157,39 +1180,25 @@
       </div>
 
       <div class="cinema" id="cinema">
-        <img
-          class="cinema-media cinema-poster"
-          src="../../images/bio-poster.webp"
-          alt=""
-          fetchpriority="high"
-          aria-hidden="true"
-        >
+  <img
+    class="cinema-media cinema-poster"
+    src="../../images/bio-comeback.jpg"
+    alt="En biografsalong med röda fåtöljer och varmt upplysta bordslampor"
+    fetchpriority="high"
+    decoding="async"
+  >
 
-        <video
-          class="cinema-media cinema-video"
-          id="bioVideo"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-          poster="../../images/bio-poster.webp"
-          aria-hidden="true"
-        >
-          <source src="../../videos/bio.mp4" type="video/mp4">
-        </video>
+  <div class="film-label">
+    <span class="film-label-title">
+      En lång nedgång.<br>
+      En möjlig ny början.
+    </span>
 
-        <div class="film-label">
-          <span class="film-label-title">
-            En lång nedgång.<br>
-            En möjlig ny början.
-          </span>
-
-          <a class="scroll-link" href="#varfor">
-            Scrolla vidare <span aria-hidden="true">↓</span>
-          </a>
-        </div>
-      </div>
+    <a class="scroll-link" href="#varfor">
+      Scrolla vidare <span aria-hidden="true">↓</span>
+    </a>
+  </div>
+</div>
 
       <div class="project-meta">
         <span>BERGHS SCHOOL OF COMMUNICATION</span>
@@ -1900,145 +1909,62 @@
           revealObserver.observe(element);
         });
       }
+/* Mjuk scrollrörelse för biografbilden. */
+const cinemaImage = document.querySelector(
+  "#cinema .cinema-poster"
+);
 
-      /* Hero-video med reservbild. */
-      const video = document.getElementById("bioVideo");
-      const cinema = document.getElementById("cinema");
-      let videoVisible = true;
+if (cinemaImage) {
+  let imageFramePending = false;
 
-      if (video && cinema) {
-        video.muted = true;
-        video.defaultMuted = true;
-        video.playsInline = true;
-        video.controls = false;
-        video.loop = true;
+  function updateCinemaImage() {
+    imageFramePending = false;
 
-        video.setAttribute("muted", "");
-        video.setAttribute("playsinline", "");
+    if (motionPreference.matches) {
+      cinemaImage.style.transform = "none";
+      return;
+    }
 
-        function startVideo() {
-          if (
-            motionPreference.matches ||
-            document.hidden ||
-            !videoVisible
-          ) {
-            return;
-          }
+    const rect = cinemaImage.parentElement.getBoundingClientRect();
 
-          video.muted = true;
+    const progress = Math.max(
+      0,
+      Math.min(
+        1,
+        (window.innerHeight - rect.top) /
+        (window.innerHeight + rect.height)
+      )
+    );
 
-          const playback = video.play();
+    const movement = (progress - 0.5) * 24;
+    const scale = 1.08 + progress * 0.03;
 
-          if (playback && typeof playback.catch === "function") {
-            playback.catch(function () {
-              /*
-                Behåll reservbilden om webbläsaren blockerar
-                automatisk uppspelning. Ett senare klick kan
-                starta videon.
-              */
-            });
-          }
-        }
+    cinemaImage.style.transform =
+      "translateY(" + movement + "px) scale(" + scale + ")";
+  }
 
-        video.addEventListener("playing", function () {
-          cinema.classList.add("is-playing");
-        });
-
-        video.addEventListener("error", function () {
-          cinema.classList.remove("is-playing");
-        });
-
-        video.addEventListener("canplay", startVideo);
-        window.addEventListener("pageshow", startVideo);
-
-        document.addEventListener("visibilitychange", function () {
-          if (document.hidden) {
-            video.pause();
-          } else {
-            startVideo();
-          }
-        });
-
-        document.addEventListener("pointerdown", startVideo, {
-          passive: true
-        });
-
-        document.addEventListener("keydown", startVideo);
-
-        if ("IntersectionObserver" in window) {
-          const videoObserver = new IntersectionObserver(
-            function (entries) {
-              videoVisible = entries[0].isIntersecting;
-
-              if (videoVisible) {
-                startVideo();
-              } else {
-                video.pause();
-              }
-            },
-            { threshold: 0 }
-          );
-
-          videoObserver.observe(cinema);
-        }
-
-        function applyVideoMotionPreference() {
-          if (motionPreference.matches) {
-            video.pause();
-            cinema.classList.remove("is-playing");
-          } else {
-            startVideo();
-          }
-        }
-
-        if (motionPreference.addEventListener) {
-          motionPreference.addEventListener(
-            "change",
-            applyVideoMotionPreference
-          );
-        }
-
-        applyVideoMotionPreference();
-
-        /*
-          Mjuk förflyttning av bilden när man scrollar.
-          Videon spelar samtidigt som vanligt.
-        */
-        let scrollScheduled = false;
-
-        function updateHeroPosition() {
-          scrollScheduled = false;
-
-          if (motionPreference.matches || !videoVisible) {
-            return;
-          }
-
-          const rect = cinema.getBoundingClientRect();
-          const distance = Math.max(
-            -35,
-            Math.min(35, -rect.top * 0.045)
-          );
-
-          cinema.querySelectorAll(".cinema-media").forEach(
-            function (media) {
-              media.style.transform =
-                "translateY(" + distance + "px) scale(1.08)";
-            }
-          );
-        }
-
-        window.addEventListener(
-          "scroll",
-          function () {
-            if (!scrollScheduled) {
-              scrollScheduled = true;
-              window.requestAnimationFrame(updateHeroPosition);
-            }
-          },
-          { passive: true }
-        );
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!imageFramePending) {
+        imageFramePending = true;
+        window.requestAnimationFrame(updateCinemaImage);
       }
+    },
+    { passive: true }
+  );
 
+  window.addEventListener("resize", updateCinemaImage);
+
+  if (motionPreference.addEventListener) {
+    motionPreference.addEventListener(
+      "change",
+      updateCinemaImage
+    );
+  }
+
+  updateCinemaImage();
+}
       /* Instagram-karusell. */
       const carousel = document.getElementById("instagramCarousel");
 
