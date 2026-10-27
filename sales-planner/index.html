@@ -859,6 +859,27 @@
         transform: none !important;
       }
     }
+    /* Show the complete image without cropping or zooming */
+
+.hero .photo {
+  transform: none;
+}
+
+.hero .photo .photo-window {
+  aspect-ratio: auto;
+  height: auto;
+  overflow: hidden;
+}
+
+.hero .photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transform: none !important;
+  filter: none;
+  will-change: auto;
+}
   </style>
 </head>
 
